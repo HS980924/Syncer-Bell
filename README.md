@@ -1,5 +1,5 @@
 <div align="center">
-    <h1>PTJ_Form</h1>
+    <img src="https://github.com/DevvIll/Syncer-Bell/blob/main/static/image/Syncer%20Bell%20Title%20Bar.png"/>
 </div>
 
 ___  
