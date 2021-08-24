@@ -62,3 +62,4 @@ ___
 - [github action tutorial](https://zzsza.github.io/development/2020/06/06/github-action/)
 - [commit 수 체크 자동화](https://github.com/pro00er/commit-checker)
 - [github api 사용법정리](https://eunjin3786.tistory.com/194)
+- [How to Connect between Discord and Slack?](https://discordbot.tistory.com/37) 
