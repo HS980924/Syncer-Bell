@@ -56,3 +56,9 @@ ___
 - 테스트가 통과하면 배포한다.
 - 추후 발견된 버그를 픽스하여 다시 테스트한다.
 - 해당과정을 반복한다.
+
+# Reference
+- [CI/CD란?](https://www.redhat.com/ko/topics/devops/what-is-ci-cd)
+- [github action tutorial](https://zzsza.github.io/development/2020/06/06/github-action/)
+- [commit 수 체크 자동화](https://github.com/pro00er/commit-checker)
+- [github api 사용법정리](https://eunjin3786.tistory.com/194)
