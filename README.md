@@ -65,3 +65,4 @@ ___
 - [github api 사용법정리](https://eunjin3786.tistory.com/194)
 - [How to Connect between Discord and Slack?](https://discordbot.tistory.com/37) 
 - [Official API Reference](https://docs.github.com/en/rest/reference/users)
+- [개발 버전표기](https://okayoon.tistory.com/entry/%EA%B0%9C%EB%B0%9C-%EB%B2%84%EC%A0%84%ED%91%9C%EA%B8%B0-%EB%8C%80%EB%9E%B5%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
