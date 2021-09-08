@@ -8,7 +8,13 @@ ___
     SYncer-Bell을 통해 Commit, Issue, PR에 대한 정보를 알림받고 잔디밭 관리까지 해봅시다!
 
 # 😎 Who is Contributor?
-Team DeⅧ
+
+<a href="https://github.com/HS98094" align="center">
+      <img src=https://img.shields.io/badge/Team.DeVlll-HS98094-002d75?style=flat-square&labelColor=DA1F26 />
+</a>
+<a href="https://github.com/JH9892" align="center">
+      <img src=https://img.shields.io/badge/Team.DeVlll-JH9892-c297e8?style=flat-square&labelColor=DA1F26 />
+</a>
 
 # 🤗 Progress
 
