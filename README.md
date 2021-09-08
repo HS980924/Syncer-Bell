@@ -5,7 +5,8 @@
 ___  
 
 # 🕊️ Syncer Bell을 소개합니다!
-
+    일일히 알림관리하기 어려우시죠? 
+    간단한 로그인을 통해 Github User가 원하는 정보를 Notification 해주는 MVP를 만들어봅시다!
 
 # 😎 프로젝트란 무엇일까?
     프로젝트는 적당한 목표를 적절한 기간안에 수행하여 결과물을 도출하는 것.
@@ -56,3 +57,12 @@ ___
 - 테스트가 통과하면 배포한다.
 - 추후 발견된 버그를 픽스하여 다시 테스트한다.
 - 해당과정을 반복한다.
+
+# Reference
+- [CI/CD란?](https://www.redhat.com/ko/topics/devops/what-is-ci-cd)
+- [github action tutorial](https://zzsza.github.io/development/2020/06/06/github-action/)
+- [commit 수 체크 자동화](https://github.com/pro00er/commit-checker)
+- [github api 사용법정리](https://eunjin3786.tistory.com/194)
+- [How to Connect between Discord and Slack?](https://discordbot.tistory.com/37) 
+- [Official API Reference](https://docs.github.com/en/rest/reference/users)
+- [개발 버전표기](https://okayoon.tistory.com/entry/%EA%B0%9C%EB%B0%9C-%EB%B2%84%EC%A0%84%ED%91%9C%EA%B8%B0-%EB%8C%80%EB%9E%B5%EC%A0%81%EC%9C%BC%EB%A1%9C-%EC%9D%B4%ED%95%B4%ED%95%98%EA%B8%B0)
