@@ -6,6 +6,7 @@ ___
 
 # 🕊️ Syncer Bell을 소개합니다!
     Syncer-Bell을 통해 Commit, Issue, PR에 대한 정보를 알림받고 잔디밭 관리까지 해봅시다!
+    ※ this is Syncer-Bell Frontend Repository
 
 # 😎 Who is Contributor?
 
