@@ -19,19 +19,19 @@ ___
 
 # 🤗 Progress
 
-|Schedule|Start Date|Finish Date|Time|
-|--------|--------|--------|--------|
-`Kick-off meeting` | 2021-09-03 | 2021-09-03 | 19:30 ~ 21:00 |
-`Data Searching` | 2021-09-03 | 2021-09-06 | 21:00 |
-`Second meeting` | 2021-09-06 | 2021-09-06| 21:00 ~ 22:00 |
-`Write Requirements` | 2021-09-06 | 2021-09-07 | |
-`Reference Searching` | 2021-09-08 | 2021-09-15| |
-`Developing MVP` | 2021-09-16 | 2021-09-23 | |
-`Focusing Main Function` | 2021-09-24 | 2021-10-15 | |
-`Focusing Side Function` | 2021-10-16 | 2021-10-20 | |
-`Testing Period` | 2021-10-21 | 2021-10-24 | |
-`Refactoring` | 2021-10-25 | 2021-10-31 | |
-`Project Finished` | 2021-09-03 | 2021-10-31 | 23:59 |
+|`Schedule`|`Start Date`|`Finish Date`|`Time`|`Check`|
+|--------|--------|--------|--------|:-----:|
+`Kick-off meeting` | 2021-09-03 | 2021-09-03 | 19:30 ~ 21:00 |OK|
+`Data Searching` | 2021-09-03 | 2021-09-06 | 21:00 |OK|
+`Second meeting` | 2021-09-06 | 2021-09-06| 21:00 ~ 22:00 |OK|
+`Write Requirements` | 2021-09-06 | 2021-09-07 | |OK|
+`Reference Searching` | 2021-09-08 | 2021-09-15| |OK|
+`Developing MVP` | 2021-09-16 | 2021-09-23 | |**Processing...**|
+`Focusing Main Function` | 2021-09-24 | 2021-10-15 | | |
+`Focusing Side Function` | 2021-10-16 | 2021-10-20 | | |
+`Testing Period` | 2021-10-21 | 2021-10-24 | | |
+`Refactoring` | 2021-10-25 | 2021-10-31 | | |
+`Project Finished` | 2021-09-03 | 2021-10-31 | 23:59 | |
 
 ---
 
