@@ -37,6 +37,31 @@ ___
 `Way 2` | 2021-XX-xx | 2021-XX-xx | | |
 
 ---
+# 😃 Project Direction
+1. auth 인증부분
+2. 프로젝트 전체기간
+3. ui/ux 웹으로 수정
+4. 기능도 재정의
+기능
+- 이슈, 커밋, pr을 알림해주자.
+- 사용자 정보 보여주기.
+- 자동로그인 (어려울듯)
+- mail로 알림!(추후 변경) 
+Focusing
+1. 주요기능구현
+ - Github으로 로그인 (Social Login)
+ - 로그인된 user의 정보 띄우기
+ - 로그인된 user의 Issue, Commit, PR 알림
+2. 확장기능 구현
+ - mail로 알림
+ - 자동로그인(세션유지) 리서치
+ - 도메인 확장
+ - 서버유지 리서치
+3. 디자인 리팩토링
+4. 테스팅
+5. 배포
+
+---  
 
 # 📑 Reference
 - [CI/CD란?](https://www.redhat.com/ko/topics/devops/what-is-ci-cd)
