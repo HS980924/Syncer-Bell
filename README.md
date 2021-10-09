@@ -21,18 +21,13 @@ ___
 
 |`Schedule`|`Start Date`|`Finish Date`|`Time`|`Check`|
 |--------|--------|--------|--------|:-----:|
-`Kick-off meeting` | 2021-09-03 | 2021-09-03 | 19:30 ~ 21:00 |OK|
-`Data Searching` | 2021-09-03 | 2021-09-06 | 21:00 |OK|
-`Second meeting` | 2021-09-06 | 2021-09-06| 21:00 ~ 22:00 |OK|
-`Write Requirements` | 2021-09-06 | 2021-09-07 | |OK|
-`Reference Searching` | 2021-09-08 | 2021-09-15| |OK|
-`Developing MVP` | 2021-09-16 | 2021-09-23 | |OK|
-`Resting Period` | 2021-09-24 | 2021-10-06 | |**Processing...**|
-`- Main Function : Social Login` | 2021-10-07 | 2021-10-11 | | |
-`- Main Function : User info load` | 2021-10-12 | 2021-10-17 | | |
-`* Key Function : Getting Information` | 2021-10-23 | 2021-11-01 | | |
-`- Main Function : Mail to service` | 2021-11-08 | 2021-11-13 | | |
-`After Conference` | 2021-11-14 | 2021-11-14 | 14:00 ~ 17:00 | |
+`Benchmarking Research` | 2021-10-10 | 2021-10-25 | |**Processing...**|
+`Mentoring for Project` | 2021-10-25 | 2021-10-25 | 20:00 | |
+**`- Key Function : Github OAuth - Social Login`** | 2021-10-26 | 2021-10-30 | | |
+`- Main Function : User Information Load` | 2021-10-31 | 2021-11-05 | | |
+`- Main Function : Get Commit, issue, pr information` | 2021-11-06 | 2021-11-15 | | |
+`- Main Function : Setting Mail to Service` | 2021-11-16 | 2021-11-21 | | |
+`After Conference` | 2021-11-22 | 2021-11-22 | 20:00 ~ 21:00 | |
 `Way 1` | 2021-XX-xx | 2021-XX-xx | | |
 `Way 2` | 2021-XX-xx | 2021-XX-xx | | |
 
