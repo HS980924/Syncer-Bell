@@ -4,12 +4,12 @@
 
 ___  
 
-# 🕊️ Syncer Bell을 소개합니다!
-    Syncer-Bell을 통해 Commit, Issue, PR에 대한 정보를 알림받고 잔디밭 관리까지 해봅시다!
-    ※ this is Syncer-Bell Frontend Repository
+# **😊 Syncer Bell을 소개합니다!**
+    > Commit, Issue, PR에 대한 정보를 알림받고 잔디밭 관리까지 해봅시다!
+    > 
 
-# 😎 Who is Contributor?
 
+# **😎 Who is Contributor?**
 <a href="https://github.com/HS98094" align="center">
       <img src=https://img.shields.io/badge/Team.DeVlll-HS98094-002d75?style=flat-square&labelColor=DA1F26 />
 </a>
@@ -17,22 +17,20 @@ ___
       <img src=https://img.shields.io/badge/Team.DeVlll-JH9892-c297e8?style=flat-square&labelColor=DA1F26 />
 </a>
 
-# 🤗 Progress
-
+# **🤗 Progressing Schedule**
 |`Schedule`|`Start Date`|`Finish Date`|`Time`|`Check`|
-|--------|--------|--------|--------|:-----:|
-`Benchmarking Research` | 2021-10-10 | 2021-10-25 | |**Processing...**|
-`Mentoring for Project` | 2021-10-25 | 2021-10-25 | 20:00 | |
-**`- Key Function : Github OAuth - Social Login`** | 2021-10-26 | 2021-10-30 | | |
-`- Main Function : User Information Load` | 2021-10-31 | 2021-11-05 | | |
-`- Main Function : Get Commit, issue, pr information` | 2021-11-06 | 2021-11-15 | | |
-`- Main Function : Setting Mail to Service` | 2021-11-16 | 2021-11-21 | | |
-`After Conference` | 2021-11-22 | 2021-11-22 | 20:00 ~ 21:00 | |
-`Way 1` | 2021-XX-xx | 2021-XX-xx | | |
-`Way 2` | 2021-XX-xx | 2021-XX-xx | | |
+|:---------|------------|-------------|:------:|:-----:|
+|`Benchmarking Research` | 2021-10-10 | 2021-10-25 | |**Processing...**|
+|`Mentoring for Project` | 2021-10-25 | 2021-10-25 | 20:00 | |
+|`Github OAuth - Social Login` | 2021-10-26 | 2021-10-30 | | |
+|`User Information Load` | 2021-10-31 | 2021-11-05 | | |
+|`Get Commit, issue, pr information` | 2021-11-06 | 2021-11-15 | | |
+|`Setting Mail to Service` | 2021-11-16 | 2021-11-21 | | |
+|`After Conference` | 2021-11-22 | 2021-11-22 | 20:00 ~ 21:00 | |
+|`Way 1` | 2021-XX-xx | 2021-XX-xx | | |
 
 ---
-# 😃 Project Direction
+# **😃 Project Direction**
 1. auth 인증부분
 2. 프로젝트 전체기간
 3. ui/ux 웹으로 수정
@@ -55,6 +53,15 @@ Focusing
 3. 디자인 리팩토링
 4. 테스팅
 5. 배포
+---
+
+# **💻 Skill Stack**
+## ⚔️ Frontend  
+ - React.js  
+
+## 🗡️ Backend  
+ - Node.js
+ - Express
 
 ---  
 
