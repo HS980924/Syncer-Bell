@@ -16,6 +16,9 @@ ___
       <img src=https://img.shields.io/badge/Team.DeVlll-JH9892-c297e8?style=flat-square&labelColor=DA1F26 />
 </a>
 
+# **😆This is our story
+👉 **[LINK](https://hunspace.notion.site/Syncer-Bell-7d2f728766f74448a5fa57f6a8bf72cb)**  
+
 # **🤗 Progressing Schedule**
 |`Schedule`|`Start Date`|`Finish Date`|`Time`|`Check`|
 |:---------|------------|-------------|:------:|:-----:|
