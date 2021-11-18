@@ -19,15 +19,6 @@ ___
 # **😆This is our story**
 👉 **[LINK](https://hunspace.notion.site/Syncer-Bell-7d2f728766f74448a5fa57f6a8bf72cb)**  
 
-# **🤗 Progressing Schedule**
-|`Schedule`|`Start Date`|`Finish Date`|`Time`|`Check`|
-|:---------|------------|-------------|:------:|:-----:|
-|`Benchmarking Research` | 2021-10-10 | 2021-10-29 | |**Processing...**|
-|`Mentoring for Project` | 2021-10-30 | 2021-10-30 | 09:00 | |
-|`Parts Development` | 2021-11-01 | 2021-12-30 | | |
-|`Testing` | 2022-01-02 | 2022-01-15 | | |
-|`Refactoring & Deploying` | 2022-01-16 | 2022-01-31 | | |
-
 ---  
 
 # **💻 Skill Stack**
