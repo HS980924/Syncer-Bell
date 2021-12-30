@@ -9,7 +9,7 @@ const sidebarNavLinks = [
     "commit",
     "issue",
     "pullRequest",
-    "github",
+    "github_my",
     "settings"
 ];
 
