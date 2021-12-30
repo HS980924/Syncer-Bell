@@ -2,6 +2,7 @@ import styles from './Sidebar.module.scss';
 import user from '../../assets/png/jh.jpg';
 import ptj_logo from '../../assets/png/logo.png';
 import {Link, useLocation} from 'react-router-dom';
+import Data from '../leftside_data/leftside_data';
 
 
 const sidebarNavLinks = [
@@ -15,6 +16,7 @@ const sidebarNavLinks = [
 
 export default function Sidebar() {
     const location = useLocation();
+
     return (
         <> 
             <aside className={styles.sidebar}>
@@ -28,6 +30,7 @@ export default function Sidebar() {
                         </div>
                         <p className={styles.userName}>JH9892</p>
                         <p className={styles.userEmail}>diadiahun0902@email.com</p>
+                        <Data/>
                     </div>
 
                     <nav>
