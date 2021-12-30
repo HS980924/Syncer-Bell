@@ -1,8 +1,4 @@
-import styles from './Expenses.module.scss';
-import personOne from '../../assets/png/person1.png';
-import personTwo from '../../assets/png/person2.png';
-import personThree from '../../assets/png/person3.png';
-import addIcon from '../../assets/png/addIcon.png';
+import styles from './Dashboard.module.scss';
 import {Bar, BarChart, Cell, ResponsiveContainer} from 'recharts';
 import {useState} from 'react';
 import optionIcon from '../../assets/png/menuIcon.png';
@@ -10,7 +6,7 @@ import cartIcon from '../../assets/svg/cartIcon.svg';
 import transportIcon from '../../assets/svg/transportIcon.svg';
 import houseIcon from '../../assets/svg/houseIcon.svg';
 
-export default function Expenses() {
+export default function Dashboard() {
 
     const [activeIndex, setActiveIndex] = useState(0);
     const data = [
@@ -98,12 +94,12 @@ export default function Expenses() {
             amt: 2210
         }, {
             name: 'Page C',
-            uv: 2000,
+            uv: 5000,
             pv: 9800,
             amt: 2290
         }, {
             name: 'Page D',
-            uv: 2780,
+            uv: 4780,
             pv: 3908,
             amt: 2000
         }, {
@@ -185,7 +181,7 @@ export default function Expenses() {
             amt: 2181
         }, {
             name: 'Page F',
-            uv: 2390,
+            uv: 6000,
             pv: 3800,
             amt: 2500
         }, {
@@ -196,7 +192,7 @@ export default function Expenses() {
         }
     ];
 
-    const todayExpense_dummy = [
+    const issue_dummy = [
         {
             id:1,
             expense: "Dummy01",
@@ -223,10 +219,76 @@ export default function Expenses() {
             price: 326.8,
             icon: houseIcon,
             iconBackgroundColor: "#FF8700",
+        },
+        {
+            id:4,
+            expense: "Dummy02",
+            time: "5:12 PM",
+            location: "Repo : syncer-bell",
+            price: 326.8,
+            icon: transportIcon,
+            iconBackgroundColor: "#B548C6",
+        },
+        {
+            id:5,
+            expense: "Dummy03",
+            time: "5:12 PM",
+            location: "Repo : syncer-bell",
+            price: 326.8,
+            icon: houseIcon,
+            iconBackgroundColor: "#FF8700",
         }
     ]
 
-    const spendCategories = [
+    const pullRequest_dummy = [
+        {
+            id:1,
+            expense: "Dummy01",
+            time: "5:12 PM",
+            location: "Repo : syncer-bell",
+            price: 326.8,
+            icon: cartIcon,
+            iconBackgroundColor: "#32a7e2",
+        },
+        {
+            id:2,
+            expense: "Dummy02",
+            time: "5:12 PM",
+            location: "Repo : syncer-bell",
+            price: 326.8,
+            icon: transportIcon,
+            iconBackgroundColor: "#B548C6",
+        },
+        {
+            id:3,
+            expense: "Dummy03",
+            time: "5:12 PM",
+            location: "Repo : syncer-bell",
+            price: 326.8,
+            icon: houseIcon,
+            iconBackgroundColor: "#FF8700",
+        },
+        {
+            id:4,
+            expense: "Dummy02",
+            time: "5:12 PM",
+            location: "Repo : syncer-bell",
+            price: 326.8,
+            icon: transportIcon,
+            iconBackgroundColor: "#B548C6",
+        },
+        {
+            id:5,
+            expense: "Dummy03",
+            time: "5:12 PM",
+            location: "Repo : syncer-bell",
+            price: 326.8,
+            icon: houseIcon,
+            iconBackgroundColor: "#FF8700",
+        }
+    ]
+
+    const year_statics = [
         {
             id:1,
             category: "Commit",
@@ -256,16 +318,6 @@ export default function Expenses() {
             <section className={styles.expensesOverview}>
                 <div className={styles.expensesHeader}>
                     <p className={styles.expensesTitle}>Syncer-Bell</p>
-                    <div className={styles.expensesActions}>
-                        <div className={styles.personImages}>
-                            <img className={styles.personOne} src={personOne} alt="person one"/>
-                            <img className={styles.personTwo} src={personTwo} alt="person two"/>
-                            <img className={styles.personThree} src={personThree} alt="person three"/>
-                        </div>
-                        <button>
-                            <img className={styles.addIcon} src={addIcon} alt="add"/>
-                        </button>
-                    </div>
                 </div>
                 <p className={styles.dataRange}>01 - 31, December, 2021</p>
                 <ResponsiveContainer width="100%" height="9%">
@@ -278,8 +330,8 @@ export default function Expenses() {
                             <Cell
                                 cursor="pointer"
                                 fill={index === activeIndex
-                                ? "rgb(21,122,255)"
-                                : "rgba(21,122,255,.2)"}
+                                ? "rgb(0,255,69)"
+                                : "rgba(0,255,69,.2)"}
                                 key={index}
                             />
                         ))}
@@ -288,77 +340,77 @@ export default function Expenses() {
                 </ResponsiveContainer>
 
                 <div className={styles.expensesOverviewHeader}>
-                    <p className={styles.expensesOverviewTitle}>Today</p>
+                    <p className={styles.expensesOverviewTitle}>Issue</p>
                     <button>
                         <img className={styles.expenseOption} src={optionIcon} alt="options"/>
                     </button>
                 </div>
 
                 <ul>
-                    {todayExpense_dummy.map((expense) => (
-                        <li className={styles.expenseItem} key={expense.id}>
+                    {issue_dummy.map((item) => (
+                        <li className={styles.expenseItem} key={item.id}>
                             <div className={styles.expenseItemLeft}>
                                 <div 
-                                    style={{backgroundColor: expense.iconBackgroundColor}}
+                                    style={{backgroundColor: item.iconBackgroundColor}}
                                     className={styles.expenseItemDiv}
                                 >
-                                    <img src={cartIcon} alt={expense.expense}/>
+                                    <img src={cartIcon} alt={item.expense}/>
                                 </div>
                                 <div className={styles.expenseItemDetails}>
-                                    <p className={styles.expenseItemTitle}>{expense.expense}</p>
+                                    <p className={styles.expenseItemTitle}>{item.expense}</p>
                                     <p className={styles.expenseItemTime}>
-                                        {expense.time} . {expense.location}
+                                        {item.time} . {item.location}
                                     </p>
                                 </div>
                             </div>
-                            <p className={styles.expenseItemPrice}>{expense.price}</p>
+                            <p className={styles.expenseItemPrice}>{item.price}</p>
                         </li>
                     ))}
                     
                 </ul>
 
                 <div className={styles.expensesOverviewHeader}>
-                    <p className={styles.expensesOverviewTitle}>4th week, December, 2021</p>
+                    <p className={styles.expensesOverviewTitle}>Pull Request</p>
                     <button>
                         <img className={styles.expenseOption} src={optionIcon} alt="options"/>
                     </button>
                 </div>
 
                 <ul>
-                    {todayExpense_dummy.map((expense) => (
-                        <li className={styles.expenseItem} key={expense.id}>
+                    {pullRequest_dummy.map((item) => (
+                        <li className={styles.expenseItem} key={item.id}>
                             <div className={styles.expenseItemLeft}>
                                 <div 
-                                    style={{backgroundColor: expense.iconBackgroundColor}}
+                                    style={{backgroundColor: item.iconBackgroundColor}}
                                     className={styles.expenseItemDiv}
                                 >
-                                    <img src={cartIcon} alt={expense.expense}/>
+                                    <img src={cartIcon} alt={item.expense}/>
                                 </div>
                                 <div className={styles.expenseItemDetails}>
-                                    <p className={styles.expenseItemTitle}>{expense.expense}</p>
+                                    <p className={styles.expenseItemTitle}>{item.expense}</p>
                                     <p className={styles.expenseItemTime}>
-                                        {expense.time} . {expense.location}
+                                        {item.time} . {item.location}
                                     </p>
                                 </div>
                             </div>
-                            <p className={styles.expenseItemPrice}>{expense.price}</p>
+                            <p className={styles.expenseItemPrice}>{item.price}</p>
                         </li>
                     ))}
                 </ul>
             </section>
-
+            
             <section className={styles.sideOverview}>
-                <p className={styles.sideOverviewTitle}>Weekend Statics</p>
+                <p className={styles.sideOverviewTitle}>2021's Statics</p>
                 <ul>
-                    {spendCategories.map((category) => (
-                        <li key={category.id}>
+                    {year_statics.map((item) => (
+                        <li key={item.id}>
                             <div className={styles.spendCategory}>
-                                <p className={styles.spendCategoryName}>{category.category}</p>
-                                <p className={styles.spendCategoryPrice}>{category.entity}</p>
+                                <p className={styles.spendCategoryName}>{item.category}</p>
+                                <p className={styles.spendCategoryPrice}>{item.entity}</p>
                             </div>
                             <div className={styles.spendCategoryBar}>
                                 <div 
-                                    style={{width:`${category.entity}%`}}
+                                    style={{width:`${item.entity}%`}}
                                     className={styles.spendCategoryColoredBar}></div>
                             </div>
                         </li> 

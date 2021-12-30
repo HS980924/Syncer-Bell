@@ -3,14 +3,24 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 25vw;
-    background-color: #101010;// please change
-    color: white;
+    width: 15vw;
+    background-color: #fcefde;// please change
+    color: black;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.ptjLogo {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 0;
+    left: 0;
+    padding-top: 25px;
+    padding-left: 25px;
 }
 
 .sidebarContent {
@@ -22,6 +32,9 @@
 
 .profileDetails {
     margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .profileImageDiv {
@@ -40,13 +53,14 @@
     height: 2.5rem;
     border-radius: 50%;
     background-color: #ff0000;
+    color: white;
 
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     top: -15px;
-    right: 80px;
+    left: 105px;
     
     font-size: 20px;
 }
@@ -71,13 +85,26 @@
     margin: 2rem 0;
 }
 
+.sidebarNavLink_nonhover {
+    font-size:20px;
+    font-weight: 500;
+}
+
+.sidebarNavLink:hover {
+    font-size: 30px;
+    font-weight: 600;
+
+    // @extend .sidebarNavLink_nonhover;
+}
+
 .sidebarNavLink {
     text-decoration: none;
-    outline: noen;
-    color: white;
+    outline: none;
+    color: black;
     opacity: 0.5;
     font-size: 25px;
     font-weight: 500;
+    transition: ease-in-out 0.2s;
 
     &Active {
         @extend .sidebarNavLink;

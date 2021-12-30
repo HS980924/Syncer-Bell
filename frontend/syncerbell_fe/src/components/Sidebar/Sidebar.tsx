@@ -1,9 +1,11 @@
 import styles from './Sidebar.module.scss';
 import user from '../../assets/png/jh.jpg';
+import ptj_logo from '../../assets/png/logo.png';
 import {Link, useLocation} from 'react-router-dom';
 
+
 const sidebarNavLinks = [
-    "dashboard",
+    "home",
     "commit",
     "issue",
     "pullRequest",
@@ -16,17 +18,19 @@ export default function Sidebar() {
     return (
         <> 
             <aside className={styles.sidebar}>
-            <div className={styles.sidebarContent}>
-                <div className={styles.profileDetails}>
-                    <div className={styles.profileImageDiv}>
-                        <img src={user} alt="user"/>
-                        <p className={styles.notifications}>4</p>
-                    </div>
-                    <p className={styles.userName}>JH9892</p>
-                    <p className={styles.userEmail}>diadiahun0902@email.com</p>
-                </div>
+                <img className={styles.ptjLogo} src={ptj_logo} alt="ptj_logo"/>
 
-                <nav>
+                <div className={styles.sidebarContent}>
+                    <div className={styles.profileDetails}>
+                        <div className={styles.profileImageDiv}>
+                            <img src={user} alt="user"/>
+                            <p className={styles.notifications}>4</p>
+                        </div>
+                        <p className={styles.userName}>JH9892</p>
+                        <p className={styles.userEmail}>diadiahun0902@email.com</p>
+                    </div>
+
+                    <nav>
                     <ul>
                         {sidebarNavLinks.map(sidebarNavLinks => 
                         <li className={styles.sidebarNavItem} key={sidebarNavLinks}>
@@ -38,8 +42,8 @@ export default function Sidebar() {
                         </li>)}
                     </ul>
                 </nav>
-            </div>
-        </aside> 
-    </>
+                </div>
+            </aside> 
+        </>
     );
 }
