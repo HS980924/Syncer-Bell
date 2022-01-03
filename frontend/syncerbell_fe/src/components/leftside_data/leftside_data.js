@@ -12,7 +12,7 @@ function Leftside_data() {
             setError(null);
             setUsers(null);
             setLoading(true);
-            const res = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+            const res = await axios.get('/home');
             setUsers(res.data);
         } catch(e) {
             setError(e);
@@ -31,11 +31,10 @@ function Leftside_data() {
     return (
         <>
             <ul>
-                <li key={users.id}>
-                    {users.title}
+                <li key={users.name}>
+                    {users.login}
                 </li>
             </ul>
-
             <button onClick={fetchUsers}>Reload</button>
         </>
     )

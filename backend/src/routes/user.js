@@ -3,7 +3,7 @@ const router = express.Router();
 
 
 router.get('/', (req,res) => {
-    const userdata = req.user._json
+    const userdata = req.user._json;
     const leftSide = {
         "login" : userdata.login,
         "name" : userdata.name,
@@ -17,12 +17,9 @@ router.get('/', (req,res) => {
         "followers" : userdata.followers,
         "following" : userdata.following,
         "repo" : userdata.repos_url,
-        "org" : userdata. organizations_url
+        "org" : userdata.organizations_url
     }
     res.json(leftSide);
 });
-
-
-
 
 module.exports = router;
