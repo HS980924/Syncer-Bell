@@ -1,8 +1,7 @@
 import styles from './Sidebar.module.scss';
-import user from '../../assets/png/jh.jpg';
 import ptj_logo from '../../assets/png/logo.png';
 import {Link, useLocation} from 'react-router-dom';
-import Data from '../leftside_data/leftside_data';
+import UserLeftSide from '../leftside_data/leftside_data';
 
 
 const sidebarNavLinks = [
@@ -23,17 +22,10 @@ export default function Sidebar() {
                 <img className={styles.ptjLogo} src={ptj_logo} alt="ptj_logo"/>
 
                 <div className={styles.sidebarContent}>
-                    <div className={styles.profileDetails}>
-                        <div className={styles.profileImageDiv}>
-                            <img src={user} alt="user"/>
-                            <p className={styles.notifications}>4</p>
-                        </div>
-                        <p className={styles.userName}>JH9892</p>
-                        <p className={styles.userEmail}>diadiahun0902@email.com</p>
-                        <Data/>
-                    </div>
+                    <UserLeftSide/>
+                </div>
 
-                    <nav>
+                <nav>
                     <ul>
                         {sidebarNavLinks.map(sidebarNavLinks => 
                         <li className={styles.sidebarNavItem} key={sidebarNavLinks}>
@@ -45,7 +37,6 @@ export default function Sidebar() {
                         </li>)}
                     </ul>
                 </nav>
-                </div>
             </aside> 
         </>
     );
