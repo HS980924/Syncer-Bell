@@ -30,6 +30,8 @@ function Leftside_data() {
     if (errors) return <h3>Error!!</h3>;
     if (!users) return null;
 
+    const url = users.blog;
+
     return (
         <>
             <div className={styles.profileDetails}>
@@ -55,10 +57,14 @@ function Leftside_data() {
                         </li>
                         <li>
                             <FaCode className={styles.sectionIcon}/>
-                            <p className={styles.sectionLink} key={users.blog} onClick={()=> {
-                                window.location.href = "users.blog";
-                                return null;
-                            }}>{users.blog}</p>
+                            <p 
+                                className={styles.sectionLink}
+                                key={users.blog}
+                                onClick={()=> {
+                                    window.open(url, '_blank')
+                                }}>
+                                    {users.blog}
+                            </p>
                         </li>
                     </ul>
                 </div>

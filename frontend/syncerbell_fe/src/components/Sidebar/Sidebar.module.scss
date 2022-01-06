@@ -1,4 +1,4 @@
-.sidebar {
+.leftBar {
     position: absolute;
     top: 0;
     left: 0;
@@ -9,8 +9,9 @@
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    z-index: 100;
 }
 
 .ptjLogo {
@@ -19,12 +20,13 @@
     height: 80px;
     top: 0;
     left: 0;
-    padding-top: 25px;
-    padding-left: 25px;
+    padding-top: 1rem;
+    padding-left: 1rem;
 }
 
-.sidebarContent {
-    height:100%;
+.leftBarContent {
+    width:100%;
+    height:65%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;

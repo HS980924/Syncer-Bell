@@ -5,6 +5,7 @@ import optionIcon from '../../assets/png/menuIcon.png';
 import cartIcon from '../../assets/svg/cartIcon.svg';
 import transportIcon from '../../assets/svg/transportIcon.svg';
 import houseIcon from '../../assets/svg/houseIcon.svg';
+import dummy from '../../assets/png/dummy_img.jpg';
 
 export default function Dashboard() {
 
@@ -219,24 +220,6 @@ export default function Dashboard() {
             price: 326.8,
             icon: houseIcon,
             iconBackgroundColor: "#FF8700",
-        },
-        {
-            id:4,
-            expense: "Dummy02",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: transportIcon,
-            iconBackgroundColor: "#B548C6",
-        },
-        {
-            id:5,
-            expense: "Dummy03",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: houseIcon,
-            iconBackgroundColor: "#FF8700",
         }
     ]
 
@@ -261,24 +244,6 @@ export default function Dashboard() {
         },
         {
             id:3,
-            expense: "Dummy03",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: houseIcon,
-            iconBackgroundColor: "#FF8700",
-        },
-        {
-            id:4,
-            expense: "Dummy02",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: transportIcon,
-            iconBackgroundColor: "#B548C6",
-        },
-        {
-            id:5,
             expense: "Dummy03",
             time: "5:12 PM",
             location: "Repo : syncer-bell",
@@ -313,16 +278,19 @@ export default function Dashboard() {
 
     const onMouseOver = (data : any, index : number) => setActiveIndex(index);
 
-    return ( <> <main className={styles.expenses}>
-        <div className={styles.expensesCard}>
-            <section className={styles.expensesOverview}>
-                <div className={styles.titleArea}>
-                    <div className={styles.expensesHeader}>
-                        <p className={styles.expensesTitle}>Syncer-Bell</p>
+    return ( <> <main className={styles.dashBoard}>
+        <div className={styles.dashBoardMain}>
+            <section className={styles.dashBoardCenterArea}>
+                {/*<!-------------------------- 
+                            Head Area 
+                    ---------------------------->*/}
+                <div className={styles.headerArea}>
+                    <div className={styles.headTitleArea}>
+                        <p className={styles.title}>Syncer-Bell</p>
+                        <p className={styles.dataRange}>01 - 31, January, 2022</p>
                     </div>
-                    <p className={styles.dataRange}>01 - 31, December, 2021</p>
                     
-                    <ResponsiveContainer width="100%" height="8%">
+                    <ResponsiveContainer className={styles.chartArea} width="70%" height="70%">
                         <BarChart data={data}>
                             <Bar 
                                 dataKey="uv" 
@@ -342,11 +310,14 @@ export default function Dashboard() {
                     </ResponsiveContainer>
                 </div>
 
+                {/*<!-------------------------- 
+                            Issue Area 
+                    ---------------------------->*/}
                 <div className={styles.issueArea}>
-                    <div className={styles.expensesOverviewHeader}>
-                        <p className={styles.expensesOverviewTitle}>Issue</p>
+                    <div className={styles.titleArea}>
+                        <p className={styles.areaTitle}>Issue</p>
                         <button>
-                            <img className={styles.expenseOption} src={optionIcon} alt="options"/>
+                            <img className={styles.showDetails} src={optionIcon} alt="options"/>
                         </button>
                     </div>
 
@@ -373,11 +344,14 @@ export default function Dashboard() {
                     </ul>
                 </div>
                 
+                {/*<!-------------------------- 
+                            PR Area 
+                    ---------------------------->*/}
                 <div className={styles.prArea}>
-                    <div className={styles.expensesOverviewHeader}>
-                        <p className={styles.expensesOverviewTitle}>Pull Request</p>
+                    <div className={styles.titleArea}>
+                        <p className={styles.areaTitle}>Pull Request</p>
                         <button>
-                            <img className={styles.expenseOption} src={optionIcon} alt="options"/>
+                            <img className={styles.showDetails} src={optionIcon} alt="options"/>
                         </button>
                     </div>
 
@@ -405,7 +379,10 @@ export default function Dashboard() {
                 </div>
             </section>
             
-            <section className={styles.sideOverview}>
+                {/*<!----------------------------------------------------------
+                                    DashBoard Main - Right Side 
+                    ---------------------------------------------------------->*/}
+            <section className={styles.dashBoardRightSide}>
                 <p className={styles.sideOverviewTitle}>2021's Statics</p>
                 <ul>
                     {year_statics.map((item) => (
@@ -422,6 +399,10 @@ export default function Dashboard() {
                         </li> 
                     ))}
                 </ul>
+                <div className={styles.adsImageSection}>
+                    <img className={styles.adsImage} src={dummy} alt="dummy_image"/>
+                </div>
+                
             </section>
         </div>
     </main> 

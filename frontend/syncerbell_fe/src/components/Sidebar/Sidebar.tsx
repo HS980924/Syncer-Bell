@@ -18,17 +18,19 @@ export default function Sidebar() {
 
     return (
         <> 
-            <aside className={styles.sidebar}>
+            <aside className={styles.leftBar}>
                 <img className={styles.ptjLogo} src={ptj_logo} alt="ptj_logo"/>
 
-                <div className={styles.sidebarContent}>
-                    <UserLeftSide/>
+                <div className={styles.leftBarContent}>
+                    <UserLeftSide />
                 </div>
 
                 <nav>
                     <ul>
                         {sidebarNavLinks.map(sidebarNavLinks => 
-                        <li className={styles.sidebarNavItem} key={sidebarNavLinks}>
+                        <li 
+                            className={styles.sidebarNavItem}
+                            key={sidebarNavLinks}>
                             <Link
                                 className={location.pathname === `/${sidebarNavLinks}`
                                 ? styles.sidebarNavLinkActive
