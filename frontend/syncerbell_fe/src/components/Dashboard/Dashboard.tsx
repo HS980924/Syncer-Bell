@@ -316,87 +316,93 @@ export default function Dashboard() {
     return ( <> <main className={styles.expenses}>
         <div className={styles.expensesCard}>
             <section className={styles.expensesOverview}>
-                <div className={styles.expensesHeader}>
-                    <p className={styles.expensesTitle}>Syncer-Bell</p>
-                </div>
-                <p className={styles.dataRange}>01 - 31, December, 2021</p>
-                <ResponsiveContainer width="100%" height="9%">
-                    <BarChart data={data}>
-                        <Bar 
-                            dataKey="uv" 
-                            fill="rgba(21,122,255,.2)" 
-                            onMouseOver={onMouseOver}>
-                            {data.map((entry, index) => (
-                            <Cell
-                                cursor="pointer"
-                                fill={index === activeIndex
-                                ? "rgb(0,255,69)"
-                                : "rgba(0,255,69,.2)"}
-                                key={index}
-                            />
-                        ))}
-                        </Bar>
-                    </BarChart>
-                </ResponsiveContainer>
-
-                <div className={styles.expensesOverviewHeader}>
-                    <p className={styles.expensesOverviewTitle}>Issue</p>
-                    <button>
-                        <img className={styles.expenseOption} src={optionIcon} alt="options"/>
-                    </button>
-                </div>
-
-                <ul>
-                    {issue_dummy.map((item) => (
-                        <li className={styles.expenseItem} key={item.id}>
-                            <div className={styles.expenseItemLeft}>
-                                <div 
-                                    style={{backgroundColor: item.iconBackgroundColor}}
-                                    className={styles.expenseItemDiv}
-                                >
-                                    <img src={cartIcon} alt={item.expense}/>
-                                </div>
-                                <div className={styles.expenseItemDetails}>
-                                    <p className={styles.expenseItemTitle}>{item.expense}</p>
-                                    <p className={styles.expenseItemTime}>
-                                        {item.time} . {item.location}
-                                    </p>
-                                </div>
-                            </div>
-                            <p className={styles.expenseItemPrice}>{item.price}</p>
-                        </li>
-                    ))}
+                <div className={styles.titleArea}>
+                    <div className={styles.expensesHeader}>
+                        <p className={styles.expensesTitle}>Syncer-Bell</p>
+                    </div>
+                    <p className={styles.dataRange}>01 - 31, December, 2021</p>
                     
-                </ul>
-
-                <div className={styles.expensesOverviewHeader}>
-                    <p className={styles.expensesOverviewTitle}>Pull Request</p>
-                    <button>
-                        <img className={styles.expenseOption} src={optionIcon} alt="options"/>
-                    </button>
+                    <ResponsiveContainer width="100%" height="8%">
+                        <BarChart data={data}>
+                            <Bar 
+                                dataKey="uv" 
+                                fill="rgba(21,122,255,.2)" 
+                                onMouseOver={onMouseOver}>
+                                {data.map((entry, index) => (
+                                <Cell
+                                    cursor="pointer"
+                                    fill={index === activeIndex
+                                    ? "rgb(0,255,69)"
+                                    : "rgba(0,255,69,.2)"}
+                                    key={index}
+                                />
+                            ))}
+                            </Bar>
+                        </BarChart>
+                    </ResponsiveContainer>
                 </div>
 
-                <ul>
-                    {pullRequest_dummy.map((item) => (
-                        <li className={styles.expenseItem} key={item.id}>
-                            <div className={styles.expenseItemLeft}>
-                                <div 
-                                    style={{backgroundColor: item.iconBackgroundColor}}
-                                    className={styles.expenseItemDiv}
-                                >
-                                    <img src={cartIcon} alt={item.expense}/>
+                <div className={styles.issueArea}>
+                    <div className={styles.expensesOverviewHeader}>
+                        <p className={styles.expensesOverviewTitle}>Issue</p>
+                        <button>
+                            <img className={styles.expenseOption} src={optionIcon} alt="options"/>
+                        </button>
+                    </div>
+
+                    <ul>
+                        {issue_dummy.map((item) => (
+                            <li className={styles.expenseItem} key={item.id}>
+                                <div className={styles.expenseItemLeft}>
+                                    <div 
+                                        style={{backgroundColor: item.iconBackgroundColor}}
+                                        className={styles.expenseItemDiv}
+                                    >
+                                        <img src={cartIcon} alt={item.expense}/>
+                                    </div>
+                                    <div className={styles.expenseItemDetails}>
+                                        <p className={styles.expenseItemTitle}>{item.expense}</p>
+                                        <p className={styles.expenseItemTime}>
+                                            {item.time} . {item.location}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div className={styles.expenseItemDetails}>
-                                    <p className={styles.expenseItemTitle}>{item.expense}</p>
-                                    <p className={styles.expenseItemTime}>
-                                        {item.time} . {item.location}
-                                    </p>
+                                <p className={styles.expenseItemPrice}>{item.price}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                
+                <div className={styles.prArea}>
+                    <div className={styles.expensesOverviewHeader}>
+                        <p className={styles.expensesOverviewTitle}>Pull Request</p>
+                        <button>
+                            <img className={styles.expenseOption} src={optionIcon} alt="options"/>
+                        </button>
+                    </div>
+
+                    <ul>
+                        {pullRequest_dummy.map((item) => (
+                            <li className={styles.expenseItem} key={item.id}>
+                                <div className={styles.expenseItemLeft}>
+                                    <div 
+                                        style={{backgroundColor: item.iconBackgroundColor}}
+                                        className={styles.expenseItemDiv}
+                                    >
+                                        <img src={cartIcon} alt={item.expense}/>
+                                    </div>
+                                    <div className={styles.expenseItemDetails}>
+                                        <p className={styles.expenseItemTitle}>{item.expense}</p>
+                                        <p className={styles.expenseItemTime}>
+                                            {item.time} . {item.location}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
-                            <p className={styles.expenseItemPrice}>{item.price}</p>
-                        </li>
-                    ))}
-                </ul>
+                                <p className={styles.expenseItemPrice}>{item.price}</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
             </section>
             
             <section className={styles.sideOverview}>
