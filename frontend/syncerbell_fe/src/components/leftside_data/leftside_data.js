@@ -4,6 +4,8 @@ import {FaChild, FaCode} from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 
+export let userGit;
+
 function Leftside_data() {
     const [users, setUsers] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -26,17 +28,19 @@ function Leftside_data() {
         fetchUsers();
     }, []);
 
-    if (loading) return <h3>Loading.....</h3>;
-    if (errors) return <h3>Error!!</h3>;
+    
+    if (loading) return <h3 className={styles.msg}>Loading.....</h3>;
+    if (errors) return <h3 className={styles.msg}>Error!!</h3>;
     if (!users) return null;
-
+    
     const url = users.blog;
-
-    return (
+    userGit = users.url;
+    
+    return(
         <>
             <div className={styles.profileDetails}>
                 <div className={styles.profileImageDiv}>
-                    <image src={users.image}/>
+                    <img className={styles.profiileImage} src={users.image} alt={users.image}/>
                 </div>
                 <div className={styles.userInfoWrapper}>
                     <p key={users.name} className={styles.userName}>{users.name}</p>

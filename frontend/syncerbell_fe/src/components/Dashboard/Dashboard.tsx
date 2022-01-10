@@ -5,9 +5,12 @@ import optionIcon from '../../assets/png/menuIcon.png';
 import cartIcon from '../../assets/svg/cartIcon.svg';
 import transportIcon from '../../assets/svg/transportIcon.svg';
 import houseIcon from '../../assets/svg/houseIcon.svg';
-import dummy from '../../assets/png/dummy_img.jpg';
 
-export default function Dashboard() {
+import RightSide from '../RightSide/RightSide';
+
+export let commitData: { name: string; uv: number; pv: number; amt: number; }[];
+
+function Dashboard(): JSX.Element {
 
     const [activeIndex, setActiveIndex] = useState(0);
     const data = [
@@ -193,6 +196,8 @@ export default function Dashboard() {
         }
     ];
 
+    commitData = data;
+    
     const issue_dummy = [
         {
             id:1,
@@ -253,159 +258,119 @@ export default function Dashboard() {
         }
     ]
 
-    const year_statics = [
-        {
-            id:1,
-            category: "Commit",
-            entity:50,
-        },
-        {
-            id:2,
-            category: "Pull Request",
-            entity:10,
-        },
-        {
-            id:3,
-            category: "Issue",
-            entity:15,
-        },
-        {
-            id:4,
-            category: "Todays's Commit",
-            entity:36,
-        },
-    ]
-
     const onMouseOver = (data : any, index : number) => setActiveIndex(index);
 
-    return ( <> <main className={styles.dashBoard}>
-        <div className={styles.dashBoardMain}>
-            <section className={styles.dashBoardCenterArea}>
-                {/*<!-------------------------- 
-                            Head Area 
-                    ---------------------------->*/}
-                <div className={styles.headerArea}>
-                    <div className={styles.headTitleArea}>
-                        <p className={styles.title}>Syncer-Bell</p>
-                        <p className={styles.dataRange}>01 - 31, January, 2022</p>
-                    </div>
+    return ( 
+        <> 
+            <main className={styles.dashBoard}>
+                <div className={styles.dashBoardMain}>
+                    <section className={styles.dashBoardCenterArea}>
+                        {/*<!-------------------------- 
+                                    Head Area 
+                            ---------------------------->*/}
+                        <div className={styles.headerArea}>
+                            <div className={styles.headTitleArea}>
+                                <p className={styles.title}>Syncer-Bell</p>
+                                <p className={styles.dataRange}>01 - 31, January, 2022</p>
+                            </div>
+                            
+                            <ResponsiveContainer className={styles.chartArea} width="70%" height="70%">
+                                <BarChart data={data}>
+                                    <Bar 
+                                        dataKey="uv" 
+                                        fill="rgba(21,122,255,.2)" 
+                                        onMouseOver={onMouseOver}>
+                                        {data.map((entry, index) => (
+                                        <Cell
+                                            cursor="pointer"
+                                            fill={index === activeIndex
+                                            ? "rgb(0,255,69)"
+                                            : "rgba(0,255,69,.2)"}
+                                            key={index}
+                                        />
+                                    ))}
+                                    </Bar>
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+
+                        {/*<!-------------------------- 
+                                    Issue Area 
+                            ---------------------------->*/}
+                        <div className={styles.issueArea}>
+                            <div className={styles.titleArea}>
+                                <p className={styles.areaTitle}>Issue</p>
+                                <button>
+                                    <img className={styles.showDetails} src={optionIcon} alt="options"/>
+                                </button>
+                            </div>
+
+                            <ul>
+                                {issue_dummy.map((item) => (
+                                    <li className={styles.expenseItem} key={item.id}>
+                                        <div className={styles.expenseItemLeft}>
+                                            <div 
+                                                style={{backgroundColor: item.iconBackgroundColor}}
+                                                className={styles.expenseItemDiv}
+                                            >
+                                                <img src={cartIcon} alt={item.expense}/>
+                                            </div>
+                                            <div className={styles.expenseItemDetails}>
+                                                <p className={styles.expenseItemTitle}>{item.expense}</p>
+                                                <p className={styles.expenseItemTime}>
+                                                    {item.time} . {item.location}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p className={styles.expenseItemPrice}>{item.price}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                        
+                        {/*<!-------------------------- 
+                                    PR Area 
+                            ---------------------------->*/}
+                        <div className={styles.prArea}>
+                            <div className={styles.titleArea}>
+                                <p className={styles.areaTitle}>Pull Request</p>
+                                <button>
+                                    <img className={styles.showDetails} src={optionIcon} alt="options"/>
+                                </button>
+                            </div>
+
+                            <ul>
+                                {pullRequest_dummy.map((item) => (
+                                    <li className={styles.expenseItem} key={item.id}>
+                                        <div className={styles.expenseItemLeft}>
+                                            <div 
+                                                style={{backgroundColor: item.iconBackgroundColor}}
+                                                className={styles.expenseItemDiv}
+                                            >
+                                                <img src={cartIcon} alt={item.expense}/>
+                                            </div>
+                                            <div className={styles.expenseItemDetails}>
+                                                <p className={styles.expenseItemTitle}>{item.expense}</p>
+                                                <p className={styles.expenseItemTime}>
+                                                    {item.time} . {item.location}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <p className={styles.expenseItemPrice}>{item.price}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </section>
                     
-                    <ResponsiveContainer className={styles.chartArea} width="70%" height="70%">
-                        <BarChart data={data}>
-                            <Bar 
-                                dataKey="uv" 
-                                fill="rgba(21,122,255,.2)" 
-                                onMouseOver={onMouseOver}>
-                                {data.map((entry, index) => (
-                                <Cell
-                                    cursor="pointer"
-                                    fill={index === activeIndex
-                                    ? "rgb(0,255,69)"
-                                    : "rgba(0,255,69,.2)"}
-                                    key={index}
-                                />
-                            ))}
-                            </Bar>
-                        </BarChart>
-                    </ResponsiveContainer>
-                </div>
-
-                {/*<!-------------------------- 
-                            Issue Area 
-                    ---------------------------->*/}
-                <div className={styles.issueArea}>
-                    <div className={styles.titleArea}>
-                        <p className={styles.areaTitle}>Issue</p>
-                        <button>
-                            <img className={styles.showDetails} src={optionIcon} alt="options"/>
-                        </button>
-                    </div>
-
-                    <ul>
-                        {issue_dummy.map((item) => (
-                            <li className={styles.expenseItem} key={item.id}>
-                                <div className={styles.expenseItemLeft}>
-                                    <div 
-                                        style={{backgroundColor: item.iconBackgroundColor}}
-                                        className={styles.expenseItemDiv}
-                                    >
-                                        <img src={cartIcon} alt={item.expense}/>
-                                    </div>
-                                    <div className={styles.expenseItemDetails}>
-                                        <p className={styles.expenseItemTitle}>{item.expense}</p>
-                                        <p className={styles.expenseItemTime}>
-                                            {item.time} . {item.location}
-                                        </p>
-                                    </div>
-                                </div>
-                                <p className={styles.expenseItemPrice}>{item.price}</p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                
-                {/*<!-------------------------- 
-                            PR Area 
-                    ---------------------------->*/}
-                <div className={styles.prArea}>
-                    <div className={styles.titleArea}>
-                        <p className={styles.areaTitle}>Pull Request</p>
-                        <button>
-                            <img className={styles.showDetails} src={optionIcon} alt="options"/>
-                        </button>
-                    </div>
-
-                    <ul>
-                        {pullRequest_dummy.map((item) => (
-                            <li className={styles.expenseItem} key={item.id}>
-                                <div className={styles.expenseItemLeft}>
-                                    <div 
-                                        style={{backgroundColor: item.iconBackgroundColor}}
-                                        className={styles.expenseItemDiv}
-                                    >
-                                        <img src={cartIcon} alt={item.expense}/>
-                                    </div>
-                                    <div className={styles.expenseItemDetails}>
-                                        <p className={styles.expenseItemTitle}>{item.expense}</p>
-                                        <p className={styles.expenseItemTime}>
-                                            {item.time} . {item.location}
-                                        </p>
-                                    </div>
-                                </div>
-                                <p className={styles.expenseItemPrice}>{item.price}</p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </section>
-            
-                {/*<!----------------------------------------------------------
+                    {/*<!----------------------------------------------------------
                                     DashBoard Main - Right Side 
-                    ---------------------------------------------------------->*/}
-            <section className={styles.dashBoardRightSide}>
-                <p className={styles.sideOverviewTitle}>2021's Statics</p>
-                <ul>
-                    {year_statics.map((item) => (
-                        <li key={item.id}>
-                            <div className={styles.spendCategory}>
-                                <p className={styles.spendCategoryName}>{item.category}</p>
-                                <p className={styles.spendCategoryPrice}>{item.entity}</p>
-                            </div>
-                            <div className={styles.spendCategoryBar}>
-                                <div 
-                                    style={{width:`${item.entity}%`}}
-                                    className={styles.spendCategoryColoredBar}></div>
-                            </div>
-                        </li> 
-                    ))}
-                </ul>
-                <div className={styles.adsImageSection}>
-                    <img className={styles.adsImage} src={dummy} alt="dummy_image"/>
+                        ---------------------------------------------------------->*/}
+                    <RightSide/>
                 </div>
-                
-            </section>
-        </div>
-    </main> 
-    </>
+            </main> 
+        </>
     )
 }
+
+export default Dashboard;

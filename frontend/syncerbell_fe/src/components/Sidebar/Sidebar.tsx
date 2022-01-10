@@ -1,45 +1,121 @@
 import styles from './Sidebar.module.scss';
 import ptj_logo from '../../assets/png/logo.png';
 import {Link, useLocation} from 'react-router-dom';
-import UserLeftSide from '../leftside_data/leftside_data';
+import UserData, {userGit} from "../leftside_data/leftside_data";
 
+// import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
-const sidebarNavLinks = [
-    "home",
-    "commit",
-    "issue",
-    "pullRequest",
-    "github_my",
-    "settings"
-];
+import Commit from '../Commit/Commit';
+import Pullrequest from '../Pullrequest/Pullrequest';
+import Settings from '../cognition/Settings';
+import DashboardMain from '../Dashboard/Dashboard';
+import Issue from '../Issue/Issue';
 
-export default function Sidebar() {
+const sidebarNavLinks = ["home","commit","issue","pullrequest","settings"];
+
+function Sidebar() {
     const location = useLocation();
+
+    // function isAuth(){
+    //     return null;
+    // }
 
     return (
         <> 
             <aside className={styles.leftBar}>
                 <img className={styles.ptjLogo} src={ptj_logo} alt="ptj_logo"/>
-
                 <div className={styles.leftBarContent}>
-                    <UserLeftSide />
+                    <UserData />
                 </div>
 
-                <nav>
-                    <ul>
-                        {sidebarNavLinks.map(sidebarNavLinks => 
-                        <li 
-                            className={styles.sidebarNavItem}
-                            key={sidebarNavLinks}>
-                            <Link
-                                className={location.pathname === `/${sidebarNavLinks}`
-                                ? styles.sidebarNavLinkActive
-                                : styles.sidebarNavLink}
-                                to={`/${sidebarNavLinks}`}>{sidebarNavLinks.charAt(0).toUpperCase() + sidebarNavLinks.slice(1)}</Link>
-                        </li>)}
-                    </ul>
-                </nav>
-            </aside> 
+                <div className={styles.leftBarMenu}>
+                    <nav>
+                        <ul>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={location.pathname === `/${sidebarNavLinks}`
+                                        ? styles.sidebarNavLinkActive
+                                        : styles.sidebarNavLink}
+                                    to={`/`} 
+                                    onClick={()=>{ return <DashboardMain/> }}>Home</Link>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={location.pathname === `/${sidebarNavLinks}`
+                                        ? styles.sidebarNavLinkActive
+                                        : styles.sidebarNavLink}
+                                    to={`/commit`}
+                                    onClick={()=>{
+                                        if(location.pathname === '/commit'){
+                                            return <Commit/>;
+                                        }
+                                        else{
+                                            return <DashboardMain/>
+                                        }
+                                    }}>Commit</Link>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={location.pathname === `/${sidebarNavLinks}`
+                                        ? styles.sidebarNavLinkActive
+                                        : styles.sidebarNavLink}
+                                    to={`/issue`}
+                                    onClick={()=>{
+                                        if(location.pathname === '/commit'){
+                                            return <Issue/>;
+                                        }
+                                        else{
+                                            return <DashboardMain/>
+                                        }
+                                    }}>Issue</Link>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={location.pathname === `/${sidebarNavLinks}`
+                                        ? styles.sidebarNavLinkActive
+                                        : styles.sidebarNavLink}
+                                    to={`/pullrequest`}
+                                    onClick={()=>{
+                                        if(location.pathname === '/pullrequest'){
+                                            return <Pullrequest/>;
+                                        }
+                                        else{
+                                            return <DashboardMain/>
+                                        }
+                                    }}>Pull Request</Link>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <p 
+                                    className={location.pathname === `/${sidebarNavLinks}`
+                                        ? styles.sidebarNavLinkActive
+                                        : styles.sidebarNavLink}
+                                    onClick={()=>{
+                                        window.open(`${userGit}`, '_blank')
+                                    }}>Github</p>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={location.pathname === `/${sidebarNavLinks}`
+                                        ? styles.sidebarNavLinkActive
+                                        : styles.sidebarNavLink}
+                                    to={`/settings`}
+                                    onClick={()=>{
+                                        if(location.pathname === '/settings'){
+                                            return <Settings/>;
+                                        }
+                                        else{
+                                            return <DashboardMain/>
+                                        }
+                                    }}>Settings</Link>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+            <DashboardMain/>
         </>
     );
 }
+
+export default Sidebar;
