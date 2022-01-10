@@ -45,7 +45,6 @@ function Leftside_data() {
                 <div className={styles.userInfoWrapper}>
                     <p key={users.name} className={styles.userName}>{users.name}</p>
                     <p key={users.login} className={styles.userNickname}>{users.login}</p>
-                    <p key={users.context} className={styles.userContext}>{users.context}</p>
                     <p key={
                         users.email === null ? 
                         users.company : 
@@ -53,6 +52,7 @@ function Leftside_data() {
                         className={styles.userEmail}>
                             {users.email === null ? users.company : users.email}
                     </p>
+                    <p key={users.context} className={styles.userContext}>{users.context}</p>
                     <ul className={styles.userInfoDetails}>
                         <li>
                             <FaChild className={styles.sectionIcon}/>

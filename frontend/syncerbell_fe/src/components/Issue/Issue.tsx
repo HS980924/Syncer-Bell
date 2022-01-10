@@ -1,16 +1,13 @@
 import React from 'react'
 import styles from './Issue.module.scss';
-// import {commitData} from '../Dashboard/Dashboard';
-import Sidebar from '../Sidebar/Sidebar';
-
 import RightSide from '../RightSide/RightSide';
+// import {commitData} from '../Dashboard/Dashboard';
 
 const Issue = () => {
     // const data = commitData;
 
     return (
         <>
-            <Sidebar/>
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
@@ -32,13 +29,8 @@ const Issue = () => {
                                 <p className={styles.areaTitle}>Issue</p>
                             </div>
                         </div>
-                        
-                        
-                        {/*<!----------------------------------------------------------
-                                            DashBoard Main - Right Side 
-                            ---------------------------------------------------------->*/}
-                        <RightSide/>
                     </section>
+                    <RightSide/>
                 </div>
             </main> 
         </>

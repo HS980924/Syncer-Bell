@@ -362,10 +362,6 @@ function Dashboard(): JSX.Element {
                             </ul>
                         </div>
                     </section>
-                    
-                    {/*<!----------------------------------------------------------
-                                    DashBoard Main - Right Side 
-                        ---------------------------------------------------------->*/}
                     <RightSide/>
                 </div>
             </main> 
