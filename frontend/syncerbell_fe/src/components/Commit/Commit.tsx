@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './Commit.module.scss';
+import {FaArrowLeft} from 'react-icons/fa';
 import RightSide from '../RightSide/RightSide';
+import { Link } from 'react-router-dom';
 
 const Commit = () => {
     return (
@@ -8,6 +10,9 @@ const Commit = () => {
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
+                        <Link to="/">
+                            <FaArrowLeft className={styles.backArrowBtn}/>
+                        </Link>
                         {/*<!-------------------------- 
                                     Head Area 
                             ---------------------------->*/}

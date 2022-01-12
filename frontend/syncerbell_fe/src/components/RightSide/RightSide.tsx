@@ -7,22 +7,19 @@ const RightSide = () => {
         {
             id:1,
             category: "Commit",
-            entity:50,
-        },
-        {
+            entity:65,
+        },{
             id:2,
             category: "Pull Request",
-            entity:10,
-        },
-        {
+            entity:23,
+        },{
             id:3,
             category: "Issue",
-            entity:15,
-        },
-        {
+            entity:40,
+        },{
             id:4,
             category: "Todays's Commit",
-            entity:36,
+            entity:15,
         },
     ]
 

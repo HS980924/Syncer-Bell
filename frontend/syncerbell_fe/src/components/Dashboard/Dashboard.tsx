@@ -1,5 +1,6 @@
 import styles from './Dashboard.module.scss';
 import {Bar, BarChart, Cell, ResponsiveContainer} from 'recharts';
+import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import optionIcon from '../../assets/png/menuIcon.png';
 import cartIcon from '../../assets/svg/cartIcon.svg';
@@ -300,9 +301,12 @@ function Dashboard(): JSX.Element {
                         <div className={styles.issueArea}>
                             <div className={styles.titleArea}>
                                 <p className={styles.areaTitle}>Issue</p>
-                                <button>
-                                    <img className={styles.showDetails} src={optionIcon} alt="options"/>
-                                </button>
+                                <Link to="/issue">
+                                    <button>
+                                        <img className={styles.showDetails} src={optionIcon} alt="options"/>
+                                    </button>
+                                </Link>
+                                
                             </div>
 
                             <ul>
@@ -334,9 +338,11 @@ function Dashboard(): JSX.Element {
                         <div className={styles.prArea}>
                             <div className={styles.titleArea}>
                                 <p className={styles.areaTitle}>Pull Request</p>
-                                <button>
-                                    <img className={styles.showDetails} src={optionIcon} alt="options"/>
-                                </button>
+                                <Link to="/pullrequest">
+                                    <button>
+                                        <img className={styles.showDetails} src={optionIcon} alt="options"/>
+                                    </button>
+                                </Link>
                             </div>
 
                             <ul>

@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './Issue.module.scss';
 import RightSide from '../RightSide/RightSide';
+import { FaArrowLeft } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 // import {commitData} from '../Dashboard/Dashboard';
 
 const Issue = () => {
@@ -11,6 +13,9 @@ const Issue = () => {
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
+                        <Link to="/">
+                            <FaArrowLeft className={styles.backArrowBtn}/>
+                        </Link>
                         {/*<!-------------------------- 
                                     Head Area 
                             ---------------------------->*/}

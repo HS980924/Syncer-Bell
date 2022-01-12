@@ -27,6 +27,15 @@
     padding-left: 2rem;
     // overflow-y: scroll;
 }
+
+.backArrowBtn{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 3rem;
+    left: 5rem;
+    z-index:100;
+}
 // -----------------------
 /* Head Area */
 // -----------------------

@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './Pullrequest.module.scss';
 import RightSide from '../RightSide/RightSide';
+import { FaArrowLeft } from 'react-icons/fa';
+import {Link} from 'react-router-dom';
 
 const Pullrequest = () => {
     return (
@@ -8,6 +10,9 @@ const Pullrequest = () => {
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
+                        <Link to="/">
+                            <FaArrowLeft className={styles.backArrowBtn}/>
+                        </Link>
                         {/*<!-------------------------- 
                                     Head Area 
                             ---------------------------->*/}
