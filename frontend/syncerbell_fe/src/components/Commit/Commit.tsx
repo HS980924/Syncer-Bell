@@ -36,88 +36,88 @@ const Commit = () => {
     if(!commit) return null;
 
     commitData = JSON.parse(commit);
-    const dummyCommitData = [
-        {
-            id:1,
-            title: "Issue 01",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:2,
-            title: "Issue 02",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:3,
-            title: "Issue 03",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:4,
-            title: "Issue 04",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:5,
-            title: "Issue 05",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:6,
-            title: "Issue 06",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:7,
-            title: "Issue 07",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:8,
-            title: "Issue 08",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:9,
-            title: "Issue 09",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:10,
-            title: "Issue 10",
-            commitTime:"5:32 PM",
-            repo:"Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        }
-    ]
+    // const dummyCommitData = [
+    //     {
+    //         id:1,
+    //         title: "Issue 01",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:2,
+    //         title: "Issue 02",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:3,
+    //         title: "Issue 03",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:4,
+    //         title: "Issue 04",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:5,
+    //         title: "Issue 05",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:6,
+    //         title: "Issue 06",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:7,
+    //         title: "Issue 07",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:8,
+    //         title: "Issue 08",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:9,
+    //         title: "Issue 09",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:10,
+    //         title: "Issue 10",
+    //         commitTime:"5:32 PM",
+    //         repo:"Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     }
+    // ]
 
     return (
         <>
@@ -141,31 +141,31 @@ const Commit = () => {
                         {/*<!-------------------------- 
                                     Commit Area 
                             ---------------------------->*/}
-                        {/* <div className={styles.commitArea}>
+                        <div className={styles.commitArea}>
                             <ul className={styles.listArea}>
-                                {commitData.map(()=>(
-                                    <li className={styles.commitList} key={commitData.message} onClick={()=>{
-                                        window.open(`${commitData.url}`, '_blank')
+                                {commitData.map((item)=>(
+                                    <li className={styles.commitList} key={item.message} onClick={()=>{
+                                        window.open(`${item.url}`, '_blank')
                                     }}>
                                         <div className={styles.commitListItem}>
                                                 <div className={styles.itemHeader}>
-                                                    <p className={styles.commitTitle}>{commitData.message}</p>
-                                                    <p className={styles.commitTime}>{commitData.date}</p>
+                                                    <p className={styles.commitTitle}>{item.message}</p>
+                                                    <p className={styles.commitTime}>{item.date}</p>
                                                     <div className={styles.secondInfo}>
-                                                        <p className={styles.commitRepo}>{commitData.repoName}</p>
-                                                        <p className={styles.commitAsignee}>{commitData.user}</p>
+                                                        <p className={styles.commitRepo}>{item.repoName}</p>
+                                                        <p className={styles.commitAsignee}>{item.user}</p>
                                                     </div>
                                                 </div>
                                         </div>
-                                        <p className={styles.commitBio}>{commitData.message}</p>
+                                        <p className={styles.commitBio}>{item.message}</p>
                                     </li>
                                 ))}
                             </ul>
-                        </div> */}
+                        </div>
                         {/* <!----------------------------------------------
                                     Commit Area : demo data
                             -------------------------------------------> */}
-                        <div className={styles.commitArea}>
+                        {/* <div className={styles.commitArea}>
                             <ul className={styles.listArea}>
                                 {dummyCommitData.map((items)=>(
                                     <li className={styles.commitList} key={items.id}>
@@ -184,7 +184,7 @@ const Commit = () => {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </div> */}
                     </section>
                     <RightSide/>
                 </div>
