@@ -27,7 +27,7 @@ const getIssueComment = async (url) => {
             commentData.cmtdate = cmt.updated_at;
             commentList.push(commentData);
         })
-        console.log(commentList)
+        //console.log(commentList)
         return commentList.flat()
 
     }catch(err){

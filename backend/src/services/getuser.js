@@ -15,8 +15,7 @@ const UserInfo = (userdata) => {
         "blog" : userdata.blog,
         "followers" : userdata.followers,
         "following" : userdata.following,
-        "repo" : userdata.repos_url,
-        "org" : userdata.organizations_url
+        'repo' : userdata.repos_url
     }
     return leftSide
 }
@@ -62,38 +61,61 @@ const getCommitList = async (url,repo,token) => {
 }
 
 // 유저가 속한 조직에서 참여한 레포 확인하는 함수
-const orgRepoCheck = async (fullname) => {
-    try{
-        const link = `https://api.github.com/repos/${fullname}/contributors`
-        const Data = await axios.get(link);
-        const contributors = Data.data.map(ele => ele.login);
-        contributors.push(fullname);
-        return contributors
-    } catch(err){
-        return null
-    }
-}
+// const orgRepoCheck = async (fullname) => {
+//     try{
+//         const link = `https://api.github.com/repos/${fullname}/contributors`
+//         const Data = await axios.get(link);
+//         const contributors = Data.data.map(ele => ele.login);
+//         contributors.push(fullname);
+//         return contributors
+//     } catch(err){
+//         return null
+//     }
+// }
+
+// const getUserCommit = async (userId,token) => {
+//     try{
+//         const repos = await getFullName(token)
+//         const commitInfo = (await Promise.all(
+//             repos.map(repo => {
+//                 return orgRepoCheck(repo)
+//             })
+//         )).filter(ele => ele);
+
+//         const commitdata = (await Promise.all(
+//             commitInfo.map(repo => {
+//                 if (repo.includes(userId)){
+//                     var full = repo[repo.length - 1]
+//                     const link = `https://api.github.com/repos/${full}/commits`
+//                     return getCommitList(link,full,token)
+//                 }
+//             })
+//         )).filter(ele => ele);
+        
+//         commitdata.flat()
+//         commitdata.sort(date_ascending)
+//         console.log(commitdata)
+//         const result = JSON.stringify(commitdata.flat())
+//         return result
+//     } catch(err){
+//         return err
+//     }
+// }
+
 
 const getUserCommit = async (userId,token) => {
     try{
         const repos = await getFullName(token)
-        const commitInfo = (await Promise.all(
-            repos.map(repo => {
-                return orgRepoCheck(repo)
-            })
-        )).filter(ele => ele);
 
         const commitdata = (await Promise.all(
-            commitInfo.map(repo => {
-                if (repo.includes(userId)){
-                    var full = repo[repo.length - 1]
-                    const link = `https://api.github.com/repos/${full}/commits`
-                    return getCommitList(link,full,token)
-                }
+            repos.map(repo => {
+                const link = `https://api.github.com/repos/${repo}/commits`
+                return getCommitList(link,repo,token)
             })
         )).filter(ele => ele);
         
-        //console.log(commitdata.flat())
+        console.log(commitdata.flat())
+
         const result = JSON.stringify(commitdata.flat())
         return result
     } catch(err){
@@ -101,7 +123,14 @@ const getUserCommit = async (userId,token) => {
     }
 }
 
+function date_ascending(a, b) {
+    var dateA = new Date(a['date']).getTime();
+    var dateB = new Date(b['date']).getTime();
+    return dateA > dateB ? 1 : -1;
+};
+
+
 module.exports = {
     UserInfo,
-    getUserCommit
+    getUserCommit,
 }
