@@ -2,10 +2,40 @@ import React from 'react'
 import styles from './Commit.module.scss';
 import {FaArrowLeft, FaDelicious} from 'react-icons/fa';
 import RightSide from '../RightSide/RightSide';
-import { userData } from '../leftside_data/leftside_data';
 import { Link } from 'react-router-dom';
+import {useEffect, useState} from 'react';
+import axios from "axios";
+
+export let commitData=[{repoName:"", user:"", message:"", date:"", url:""}];
 
 const Commit = () => {
+    const [commit, setCommit] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [errors, setError] = useState<any | null>(null);
+
+    const fetchCommit = async()=>{
+        try{
+            setError(null);
+            setCommit(null);
+            setLoading(true);
+            const res = await axios.get('/commit');
+            setCommit(res.data);
+            console.log(res.data);
+        } catch(error){
+            setError(error);
+        }
+        setLoading(false);
+    }
+
+    useEffect(()=>{
+        fetchCommit();
+    }, []);
+
+    if(loading) return <h3 className={styles.msg}>Loading....</h3>;
+    if(errors) return <h3 className={styles.msg}>Error!!</h3>;
+    if(!commit) return null;
+
+    commitData = JSON.parse(commit);
     const dummyCommitData = [
         {
             id:1,
@@ -111,6 +141,30 @@ const Commit = () => {
                         {/*<!-------------------------- 
                                     Commit Area 
                             ---------------------------->*/}
+                        {/* <div className={styles.commitArea}>
+                            <ul className={styles.listArea}>
+                                {commitData.map(()=>(
+                                    <li className={styles.commitList} key={commitData.message} onClick={()=>{
+                                        window.open(`${commitData.url}`, '_blank')
+                                    }}>
+                                        <div className={styles.commitListItem}>
+                                                <div className={styles.itemHeader}>
+                                                    <p className={styles.commitTitle}>{commitData.message}</p>
+                                                    <p className={styles.commitTime}>{commitData.date}</p>
+                                                    <div className={styles.secondInfo}>
+                                                        <p className={styles.commitRepo}>{commitData.repoName}</p>
+                                                        <p className={styles.commitAsignee}>{commitData.user}</p>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <p className={styles.commitBio}>{commitData.message}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div> */}
+                        {/* <!----------------------------------------------
+                                    Commit Area : demo data
+                            -------------------------------------------> */}
                         <div className={styles.commitArea}>
                             <ul className={styles.listArea}>
                                 {dummyCommitData.map((items)=>(
@@ -121,7 +175,7 @@ const Commit = () => {
                                                     <p className={styles.commitTime}>{items.commitTime}</p>
                                                     <div className={styles.secondInfo}>
                                                         <p className={styles.commitRepo}>{items.repo}</p>
-                                                        <p className={styles.commitRepo}>{items.asignee}</p>
+                                                        <p className={styles.commitAsignee}>{items.asignee}</p>
                                                     </div>
 
                                                 </div>

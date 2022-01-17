@@ -3,7 +3,7 @@ const router = express.Router();
 const githubService = require('../services/getuser.js');
 const githubServiceIssue = require('../services/getissue.js');
 
-router.get('/', async (req,res) => {
+router.get('/home', async (req,res) => {
     const leftSide = githubService.UserInfo(req.session.passport.user.profile._json)
     
     res.json(leftSide);
