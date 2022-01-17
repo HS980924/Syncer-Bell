@@ -1,45 +1,66 @@
 import styles from './Sidebar.module.scss';
-import user from '../../assets/png/jh.jpg';
-import {Link, useLocation} from 'react-router-dom';
+import ptj_logo from '../../assets/png/logo.png';
+import {Link} from 'react-router-dom';
+import UserData, {userGit} from "../leftside_data/leftside_data";
 
-const sidebarNavLinks = [
-    "dashboard",
-    "commit",
-    "issue",
-    "pullRequest",
-    "github",
-    "settings"
-];
+// const sidebarNavLinks = ["home","commit","issue","pullrequest","settings"];
 
-export default function Sidebar() {
-    const location = useLocation();
+function Sidebar() {
+    // const location = useLocation();
+
+    // function isAuth(){
+    //     return null;
+    // }
+
     return (
         <> 
-            <aside className={styles.sidebar}>
-            <div className={styles.sidebarContent}>
-                <div className={styles.profileDetails}>
-                    <div className={styles.profileImageDiv}>
-                        <img src={user} alt="user"/>
-                        <p className={styles.notifications}>4</p>
-                    </div>
-                    <p className={styles.userName}>JH9892</p>
-                    <p className={styles.userEmail}>diadiahun0902@email.com</p>
+            <aside className={styles.leftBar}>
+                <img className={styles.ptjLogo} src={ptj_logo} alt="ptj_logo"/>
+                <div className={styles.leftBarContent}>
+                    <UserData />
                 </div>
 
-                <nav>
-                    <ul>
-                        {sidebarNavLinks.map(sidebarNavLinks => 
-                        <li className={styles.sidebarNavItem} key={sidebarNavLinks}>
-                            <Link
-                                className={location.pathname === `/${sidebarNavLinks}`
-                                ? styles.sidebarNavLinkActive
-                                : styles.sidebarNavLink}
-                                to={`/${sidebarNavLinks}`}>{sidebarNavLinks.charAt(0).toUpperCase() + sidebarNavLinks.slice(1)}</Link>
-                        </li>)}
-                    </ul>
-                </nav>
-            </div>
-        </aside> 
-    </>
+                <div className={styles.leftBarMenu}>
+                    <nav>
+                        <ul>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={styles.sidebarNavLink}
+                                    to={`/`}>Home</Link>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={styles.sidebarNavLink}
+                                    to={`/commit`}>Commit</Link>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={styles.sidebarNavLink}
+                                    to={`/issue`}>Issue</Link>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={styles.sidebarNavLink}
+                                    to={`/pullrequest`}>Pull Request</Link>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <p 
+                                    className={styles.sidebarNavLink}
+                                    onClick={()=>{
+                                        window.open(`${userGit}`, '_blank')
+                                    }}>Github</p>
+                            </li>
+                            <li className={styles.sidebarNavItem}>
+                                <Link 
+                                    className={styles.sidebarNavLink}
+                                    to={`/settings`}>Settings</Link>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </aside>
+        </>
     );
 }
+
+export default Sidebar;
