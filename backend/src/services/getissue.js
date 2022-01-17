@@ -52,7 +52,7 @@ const getIssueList = async (url,repo,token) => {
                 issueData.date = iss.updated_at;
                 issueData.url = iss.html_url;
                 issueData.body = iss.body;
-                issueData.comments = getIssueComment(iss.comments_url);
+                //issueData.comments = getIssueComment(iss.comments_url);
                 return issueData
             })
         )).filter(ele => ele);
@@ -97,9 +97,9 @@ const getUserIssue = async (userId,token) => {
             })
         )).filter(ele => ele);
 
-        console.log(issuedata.flat())
+        //console.log(issuedata.flat())
         const result = JSON.stringify(issuedata.flat())
-        return 's'
+        return result
     } catch(err){
         return err
     }

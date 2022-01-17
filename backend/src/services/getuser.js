@@ -18,7 +18,6 @@ const UserInfo = (userdata) => {
         "repo" : userdata.repos_url,
         "org" : userdata.organizations_url
     }
-
     return leftSide
 }
 /////////////////////////////////////////////////개인 프로필 데이터 가져오기////////////////////////////////////////////
@@ -94,7 +93,7 @@ const getUserCommit = async (userId,token) => {
             })
         )).filter(ele => ele);
         
-        console.log(commitdata.flat())
+        //console.log(commitdata.flat())
         const result = JSON.stringify(commitdata.flat())
         return result
     } catch(err){

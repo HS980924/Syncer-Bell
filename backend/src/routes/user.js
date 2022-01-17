@@ -4,17 +4,25 @@ const githubService = require('../services/getuser.js');
 const githubServiceIssue = require('../services/getissue.js');
 
 router.get('/', async (req,res) => {
-    const Token = req.session.passport.user.token;
     const leftSide = githubService.UserInfo(req.session.passport.user.profile._json)
-    //const myRepo = await githubService.getUserCommit(leftSide.login,Token) 
-    const myIssue = await githubServiceIssue.getUserIssue(leftSide.login,Token)
-    //const orgCommit = await githubService.getOrgCommit(leftSide.repo,leftSide.login)
-
-
-
-    console.log(myIssue)
-    //console.log(myRepo);
+    
     res.json(leftSide);
 });
+
+router.get('/commit', async(req,res) => {
+    const Token = req.session.passport.user.token;
+    const userId = req.session.passport.user.profile.username
+    const myCommit = await githubService.getUserCommit(userId,Token)
+
+    res.json(myCommit)
+})
+
+router.get('/issue',async(req,res) => {
+    const Token = req.session.passport.user.token;
+    const userId = req.session.passport.user._json.login;
+    const myIssue = await githubServiceIssue.getUserIssue(userId,Token) 
+
+    res.json(myIssue)
+})
 
 module.exports = router;
