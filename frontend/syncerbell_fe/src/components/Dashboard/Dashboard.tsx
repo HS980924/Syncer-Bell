@@ -202,7 +202,7 @@ function Dashboard(): JSX.Element {
     const issue_dummy = [
         {
             id:1,
-            expense: "Dummy01",
+            expense: "Issue 01",
             time: "5:12 PM",
             location: "Repo : syncer-bell",
             price: 326.8,
@@ -211,7 +211,7 @@ function Dashboard(): JSX.Element {
         },
         {
             id:2,
-            expense: "Dummy02",
+            expense: "Issue 02",
             time: "5:12 PM",
             location: "Repo : syncer-bell",
             price: 326.8,
@@ -220,7 +220,7 @@ function Dashboard(): JSX.Element {
         },
         {
             id:3,
-            expense: "Dummy03",
+            expense: "Issue 03",
             time: "5:12 PM",
             location: "Repo : syncer-bell",
             price: 326.8,
@@ -232,7 +232,7 @@ function Dashboard(): JSX.Element {
     const pullRequest_dummy = [
         {
             id:1,
-            expense: "Dummy01",
+            expense: "PullRequest 01",
             time: "5:12 PM",
             location: "Repo : syncer-bell",
             price: 326.8,
@@ -241,7 +241,7 @@ function Dashboard(): JSX.Element {
         },
         {
             id:2,
-            expense: "Dummy02",
+            expense: "PullRequest 02",
             time: "5:12 PM",
             location: "Repo : syncer-bell",
             price: 326.8,
@@ -250,7 +250,7 @@ function Dashboard(): JSX.Element {
         },
         {
             id:3,
-            expense: "Dummy03",
+            expense: "PullRequest 03",
             time: "5:12 PM",
             location: "Repo : syncer-bell",
             price: 326.8,
@@ -315,8 +315,7 @@ function Dashboard(): JSX.Element {
                                         <div className={styles.expenseItemLeft}>
                                             <div 
                                                 style={{backgroundColor: item.iconBackgroundColor}}
-                                                className={styles.expenseItemDiv}
-                                            >
+                                                className={styles.expenseItemDiv}>
                                                 <img src={cartIcon} alt={item.expense}/>
                                             </div>
                                             <div className={styles.expenseItemDetails}>

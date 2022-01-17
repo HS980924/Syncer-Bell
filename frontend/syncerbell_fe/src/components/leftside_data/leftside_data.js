@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 
 export let userGit;
+export let userData;
 
 function Leftside_data() {
     const [users, setUsers] = useState(null);
@@ -35,6 +36,7 @@ function Leftside_data() {
     
     const url = users.blog;
     userGit = users.url;
+    userData = users;
     
     return(
         <>
