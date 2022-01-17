@@ -19,7 +19,7 @@ router.get('/commit', async(req,res) => {
 
 router.get('/issue',async(req,res) => {
     const Token = req.session.passport.user.token;
-    const userId = req.session.passport.user._json.login;
+    const userId = req.session.passport.user.profile.username;
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token) 
 
     res.json(myIssue)
