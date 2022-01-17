@@ -1,28 +1,20 @@
 const express = require('express');
 const router = express.Router();
+const githubService = require('../services/getuser.js');
+const githubServiceIssue = require('../services/getissue.js');
+
+router.get('/', async (req,res) => {
+    const Token = req.session.passport.user.token;
+    const leftSide = githubService.UserInfo(req.session.passport.user.profile._json)
+    //const myRepo = await githubService.getUserCommit(leftSide.login,Token) 
+    const myIssue = await githubServiceIssue.getUserIssue(leftSide.login,Token)
+    //const orgCommit = await githubService.getOrgCommit(leftSide.repo,leftSide.login)
 
 
-router.get('/', (req,res) => {
-    const userdata = req.user._json
-    const leftSide = {
-        "login" : userdata.login,
-        "name" : userdata.name,
-        "image" : userdata.avatar_url,
-        "url": userdata.html_url,
-        "context": userdata.bio,
-        "email" : userdata.email,
-        "company" : userdata.company,
-        "location" : userdata.location,
-        "blog" : userdata.blog,
-        "followers" : userdata.followers,
-        "following" : userdata.following,
-        "repo" : userdata.repos_url,
-        "org" : userdata. organizations_url
-    }
+
+    console.log(myIssue)
+    //console.log(myRepo);
     res.json(leftSide);
 });
-
-
-
 
 module.exports = router;
