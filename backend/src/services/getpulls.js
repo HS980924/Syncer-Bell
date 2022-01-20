@@ -86,7 +86,7 @@ const getUserPull = async (userId,token) => {
             return day2 - day1;
         });
         
-        const result = JSON.stringify(pulldata.flat())
+        const result = JSON.stringify(pulldata)
         return result
     } catch(err){
         return err

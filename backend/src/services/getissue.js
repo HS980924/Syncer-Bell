@@ -102,8 +102,7 @@ const getUserIssue = async (userId,token) => {
             return day2 - day1;
         });
 
-        //console.log(issuedata.flat())
-        const result = JSON.stringify(issuedata.flat())
+        const result = JSON.stringify(issuedata)
         return result
     } catch(err){
         return err
