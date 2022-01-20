@@ -25,6 +25,8 @@
     width: 80%;
     padding-right: 2rem;
     padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
     // overflow-y: scroll;
 }
 
@@ -36,168 +38,156 @@
     left: 5rem;
     z-index:100;
 }
-
 // -----------------------
 /* Head Area */
 // -----------------------
 .headerArea {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     width: 100%;
-    height: 15%;
+    height: 13%;
+    padding-top:2%;
+    border-bottom: 0.6px solid rgba(128, 79, 0, .5);
 }
 
 .headTitleArea {
+    width: 100%;
     position: relative;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding-top: 1rem;
 }
 
-.title {
-    position: inherit;
-    right: 1rem;
-    font-weight: 600;
-    font-size: 45px;
+.titleGroup{
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
-.dataRange {
+.issueIcon {
+    width: 3rem;
+    height: 3rem;
     margin-top: 1rem;
     opacity: 0.5;
 }
 
+.title {
+    font-weight: 600;
+    font-size: 3rem;
+    margin-right: 1.5rem;
+    padding-left: 1rem;
+    line-height: normal;
+}
+
+
+.issueReloadIcon{
+    width: 1rem;
+    height: 1rem;
+    margin-top: 1rem;
+    opacity: 0.5;
+    color: green;
+    cursor: pointer;
+}
+
+.dates {
+    position: relative;
+    padding-top: 8%;
+    opacity:0.5;
+    font-size: 1rem;
+}
+
 // -----------------------
-/* Issue & PR Area */
+/* issue Area */
 // -----------------------
 
 .issueArea {
+    margin-top: 1%;
     width: 100%;
-    height: 40%;
-    margin-top:2rem;
-    // overflow-y: hidden;
+    height: 82%;
+    overflow-y: hidden;
 }
 
-.prArea {
-    width: 100%;
-    height: 40%;
-    // overflow-y: hidden;
+.listArea {
+    width: inherit;
+    height: inherit;
+    padding-top: 1%;
 }
 
-.titleArea {
-    margin-top: 0.5rem;
+// .listTitleArea {
+//     margin-top: 0.5rem;
+//     height: 5%;
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+//     align-items: center;
+//     border-bottom: 0.5px solid #dedede;
+// }
+
+.issueList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.issueList:hover {
+    background-color: lightgray;
+}
+
+.issueListItem {
+    width: 100%;
+    padding-top:0.5%;
+}
+
+.itemHeader{
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 0.75rem;
     border-bottom: 0.5px solid #dedede;
 }
 
-.areaTitle {
-    font-size: 18px;
+.issueTitle {
+    font-size: 1.5rem;
     font-weight: 600;
+    padding-left: 2%;
+    margin-right: 3%;
 }
 
-.showDetails {
-    cursor:pointer;
+.issueTime {
+    padding-top: 2%;
+    font-weight: 100;
 }
 
-.expenseItem {
-    margin: 1rem;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.expenseItemLeft {
-    display: flex;
-    align-items: center;
-}
-
-.expenseItemDiv {
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.expenseItemDetails {
-    margin-left: 1rem;
-}
-
-.expenseItemTitle {
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-.expenseItemTime {
-    opacity: 0.5;
-}
-
-.expenseItemPrice {
-    font-weight: 600;
-}
-
-.dashBoardRightSide {
-    width: 35%;
-    background-color: #f9fafc;
-    border-radius: 0 50px 50px 0;
-    padding: 5rem 2rem;
+.secondInfo {
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
+    left: 65%;
 }
 
-.spendCategory {
-    display: flex;
-    justify-content: space-between;    
+.issueRepo {
+    padding-bottom: 5%;
+    font-weight: 400;
 }
 
-.sideOverviewTitle {
-    font-size: 20px;
-    font-weight: 500;
-    margin-bottom: 3rem;
+.issueAsignee {
+    font-weight: 100;
 }
 
-.spendCategoryName {
-    font-weight: 500;
-    font-size: 13px;
-}
-
-.spendCategoryBar {
-    height: 5px;
-    width:100%;
-    background-color: #eceff5;
-    position: relative;
-    border-radius: 5px;
-    margin-bottom: 2rem;
-    margin-top: 1rem;
-}
-
-.spendCategoryColoredBar {
-    height: 5px;
-    width: 40%;
-    background-color: #31ba96;
-    position: absolute;
-    border-radius: 5px;
-}
-
-.adsImageSection {
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 3rem;
-}
-
-.adsImage {
-    width: 70%;
-    height: 90%;
-
+.issueBio {
+    padding-left: 2%;
+    font-size:1rem;
+    color: rgba(0,0,0,0.5);
 }
