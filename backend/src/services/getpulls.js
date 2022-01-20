@@ -92,12 +92,6 @@ const getUserPull = async (userId,token) => {
         return err
     }
 }
-const cntUserPull = async (data) => {
-    const infoData = Json.parse(data)
-    var cnt = Object.keys(infoData).length;
-    
-    return cnt
-}
 
 module.exports = {
     getUserPull,

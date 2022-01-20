@@ -108,6 +108,7 @@ const getCommitList = async (url,repo,token,userId) => {
 const getUserCommit = async (userId,token) => {
     try{
         const repos = await getFullName(token)
+        
         const commitdata = (await Promise.all(
             repos.map(repo => {
                 const link = `https://api.github.com/repos/${repo}/commits`
@@ -130,7 +131,6 @@ const getUserCommit = async (userId,token) => {
         return err
     }
 }
-
 
 
 module.exports = {

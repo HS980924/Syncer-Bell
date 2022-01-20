@@ -23,6 +23,7 @@ router.get('/issue',async(req,res) => {
     const userId = req.session.passport.user.profile.username;
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token) 
 
+
     res.json(myIssue)
 })
 
