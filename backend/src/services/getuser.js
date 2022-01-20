@@ -37,7 +37,7 @@ const getFullName = async (token) => {
 }
 
 // commit 정보 가져오는 함수 
-const getCommitList = async (url,repo,token) => {
+const getCommitList = async (url,repo,token,userId) => {
     try{
         var commitList = []
         const JsonData = await axios.get(url,{
@@ -46,13 +46,15 @@ const getCommitList = async (url,repo,token) => {
             }
         });
         JsonData.data.forEach((com) =>{
-            var commitData = new Object();
-            commitData.repoName = repo;
-            commitData.user = com.commit.author.name;
-            commitData.message = com.commit.message;
-            commitData.date = com.commit.author.date;
-            commitData.url = com.html_url;
-            commitList.push(commitData);
+            if (com.commit.author.name === userId){
+                var commitData = new Object();
+                commitData.repoName = repo;
+                commitData.user = com.commit.author.name;
+                commitData.message = com.commit.message;
+                commitData.date = com.commit.author.date;
+                commitData.url = com.html_url;
+                commitList.push(commitData);
+            }
         })
         return commitList
     }catch(err){
@@ -110,7 +112,7 @@ const getUserCommit = async (userId,token) => {
         const commitdata = (await Promise.all(
             repos.map(repo => {
                 const link = `https://api.github.com/repos/${repo}/commits`
-                return getCommitList(link,repo,token)
+                return getCommitList(link,repo,token,userId)
             })
         )).filter(ele => ele);
         

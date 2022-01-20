@@ -36,7 +36,7 @@ const getIssueComment = async (url) => {
 }
 
 // 유저 레포의 issue 타이틀 및 정보 가져오기
-const getIssueList = async (url,repo,token) => {
+const getIssueList = async (url,repo,token,userId) => {
     try{
         const JsonData = await axios.get(url,{
             headers: {
@@ -45,15 +45,17 @@ const getIssueList = async (url,repo,token) => {
         });
         const issueList = (await Promise.all( 
             JsonData.data.map((iss) =>{
-                var issueData = new Object();
-                issueData.repoName = repo;
-                issueData.title = iss.title;
-                issueData.user = iss.user.login;
-                issueData.date = iss.updated_at;
-                issueData.url = iss.html_url;
-                issueData.body = iss.body;
+                if (iss.user.login === userId){
+                    var issueData = new Object();
+                    issueData.repoName = repo;
+                    issueData.title = iss.title;
+                    issueData.user = iss.user.login;
+                    issueData.date = iss.updated_at;
+                    issueData.url = iss.html_url;
+                    issueData.body = iss.body;
+                    return issueData
+                }
                 //issueData.comments = getIssueComment(iss.comments_url);
-                return issueData
             })
         )).filter(ele => ele);
 
@@ -80,20 +82,17 @@ const getUserIssue = async (userId,token) => {
     try{
         const repos = await getFullName(token);
 
-        const issueInfo = (await Promise.all(
-            repos.map(repo => {
-                return orgRepoCheck(repo);
-            })
-        )).filter(ele => ele);
+        // const issueInfo = (await Promise.all(
+        //     repos.map(repo => {
+        //         return orgRepoCheck(repo);
+        //     })
+        // )).filter(ele => ele);
 
         
         const issuedata = (await Promise.all(
-            issueInfo.map(repo => {
-                if (repo.includes(userId)){
-                    var full = repo[repo.length - 1]
-                    const link = `https://api.github.com/repos/${full}/issues`
-                    return getIssueList(link,full,token)
-                }
+            repos.map(repo => {
+                const link = `https://api.github.com/repos/${repo}/issues`
+                return getIssueList(link,repo,token,userId)
             })
         )).filter(ele => ele);
 

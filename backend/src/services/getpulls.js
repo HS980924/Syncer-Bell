@@ -16,7 +16,7 @@ const getFullName = async (token) => {
 }
 
 // 유저 레포의 pullrequest 타이틀 및 정보 가져오기
-const getPullList= async (url,repo,token) => {
+const getPullList= async (url,repo,token,userId) => {
     try{
         const JsonData = await axios.get(url,{
             headers: {
@@ -25,17 +25,19 @@ const getPullList= async (url,repo,token) => {
         });
         const pullList = (await Promise.all( 
             JsonData.data.map((pull) =>{
-                var pullData = new Object();
-                pullData.repoName = repo;
-                pullData.title = pull.title;
-                pullData.user = pull.user.login;
-                pullData.body = pull.body;
-                pullData.label = pull.label.name;
-                pullData.color = pull.label.color;
-                pullData.assig = pull.assignees.login;
-                pullData.date = pull.updated_at;
-                pullData.url = pull.html_url;
-                return pullData
+                if (pull.user.login === userId){
+                    var pullData = new Object();
+                    pullData.repoName = repo;
+                    pullData.title = pull.title;
+                    pullData.user = pull.user.login;
+                    pullData.body = pull.body;
+                    pullData.label = pull.label.name;
+                    pullData.color = pull.label.color;
+                    pullData.assig = pull.assignees.login;
+                    pullData.date = pull.updated_at;
+                    pullData.url = pull.html_url;
+                    return pullData
+                }
             })
         )).filter(ele => ele);
 
@@ -62,19 +64,18 @@ const getUserPull = async (userId,token) => {
     try{
         const repos = await getFullName(token);
 
-        const issueInfo = (await Promise.all(
-            repos.map(repo => {
-                return orgRepoCheck(repo);
-            })
-        )).filter(ele => ele);
+        // const issueInfo = (await Promise.all(
+        //     repos.map(repo => {
+        //         return orgRepoCheck(repo);
+        //     })
+        // )).filter(ele => ele);
 
         
         const issuedata = (await Promise.all(
-            issueInfo.map(repo => {
+            repos.map(repo => {
                 if (repo.includes(userId)){
-                    var full = repo[repo.length - 1]
-                    const link = `https://api.github.com/repos/${full}/pulls`
-                    return getPullList(link,full,token)
+                    const link = `https://api.github.com/repos/${repo}/pulls`
+                    return getPullList(link,repo,token,userId)
                 }
             })
         )).filter(ele => ele);
