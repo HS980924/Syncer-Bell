@@ -1,0 +1,59 @@
+/*
+    SCSS
+*/
+.dashBoardRightSide {
+    width: 35%;
+    background-color: #f9fafc;
+    border-radius: 0 50px 50px 0;
+    padding: 5rem 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.sideOverviewTitle {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 3rem;
+}
+
+.spendCategory {
+    display: flex;
+    justify-content: space-between;    
+}
+
+.spendCategoryName {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.spendCategoryBar {
+    height: 5px;
+    width:100%;
+    background-color: #eceff5;
+    position: relative;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.spendCategoryColoredBar {
+    height: 5px;
+    width: 40%;
+    background-color: #31ba96;
+    position: absolute;
+    border-radius: 5px;
+}
+
+.adsImageSection {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1.5rem;
+}
+
+.adsImage {
+    width: 70%;
+    height: 90%;
+    border: 12px solid #31ba96;
+}
