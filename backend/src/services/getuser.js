@@ -46,7 +46,6 @@ const getCommitList = async (url,repo,token,userId) => {
             }
         });
         JsonData.data.forEach((com) =>{
-
             if (com.commit.author.name === userId){
                 var commitData = new Object();
                 commitData.repoName = repo;
@@ -115,22 +114,24 @@ const getUserCommit = async (userId,token) => {
                 const link = `https://api.github.com/repos/${repo}/commits`
                 return getCommitList(link,repo,token,userId)
             })
-        )).filter(ele => ele);
-        
-        console.log(commitdata.flat())
+        )).filter(ele => ele).flat();
 
-        const result = JSON.stringify(commitdata.flat())
+        commitdata.sort((a,b) => {
+            const day1 = new Date(a.date);
+            const day2 = new Date(b.date);
+            return day2 - day1;
+        });
+
+        // var cnt = Object.keys(commitdata).length;
+        // console.log(cnt);
+
+        const result = JSON.stringify(commitdata)
         return result
     } catch(err){
         return err
     }
 }
 
-function date_ascending(a, b) {
-    var dateA = new Date(a['date']).getTime();
-    var dateB = new Date(b['date']).getTime();
-    return dateA > dateB ? 1 : -1;
-};
 
 
 module.exports = {
