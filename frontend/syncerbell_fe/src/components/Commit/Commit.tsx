@@ -1,12 +1,13 @@
 import React from 'react'
 import styles from './Commit.module.scss';
-import {FaArrowLeft, FaDelicious} from 'react-icons/fa';
+import {FaArrowLeft, FaDelicious, FaSyncAlt} from 'react-icons/fa';
 import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
 import {useEffect, useState} from 'react';
 import axios from "axios";
 
-export let commitData=[{repoName:"", user:"", message:"", date:"", url:""}];
+let commitData=[{repoName:"", user:"", message:"", date:"", url:""}];
+export let printCommit=[{repoName:"", user:"", message:"", date:"", url:""}];
 
 const Commit = () => {
     const [commit, setCommit] = useState(null);
@@ -29,6 +30,7 @@ const Commit = () => {
 
     useEffect(()=>{
         fetchCommit();
+        console.log("loading?")
     }, []);
 
     if(loading) return <h3 className={styles.msg}>Loading....</h3>;
@@ -36,88 +38,89 @@ const Commit = () => {
     if(!commit) return null;
 
     commitData = JSON.parse(commit);
-    const dummyCommitData = [
-        {
-            id:1,
-            title: "Issue 01",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:2,
-            title: "Issue 02",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:3,
-            title: "Issue 03",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:4,
-            title: "Issue 04",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:5,
-            title: "Issue 05",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:6,
-            title: "Issue 06",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:7,
-            title: "Issue 07",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:8,
-            title: "Issue 08",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:9,
-            title: "Issue 09",
-            commitTime: "5:12 PM",
-            repo: "Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        },
-        {
-            id:10,
-            title: "Issue 10",
-            commitTime:"5:32 PM",
-            repo:"Repo : syncer-bell",
-            asignee: "JH9892",
-            bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-        }
-    ]
+    printCommit = commitData.slice(0,10)
+    // const dummyCommitData = [
+    //     {
+    //         id:1,
+    //         title: "Issue 01",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:2,
+    //         title: "Issue 02",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:3,
+    //         title: "Issue 03",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:4,
+    //         title: "Issue 04",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:5,
+    //         title: "Issue 05",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:6,
+    //         title: "Issue 06",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:7,
+    //         title: "Issue 07",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:8,
+    //         title: "Issue 08",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:9,
+    //         title: "Issue 09",
+    //         commitTime: "5:12 PM",
+    //         repo: "Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     },
+    //     {
+    //         id:10,
+    //         title: "Issue 10",
+    //         commitTime:"5:32 PM",
+    //         repo:"Repo : syncer-bell",
+    //         asignee: "JH9892",
+    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    //     }
+    // ]
 
     return (
         <>
@@ -132,18 +135,21 @@ const Commit = () => {
                             ---------------------------->*/}
                         <div className={styles.headerArea}>
                             <div className={styles.headTitleArea}>
-                                <FaDelicious className={styles.commitIcon}/>
-                                <p className={styles.title}>Commit</p>
-                                <p className={styles.dates}>January 1th ~ 30th, 2022</p>
+                                <div className={styles.titleGroup}>
+                                    <FaDelicious className={styles.commitIcon}/>
+                                    <p className={styles.title}>Commit</p>
+                                    <p className={styles.dates}>January 1th ~ 30th, 2022</p>
+                                </div>
+                                <FaSyncAlt className={styles.commitReloadIcon}/>
                             </div>
                         </div>
 
                         {/*<!-------------------------- 
                                     Commit Area 
                             ---------------------------->*/}
-                        {/* <div className={styles.commitArea}>
+                        <div className={styles.commitArea}>
                             <ul className={styles.listArea}>
-                                {commitData.map((item)=>(
+                                {printCommit.map((item)=>(
                                     <li className={styles.commitList} key={item.message} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
@@ -161,11 +167,11 @@ const Commit = () => {
                                     </li>
                                 ))}
                             </ul>
-                        </div> */}
+                        </div>
                         {/* <!----------------------------------------------
                                     Commit Area : demo data
                             -------------------------------------------> */}
-                        <div className={styles.commitArea}>
+                        {/* <div className={styles.commitArea}>
                             <ul className={styles.listArea}>
                                 {dummyCommitData.map((items)=>(
                                     <li className={styles.commitList} key={items.id}>
@@ -184,7 +190,7 @@ const Commit = () => {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </div> */}
                     </section>
                     <RightSide/>
                 </div>
