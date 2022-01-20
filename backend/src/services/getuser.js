@@ -46,6 +46,7 @@ const getCommitList = async (url,repo,token,userId) => {
             }
         });
         JsonData.data.forEach((com) =>{
+
             if (com.commit.author.name === userId){
                 var commitData = new Object();
                 commitData.repoName = repo;

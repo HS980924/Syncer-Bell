@@ -1,0 +1,203 @@
+.dashBoard {
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    width: 85vw;
+    background-color: #fcefde;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashBoardMain{
+    background-color: white;
+    width:95%;
+    height: 95%;
+    border-radius:30px;
+
+    display: flex;
+    box-shadow: 5px 5px rgba(0,0,0,.2);
+}
+
+.dashBoardCenterArea{
+    width: 80%;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    // overflow-y: scroll;
+}
+
+.backArrowBtn{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 3rem;
+    left: 5rem;
+    z-index:100;
+}
+
+// -----------------------
+/* Head Area */
+// -----------------------
+.headerArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 15%;
+}
+
+.headTitleArea {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding-top: 1rem;
+}
+
+.title {
+    position: inherit;
+    right: 1rem;
+    font-weight: 600;
+    font-size: 45px;
+}
+
+.dataRange {
+    margin-top: 1rem;
+    opacity: 0.5;
+}
+
+// -----------------------
+/* Issue & PR Area */
+// -----------------------
+
+.issueArea {
+    width: 100%;
+    height: 40%;
+    margin-top:2rem;
+    // overflow-y: hidden;
+}
+
+.prArea {
+    width: 100%;
+    height: 40%;
+    // overflow-y: hidden;
+}
+
+.titleArea {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid #dedede;
+}
+
+.areaTitle {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.showDetails {
+    cursor:pointer;
+}
+
+.expenseItem {
+    margin: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.expenseItemLeft {
+    display: flex;
+    align-items: center;
+}
+
+.expenseItemDiv {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.expenseItemDetails {
+    margin-left: 1rem;
+}
+
+.expenseItemTitle {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.expenseItemTime {
+    opacity: 0.5;
+}
+
+.expenseItemPrice {
+    font-weight: 600;
+}
+
+.dashBoardRightSide {
+    width: 35%;
+    background-color: #f9fafc;
+    border-radius: 0 50px 50px 0;
+    padding: 5rem 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.spendCategory {
+    display: flex;
+    justify-content: space-between;    
+}
+
+.sideOverviewTitle {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 3rem;
+}
+
+.spendCategoryName {
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.spendCategoryBar {
+    height: 5px;
+    width:100%;
+    background-color: #eceff5;
+    position: relative;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+.spendCategoryColoredBar {
+    height: 5px;
+    width: 40%;
+    background-color: #31ba96;
+    position: absolute;
+    border-radius: 5px;
+}
+
+.adsImageSection {
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 3rem;
+}
+
+.adsImage {
+    width: 70%;
+    height: 90%;
+
+}
