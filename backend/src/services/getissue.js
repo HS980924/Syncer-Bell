@@ -94,10 +94,15 @@ const getUserIssue = async (userId,token) => {
                 const link = `https://api.github.com/repos/${repo}/issues`
                 return getIssueList(link,repo,token,userId)
             })
-        )).filter(ele => ele);
+        )).filter(ele => ele).flat();
 
-        //console.log(issuedata.flat())
-        const result = JSON.stringify(issuedata.flat())
+        issuedata.sort((a,b) => {
+            const day1 = new Date(a.date);
+            const day2 = new Date(b.date);
+            return day2 - day1;
+        });
+
+        const result = JSON.stringify(issuedata)
         return result
     } catch(err){
         return err
