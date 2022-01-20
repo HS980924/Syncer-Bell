@@ -1,0 +1,183 @@
+.dashBoard {
+    position: absolute;
+    top:0;
+    right: 0;
+    bottom: 0;
+    width: 85vw;
+    background-color: #fcefde;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashBoardMain{
+    background-color: white;
+    width:95%;
+    height: 95%;
+    border-radius:30px;
+
+    display: flex;
+    box-shadow: 5px 5px rgba(0,0,0,.2);
+}
+
+.dashBoardCenterArea{
+    width: 80%;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    // overflow-y: scroll;
+}
+
+.backArrowBtn{
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 3rem;
+    left: 5rem;
+    z-index:100;
+}
+// -----------------------
+/* Head Area */
+// -----------------------
+.headerArea {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 13%;
+    padding-top:2%;
+    border-bottom: 0.6px solid rgba(128, 79, 0, .5);
+}
+
+.headTitleArea {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-top: 1rem;
+}
+
+.titleGroup{
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.prIcon {
+    width: 3rem;
+    height: 3rem;
+    margin-top: 1rem;
+    opacity: 0.5;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 3rem;
+    margin-right: 1.5rem;
+    padding-left: 1rem;
+    line-height: normal;
+}
+
+
+.prReloadIcon{
+    width: 1rem;
+    height: 1rem;
+    margin-top: 1rem;
+    opacity: 0.5;
+    color: green;
+    cursor: pointer;
+}
+
+.dates {
+    position: relative;
+    padding-top: 8%;
+    opacity:0.5;
+    font-size: 1rem;
+}
+
+// -----------------------
+/* pr Area */
+// -----------------------
+
+.prArea {
+    margin-top: 1%;
+    width: 100%;
+    height: 82%;
+    overflow-y: hidden;
+}
+
+.listArea {
+    width: inherit;
+    height: inherit;
+    padding-top: 1%;
+}
+
+.prList {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    height: 10%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.prList:hover {
+    background-color: lightgray;
+}
+
+.prListItem {
+    width: 100%;
+    padding-top:0.5%;
+}
+
+.itemHeader{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 0.5px solid #dedede;
+}
+
+.prTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-left: 2%;
+    margin-right: 3%;
+}
+
+.prTime {
+    padding-top: 2%;
+    font-weight: 100;
+}
+
+.secondInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    left: 65%;
+}
+
+.prRepo {
+    padding-bottom: 5%;
+    font-weight: 400;
+}
+
+.prAsignee {
+    font-weight: 100;
+}
+
+.prBio {
+    padding-left: 2%;
+    font-size:1rem;
+    color: rgba(0,0,0,0.5);
+}

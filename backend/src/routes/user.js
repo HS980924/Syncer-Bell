@@ -15,7 +15,6 @@ router.get('/commit', async(req,res) => {
     const userId = req.session.passport.user.profile.username;
     const myCommit = await githubServiceCommit.getUserCommit(userId,Token)
     
-    
     res.json(myCommit)
 })
 
@@ -33,7 +32,6 @@ router.get('/pullrequest',async(req,res) => {
     const userId = req.session.passport.user.profile.username;
     const mypulls = await githubServicePull.getUserPull(userId,Token) 
 
-    
     res.json(mypulls)
 })
 
