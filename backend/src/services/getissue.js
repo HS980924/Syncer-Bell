@@ -27,7 +27,7 @@ const getIssueComment = async (url) => {
             commentData.cmtdate = cmt.updated_at;
             commentList.push(commentData);
         })
-        console.log(commentList)
+        //console.log(commentList)
         return commentList.flat()
 
     }catch(err){
@@ -45,7 +45,7 @@ const getIssueList = async (url,repo,token,userId) => {
         });
         const issueList = (await Promise.all( 
             JsonData.data.map((iss) =>{
-                if(iss.user.login=== userId){
+                if (iss.user.login === userId){
                     var issueData = new Object();
                     issueData.repoName = repo;
                     issueData.title = iss.title;
@@ -94,10 +94,15 @@ const getUserIssue = async (userId,token) => {
                 const link = `https://api.github.com/repos/${repo}/issues`
                 return getIssueList(link,repo,token,userId)
             })
-        )).filter(ele => ele);
+        )).filter(ele => ele).flat();
 
-        //console.log(issuedata.flat())
-        const result = JSON.stringify(issuedata.flat())
+        issuedata.sort((a,b) => {
+            const day1 = new Date(a.date);
+            const day2 = new Date(b.date);
+            return day2 - day1;
+        });
+
+        const result = JSON.stringify(issuedata)
         return result
     } catch(err){
         return err
