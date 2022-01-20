@@ -16,9 +16,9 @@ module.exports = () =>{
         callbackURL: "http://localhost:5000/auth/github/callback"
         },
         function(accessToken, refreshToken, profile, done) {
-            process.nextTick(function () {
-                return done(null, profile);
-        });
+            //process.nextTick(function () {
+                return done(null,{profile: profile, token: accessToken});
+        //});
         }
     ));
 }

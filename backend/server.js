@@ -19,7 +19,7 @@ app.use(passport.session());
 require('./src/configs/passport.js')();
 
 app.use('/auth', authRouter);
-app.use('/home', userRouter);
+app.use('/', userRouter);
 app.use('/', loginRouter);
 
 app.listen(5000,()=>{
