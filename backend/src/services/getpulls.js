@@ -71,25 +71,32 @@ const getUserPull = async (userId,token) => {
         // )).filter(ele => ele);
 
         
-        const issuedata = (await Promise.all(
+        const pulldata = (await Promise.all(
             repos.map(repo => {
                 if (repo.includes(userId)){
                     const link = `https://api.github.com/repos/${repo}/pulls`
                     return getPullList(link,repo,token,userId)
                 }
             })
-        )).filter(ele => ele);
+        )).filter(ele => ele).flat();
 
+        pulldata.sort((a,b) => {
+            const day1 = new Date(a.date);
+            const day2 = new Date(b.date);
+            return day2 - day1;
+        });
         
-        const result = JSON.stringify(issuedata.flat())
+        const result = JSON.stringify(pulldata.flat())
         return result
     } catch(err){
         return err
     }
 }
-
-const cntUserPull = async (data,userId) => {
+const cntUserPull = async (data) => {
+    const infoData = Json.parse(data)
+    var cnt = Object.keys(infoData).length;
     
+    return cnt
 }
 
 module.exports = {
