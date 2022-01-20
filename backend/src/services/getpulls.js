@@ -31,8 +31,8 @@ const getPullList= async (url,repo,token,userId) => {
                     pullData.title = pull.title;
                     pullData.user = pull.user.login;
                     pullData.body = pull.body;
-                    pullData.label = pull.label.name;
-                    pullData.color = pull.label.color;
+                    pullData.label = pull.labels.name;
+                    pullData.color = pull.labels.color;
                     pullData.assig = pull.assignees.login;
                     pullData.date = pull.updated_at;
                     pullData.url = pull.html_url;

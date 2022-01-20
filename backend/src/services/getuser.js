@@ -132,8 +132,6 @@ const getUserCommit = async (userId,token) => {
     }
 }
 
-
-
 module.exports = {
     UserInfo,
     getUserCommit,
