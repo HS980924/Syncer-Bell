@@ -27,7 +27,7 @@ const getIssueComment = async (url) => {
             commentData.cmtdate = cmt.updated_at;
             commentList.push(commentData);
         })
-        console.log(commentList)
+        //console.log(commentList)
         return commentList.flat()
 
     }catch(err){
@@ -45,7 +45,7 @@ const getIssueList = async (url,repo,token,userId) => {
         });
         const issueList = (await Promise.all( 
             JsonData.data.map((iss) =>{
-                if(iss.user.login=== userId){
+                if (iss.user.login === userId){
                     var issueData = new Object();
                     issueData.repoName = repo;
                     issueData.title = iss.title;
