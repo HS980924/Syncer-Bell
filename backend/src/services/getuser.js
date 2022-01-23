@@ -97,6 +97,5 @@ module.exports = {
     UserInfo,
     getFullName,
     getRefineData,
-    cntInfo,
     AllData
 }

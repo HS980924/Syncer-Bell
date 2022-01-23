@@ -17,7 +17,7 @@ router.get('/commit', async(req,res) => {
     const myCommit = await githubServiceCommit.getUserCommit(userId,Token)
     const result = githubServiceUser.getRefineData(myCommit)
 
-    res.json(JSON.stringify(result))
+    res.json(result)
 })
 
 router.get('/issue',async(req,res) => {
@@ -26,7 +26,7 @@ router.get('/issue',async(req,res) => {
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token) 
     const result = githubServiceUser.getRefineData(myIssue)
 
-    res.json(JSON.stringify(result))
+    res.json(result)
 })
 
 router.get('/pullrequest', async(req,res) => {
@@ -35,7 +35,7 @@ router.get('/pullrequest', async(req,res) => {
     const mypulls = await githubServicePull.getUserPull(userId,Token)
     const result = githubServiceUser.getRefineData(mypulls)
 
-    res.json(JSON.stringify(result))
+    res.json(result)
 })
 
 router.get('/alldata', async(req,res) => {
