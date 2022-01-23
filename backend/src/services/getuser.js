@@ -22,45 +22,63 @@ const UserInfo = (userdata) => {
 /////////////////////////////////////////////////개인 프로필 데이터 가져오기////////////////////////////////////////////
 
 ////////////////////////////////////////////////commit 내용 및 개수 파악////////////////////////////////////////////////
+// 유저 레포 이름 가져오기
 const getFullName = async (token) => {
     try{
-        const res = await axios.get(`https://api.github.com/user/repos`,{
-            headers: {
-                Authorization: `token ${token}`
-            }
-        });
-        const orgs = res.data.map(ele => ele.full_name);
-        return orgs
+        const orgs = []
+        var per_page = 100
+        var page = 1
+        do{
+            const res = await axios.get(`https://api.github.com/user/repos`,{
+                headers: {
+                    Authorization: `token ${token}`
+                },
+                params: {
+                    per_page,
+                    page
+                }
+
+            });
+            const repoName = res.data.map(ele => ele.full_name);
+            orgs.push(repoName)
+            len = repoName.length;
+            page++;
+        }while(len > 99);
+        return orgs.flat()
     } catch(err){
         return err
     }
 }
 
-// commit 정보 가져오는 함수 
-const getCommitList = async (url,repo,token,userId) => {
-    try{
-        var commitList = []
-        const JsonData = await axios.get(url,{
-            headers: {
-                Authorization: `token ${token}`
-            }
-        });
-        JsonData.data.forEach((com) =>{
-            if (com.commit.author.name === userId){
-                var commitData = new Object();
-                commitData.repoName = repo;
-                commitData.user = com.commit.author.name;
-                commitData.message = com.commit.message;
-                commitData.date = com.commit.author.date;
-                commitData.url = com.html_url;
-                commitList.push(commitData);
-            }
-        })
-        return commitList
-    }catch(err){
-        return err
+const AllData = function (com, iss, pull) {
+    const allData = {
+        "commit" : getRefineData(com),
+        "issue" : getRefineData(iss),
+        "pulls" : getRefineData(pull),
+        "cnt" : cntInfo(com,iss,pull)
     }
+    return allData
 }
+
+const getRefineData = function (data) {
+    if (data.length > 10){
+        const result = data.slice(0,10);
+        return JSON.stringify(result)
+    }
+
+    return data
+}
+
+const cntInfo = function (commitData, issueData, pullData) {
+    const staticData = {
+        "commit" : commitData.length,
+        "issue" : issueData.length,
+        "pulls" : pullData.length
+    }
+    return staticData
+}
+
+
 
 // 유저가 속한 조직에서 참여한 레포 확인하는 함수
 // const orgRepoCheck = async (fullname) => {
@@ -75,65 +93,10 @@ const getCommitList = async (url,repo,token,userId) => {
 //     }
 // }
 
-// const getUserCommit = async (userId,token) => {
-//     try{
-//         const repos = await getFullName(token)
-//         const commitInfo = (await Promise.all(
-//             repos.map(repo => {
-//                 return orgRepoCheck(repo)
-//             })
-//         )).filter(ele => ele);
-
-//         const commitdata = (await Promise.all(
-//             commitInfo.map(repo => {
-//                 if (repo.includes(userId)){
-//                     var full = repo[repo.length - 1]
-//                     const link = `https://api.github.com/repos/${full}/commits`
-//                     return getCommitList(link,full,token)
-//                 }
-//             })
-//         )).filter(ele => ele);
-        
-//         commitdata.flat()
-//         commitdata.sort(date_ascending)
-//         console.log(commitdata)
-//         const result = JSON.stringify(commitdata.flat())
-//         return result
-//     } catch(err){
-//         return err
-//     }
-// }
-
-
-const getUserCommit = async (userId,token) => {
-    try{
-        const repos = await getFullName(token)
-        
-        const commitdata = (await Promise.all(
-            repos.map(repo => {
-                const link = `https://api.github.com/repos/${repo}/commits`
-                return getCommitList(link,repo,token,userId)
-            })
-        )).filter(ele => ele).flat();
-
-        commitdata.sort((a,b) => {
-            const day1 = new Date(a.date);
-            const day2 = new Date(b.date);
-            return day2 - day1;
-        });
-
-        // var cnt = Object.keys(commitdata).length;
-        // console.log(cnt);
-
-        const result = JSON.stringify(commitdata)
-        return result
-    } catch(err){
-        return err
-    }
-}
-
-
 module.exports = {
     UserInfo,
-    getUserCommit,
+    getFullName,
+    getRefineData,
+    cntInfo,
+    AllData
 }
