@@ -31,15 +31,20 @@ const getIssueList = async (url,repo,token,userId) => {
         });
         const issueList = (await Promise.all( 
             JsonData.data.map((iss) =>{
-                if (iss.user.login === userId){
-                    var issueData = new Object();
-                    issueData.repoName = repo;
-                    issueData.title = iss.title;
-                    issueData.user = iss.user.login;
-                    issueData.date = iss.updated_at;
-                    issueData.url = iss.html_url;
-                    issueData.body = iss.body;
-                    return issueData
+                try{
+                    var Iu_check = iss.node_id
+                    if (iss.user.login === userId && Iu_check.includes('I',0)){
+                        var issueData = new Object();
+                        issueData.repoName = repo;
+                        issueData.title = iss.title;
+                        issueData.user = iss.user.login;
+                        issueData.date = iss.updated_at;
+                        issueData.url = iss.html_url;
+                        issueData.body = iss.body;
+                        return issueData
+                    }
+                } catch(err){
+                    return null
                 }
                 //issueData.comments = getIssueComment(iss.comments_url);
             })
@@ -47,7 +52,7 @@ const getIssueList = async (url,repo,token,userId) => {
 
         return issueList.flat()
     }catch(err){
-        return err
+        return null
     }
 }
 

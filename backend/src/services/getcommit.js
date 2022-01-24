@@ -11,19 +11,23 @@ const getCommitList = async (url,repo,token,userId) => {
             }
         });
         JsonData.data.forEach((com) =>{
-            if (com.commit.author.name === userId){
-                var commitData = new Object();
-                commitData.repoName = repo;
-                commitData.user = com.commit.author.name;
-                commitData.message = com.commit.message;
-                commitData.date = com.commit.author.date;
-                commitData.url = com.html_url;
-                commitList.push(commitData);
+            try{
+                if (com.author.login === userId){
+                    var commitData = new Object();
+                    commitData.repoName = repo;
+                    commitData.user = com.author.login;
+                    commitData.message = com.commit.message;
+                    commitData.date = com.commit.author.date;
+                    commitData.url = com.html_url;
+                    commitList.push(commitData);
+                }
+            } catch(err){
+                return null
             }
         })
         return commitList
     }catch(err){
-        return err
+        return null
     }
 }
 

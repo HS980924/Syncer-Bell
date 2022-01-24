@@ -11,24 +11,28 @@ const getPullList= async (url,repo,token,userId) => {
         });
         const pullList = (await Promise.all( 
             JsonData.data.map((pull) =>{
-                if (pull.user.login === userId){
-                    var pullData = new Object();
-                    pullData.repoName = repo;
-                    pullData.title = pull.title;
-                    pullData.user = pull.user.login;
-                    pullData.body = pull.body;
-                    pullData.label = pull.labels.name;
-                    pullData.color = pull.labels.color;
-                    pullData.assig = pull.assignees.login;
-                    pullData.date = pull.updated_at;
-                    pullData.url = pull.html_url;
-                    return pullData
+                try{
+                    if (pull.user.login === userId){
+                        var pullData = new Object();
+                        pullData.repoName = repo;
+                        pullData.title = pull.title;
+                        pullData.user = pull.user.login;
+                        pullData.body = pull.body;
+                        pullData.label = pull.labels.name;
+                        pullData.color = pull.labels.color;
+                        pullData.assig = pull.assignees.login;
+                        pullData.date = pull.updated_at;
+                        pullData.url = pull.html_url;
+                        return pullData
+                    }
+                } catch(err){
+                    return null
                 }
             })
         )).filter(ele => ele);
         return pullList.flat()
     }catch(err){
-        return err
+        return null
     }
 }
 
