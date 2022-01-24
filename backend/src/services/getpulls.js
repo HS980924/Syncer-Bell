@@ -26,7 +26,6 @@ const getPullList= async (url,repo,token,userId) => {
                 }
             })
         )).filter(ele => ele);
-
         return pullList.flat()
     }catch(err){
         return err
