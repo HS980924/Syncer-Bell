@@ -28,6 +28,7 @@ const getFullName = async (token) => {
         const orgs = []
         var per_page = 100
         var page = 1
+        var len = 0
         do{
             const res = await axios.get(`https://api.github.com/user/repos`,{
                 headers: {
@@ -63,7 +64,7 @@ const AllData = function (com, iss, pull) {
 const getRefineData = function (data) {
     if (data.length > 10){
         const result = data.slice(0,10);
-        return JSON.stringify(result)
+        return result
     }
 
     return data
@@ -71,8 +72,8 @@ const getRefineData = function (data) {
 
 const cntInfo = function (commitData, issueData, pullData) {
     const staticData = {
-        "commit" : commitData.length,
-        "issue" : issueData.length,
+        "commits" : commitData.length,
+        "issues" : issueData.length,
         "pulls" : pullData.length
     }
     return staticData

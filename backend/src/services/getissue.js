@@ -31,15 +31,20 @@ const getIssueList = async (url,repo,token,userId) => {
         });
         const issueList = (await Promise.all( 
             JsonData.data.map((iss) =>{
-                if (iss.user.login === userId){
-                    var issueData = new Object();
-                    issueData.repoName = repo;
-                    issueData.title = iss.title;
-                    issueData.user = iss.user.login;
-                    issueData.date = iss.updated_at;
-                    issueData.url = iss.html_url;
-                    issueData.body = iss.body;
-                    return issueData
+                try{
+                    var Iu_check = iss.node_id
+                    if (iss.user.login === userId && Iu_check.includes('I',0)){
+                        var issueData = new Object();
+                        issueData.repoName = repo;
+                        issueData.title = iss.title;
+                        issueData.user = iss.user.login;
+                        issueData.date = iss.updated_at;
+                        issueData.url = iss.html_url;
+                        issueData.body = iss.body;
+                        return issueData
+                    }
+                } catch(err){
+                    return null
                 }
                 //issueData.comments = getIssueComment(iss.comments_url);
             })
@@ -47,7 +52,7 @@ const getIssueList = async (url,repo,token,userId) => {
 
         return issueList.flat()
     }catch(err){
-        return err
+        return null
     }
 }
 
@@ -55,7 +60,6 @@ const getIssueList = async (url,repo,token,userId) => {
 const getUserIssue = async (userId,token) => {
     try{
         const repos = await githubServiceUser.getFullName(token);
-    
         const issuedata = (await Promise.all(
             repos.map(repo => {
                 const link = `https://api.github.com/repos/${repo}/issues`
@@ -68,7 +72,6 @@ const getUserIssue = async (userId,token) => {
             const day2 = new Date(b.date);
             return day2 - day1;
         });
-
         return issuedata
     } catch(err){
         return err

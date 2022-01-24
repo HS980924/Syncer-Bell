@@ -15,27 +15,27 @@ router.get('/commit', async(req,res) => {
     const Token = req.session.passport.user.token;
     const userId = req.session.passport.user.profile.username;
     const myCommit = await githubServiceCommit.getUserCommit(userId,Token)
-    const result = githubServiceUser.getRefineData(myCommit)
+    const Commits = githubServiceUser.getRefineData(myCommit)
 
-    res.json(result)
+    res.json(JSON.stringify(Commits))
 })
 
 router.get('/issue',async(req,res) => {
     const Token = req.session.passport.user.token;
     const userId = req.session.passport.user.profile.username;
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token) 
-    const result = githubServiceUser.getRefineData(myIssue)
+    const Issues = githubServiceUser.getRefineData(myIssue)
 
-    res.json(result)
+    res.json(JSON.stringify(Issues))
 })
 
 router.get('/pullrequest', async(req,res) => {
     const Token = req.session.passport.user.token;
     const userId = req.session.passport.user.profile.username;
     const mypulls = await githubServicePull.getUserPull(userId,Token)
-    const result = githubServiceUser.getRefineData(mypulls)
+    const Pulls = githubServiceUser.getRefineData(mypulls)
 
-    res.json(result)
+    res.json(JSON.stringify(Pulls))
 })
 
 router.get('/alldata', async(req,res) => {

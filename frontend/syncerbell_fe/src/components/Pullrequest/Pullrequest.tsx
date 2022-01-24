@@ -6,8 +6,8 @@ import { FaArrowLeft, FaSyncAlt, FaBoxes } from 'react-icons/fa';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-let prData=[{repoName:"", user:"", message:"", date:"", url:""}];
-export let printPr=[{repoName:"", user:"", message:"", date:"", url:""}];
+let prData=[{repoName:"", user:"", title:"", date:"", url:""}];
+export let printPr=[{repoName:"", user:"", title:"", date:"", url:""}];
 
 const Pullrequest = () => {
     const [pr, setPr] = useState(null);
@@ -67,12 +67,12 @@ const Pullrequest = () => {
                         <div className={styles.prArea}>
                             <ul className={styles.listArea}>
                                 {printPr.map((item)=>(
-                                    <li className={styles.prList} key={item.message} onClick={()=>{
+                                    <li className={styles.prList} key={item.title} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
-                                        <div className={styles.issueListItem}>
+                                        <div className={styles.prListItem}>
                                                 <div className={styles.itemHeader}>
-                                                    <p className={styles.prTitle}>{item.message}</p>
+                                                    <p className={styles.prTitle}>{item.title}</p>
                                                     <p className={styles.prTime}>{item.date}</p>
                                                     <div className={styles.secondInfo}>
                                                         <p className={styles.prRepo}>{item.repoName}</p>
@@ -80,7 +80,7 @@ const Pullrequest = () => {
                                                     </div>
                                                 </div>
                                         </div>
-                                        <p className={styles.prBio}>{item.message}</p>
+                                        <p className={styles.prBio}>{item.title}</p>
                                     </li>
                                 ))}
                             </ul>
