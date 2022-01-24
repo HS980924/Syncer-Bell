@@ -6,8 +6,8 @@ import { FaArrowLeft, FaBox, FaSyncAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-let issueData=[{repoName:"", user:"", message:"", date:"", url:""}];
-export let printIssue=[{repoName:"", user:"", message:"", date:"", url:""}];
+let issueData=[{repoName:"", user:"", title:"", date:"", url:""}];
+export let printIssue=[{repoName:"", user:"", title:"", date:"", url:""}];
 
 const Issue = () => {
     const [issue, setIssue] = useState(null);
@@ -67,12 +67,12 @@ const Issue = () => {
                         <div className={styles.issueArea}>
                             <ul className={styles.listArea}>
                                 {printIssue.map((item)=>(
-                                    <li className={styles.issueList} key={item.message} onClick={()=>{
+                                    <li className={styles.issueList} key={item.title} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
                                         <div className={styles.issueListItem}>
                                                 <div className={styles.itemHeader}>
-                                                    <p className={styles.issueTitle}>{item.message}</p>
+                                                    <p className={styles.issueTitle}>{item.title}</p>
                                                     <p className={styles.issueTime}>{item.date}</p>
                                                     <div className={styles.secondInfo}>
                                                         <p className={styles.issueRepo}>{item.repoName}</p>
@@ -80,7 +80,7 @@ const Issue = () => {
                                                     </div>
                                                 </div>
                                         </div>
-                                        <p className={styles.issueBio}>{item.message}</p>
+                                        <p className={styles.issueBio}>{item.title}</p>
                                     </li>
                                 ))}
                             </ul>

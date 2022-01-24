@@ -31,8 +31,8 @@ const getPullList= async (url,repo,token,userId) => {
                     pullData.title = pull.title;
                     pullData.user = pull.user.login;
                     pullData.body = pull.body;
-                    pullData.label = pull.label.name;
-                    pullData.color = pull.label.color;
+                    pullData.label = pull.labels.name;
+                    pullData.color = pull.labels.color;
                     pullData.assig = pull.assignees.login;
                     pullData.date = pull.updated_at;
                     pullData.url = pull.html_url;
@@ -40,7 +40,6 @@ const getPullList= async (url,repo,token,userId) => {
                 }
             })
         )).filter(ele => ele);
-
         return pullList.flat()
     }catch(err){
         return err
@@ -63,7 +62,7 @@ const orgRepoCheck = async (fullname) => {
 const getUserPull = async (userId,token) => {
     try{
         const repos = await getFullName(token);
-
+        console.log(repos);
         // const issueInfo = (await Promise.all(
         //     repos.map(repo => {
         //         return orgRepoCheck(repo);
@@ -86,6 +85,7 @@ const getUserPull = async (userId,token) => {
             return day2 - day1;
         });
         
+        console.log(pulldata);
         const result = JSON.stringify(pulldata)
         return result
     } catch(err){

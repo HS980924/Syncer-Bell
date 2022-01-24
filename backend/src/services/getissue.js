@@ -81,7 +81,7 @@ const orgRepoCheck = async (fullname) => {
 const getUserIssue = async (userId,token) => {
     try{
         const repos = await getFullName(token);
-
+        console.log(repos);
         // const issueInfo = (await Promise.all(
         //     repos.map(repo => {
         //         return orgRepoCheck(repo);
@@ -101,7 +101,7 @@ const getUserIssue = async (userId,token) => {
             const day2 = new Date(b.date);
             return day2 - day1;
         });
-
+        console.log(issuedata);
         const result = JSON.stringify(issuedata)
         return result
     } catch(err){
