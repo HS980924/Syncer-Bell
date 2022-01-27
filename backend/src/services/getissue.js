@@ -33,7 +33,7 @@ const getIssueList = async (url,repo,token,userId) => {
             JsonData.data.map((iss) =>{
                 try{
                     var Iu_check = iss.node_id
-                    if (iss.user.login === userId && Iu_check.includes('I',0)){
+                    if (iss.user.login === userId && Iu_check.includes('I_')){
                         var issueData = new Object();
                         issueData.repoName = repo;
                         issueData.title = iss.title;

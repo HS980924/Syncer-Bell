@@ -31,13 +31,7 @@ export let pullsData = [
         url: ""
     }
 ];
-export let statics = [
-    {
-        commit: 0,
-        issue: 0,
-        pulls: 0
-    }
-];
+export let statics = {commits:0, issues:0, pulls:0}; 
 
 const Welcome = () => {
     const [userData, setData] = useState(null);
@@ -50,8 +44,12 @@ const Welcome = () => {
             setData(null);
             setLoading(true);
             const res = await axios.get('/alldata');
-            setData(res.data);
-            console.log(res.data["commit"].data);
+            commitData = JSON.parse(res.data)["commit"];
+            issueData = JSON.parse(res.data)["issue"];
+            pullsData = JSON.parse(res.data)["pulls"];
+            statics = JSON.parse(res.data)["cnt"];
+            console.log(statics);
+            setData(JSON.parse(res.data));
         } catch (error) {
             setError(error);
         }
@@ -60,7 +58,6 @@ const Welcome = () => {
 
     useEffect(() => {
         fetchCommit();
-        console.log("loading?")
     }, []);
 
     if (loading) 
