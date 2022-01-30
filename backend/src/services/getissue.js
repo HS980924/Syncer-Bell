@@ -24,7 +24,6 @@ const githubServiceUser = require('../services/getuser.js');
 // 유저 레포의 issue 타이틀 및 정보 가져오기
 const getIssueList = async (url,repo,token,userId) => {
     try{
-<<<<<<< HEAD
         var len;
         var page = 1;
         var issueList = []
@@ -41,29 +40,6 @@ const getIssueList = async (url,repo,token,userId) => {
                     since,
                     per_page: 100,
                     page
-=======
-        const JsonData = await axios.get(url,{
-            headers: {
-                Authorization: `token ${token}`
-            }
-        });
-        const issueList = (await Promise.all( 
-            JsonData.data.map((iss) =>{
-                try{
-                    var Iu_check = iss.node_id
-                    if (iss.user.login === userId && Iu_check.includes('I_')){
-                        var issueData = new Object();
-                        issueData.repoName = repo;
-                        issueData.title = iss.title;
-                        issueData.user = iss.user.login;
-                        issueData.date = iss.updated_at;
-                        issueData.url = iss.html_url;
-                        issueData.body = iss.body;
-                        return issueData
-                    }
-                } catch(err){
-                    return null
->>>>>>> 5c2e0ded2cde669e62045b60f23daf84adfc2ae0
                 }
             });
             const issues = (await Promise.all( 
