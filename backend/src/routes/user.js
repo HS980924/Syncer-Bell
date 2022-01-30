@@ -49,4 +49,5 @@ router.get('/alldata', async(req,res) => {
     res.json(JSON.stringify(result))
 })
 
+
 module.exports = router;
