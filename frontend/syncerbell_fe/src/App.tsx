@@ -1,11 +1,12 @@
 import * as React from 'react';
 import './App.css';
-import RouterModule from './Router';
+import Welcoming from './view/Welcome';
+// import RouterModule from './Router';
 
 function App() {
   return (
     <>
-      <RouterModule/>
+      <Welcoming/>
     </>
   );
 }

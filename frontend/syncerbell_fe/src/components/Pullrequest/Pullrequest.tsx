@@ -1,43 +1,15 @@
 import React from 'react'
-import {useState, useEffect} from 'react';
 import styles from './Pullrequest.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaSyncAlt, FaBoxes } from 'react-icons/fa';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+import { pullsData } from '../../view/Welcome';
 
-let prData=[{repoName:"", user:"", title:"", date:"", url:""}];
-export let printPr=[{repoName:"", user:"", title:"", date:"", url:""}];
+// export let printPr=[{repoName:"", user:"", title:"", date:"", url:""}];
 
 const Pullrequest = () => {
-    const [pr, setPr] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [errors, setError] = useState<any | null>(null);
-
-    const fetchPullRequest = async()=>{
-        try{
-            setError(null);
-            setPr(null);
-            setLoading(true);
-            const res = await axios.get('/pullrequest');
-            setPr(res.data);
-            console.log(res.data);
-        } catch(error){
-            setError(error);
-        }
-        setLoading(false);
-    }
-
-    useEffect(()=>{
-        fetchPullRequest();
-    }, []);
-
-    if(loading) return <h3 className={styles.msg}>Loading....</h3>;
-    if(errors) return <h3 className={styles.msg}>Error!!</h3>;
-    if(!pr) return null;
-
-    prData = JSON.parse(pr);
-    printPr = prData.slice(0,10)
+    
+    // printPr = pullsData.slice(0,10)
 
     return (
         <>
@@ -66,7 +38,7 @@ const Pullrequest = () => {
                             ---------------------------->*/}
                         <div className={styles.prArea}>
                             <ul className={styles.listArea}>
-                                {printPr.map((item)=>(
+                                {pullsData.map((item)=>(
                                     <li className={styles.prList} key={item.title} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
