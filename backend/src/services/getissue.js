@@ -88,7 +88,7 @@ const getUserIssue = async (userId,token) => {
             const day2 = new Date(b.date);
             return day2 - day1;
         });
-        console.log(issuedata);
+        
         return issuedata
     } catch(err){
         return err

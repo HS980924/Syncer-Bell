@@ -127,9 +127,9 @@ const twoWeekCommitCnt = function (commits) {
 
     const commitCnt = {};
     const twoWeekAgo =  new Date();
-    twoWeekAgo.setDate(twoWeekAgo.getDate() - 14);
+    twoWeekAgo.setDate(twoWeekAgo.getDate() - 21);
     
-    new Array(14).fill(0).forEach((_, days) =>{
+    new Array(21).fill(0).forEach((_, days) =>{
         const pre = new Date(twoWeekAgo);
         pre.setDate(pre.getDate() + days + 1);
 
