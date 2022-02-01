@@ -3,11 +3,11 @@ import {Bar, BarChart, Cell, ResponsiveContainer} from 'recharts';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import optionIcon from '../../assets/png/menuIcon.png';
-import cartIcon from '../../assets/svg/cartIcon.svg';
-import transportIcon from '../../assets/svg/transportIcon.svg';
-import houseIcon from '../../assets/svg/houseIcon.svg';
-
 import RightSide from '../RightSide/RightSide';
+import { barColor, barColor_hover } from '../cognition/Settings';
+import { printIssue, printPR } from '../../view/Welcome';
+import { changeNumber } from '../cognition/Settings';
+import { FaBox, FaBoxes  } from 'react-icons/fa';
 
 export let commitData: { name: string; uv: number; pv: number; amt: number; }[];
 
@@ -99,12 +99,48 @@ function Dashboard(): JSX.Element {
             amt: 2210
         }, {
             name: 'Page C',
-            uv: 5000,
+            uv: 2000,
             pv: 9800,
             amt: 2290
         }, {
             name: 'Page D',
-            uv: 4780,
+            uv: 2780,
+            pv: 3908,
+            amt: 2000
+        }, {
+            name: 'Page E',
+            uv: 1890,
+            pv: 4800,
+            amt: 2181
+        }, {
+            name: 'Page F',
+            uv: 2390,
+            pv: 3800,
+            amt: 2500
+        }, {
+            name: 'Page G',
+            uv: 3490,
+            pv: 4300,
+            amt: 2100
+        },
+        {
+            name: 'Page A',
+            uv: 4000,
+            pv: 2400,
+            amt: 2400
+        }, {
+            name: 'Page B',
+            uv: 3000,
+            pv: 1398,
+            amt: 2210
+        }, {
+            name: 'Page C',
+            uv: 2000,
+            pv: 9800,
+            amt: 2290
+        }, {
+            name: 'Page D',
+            uv: 2780,
             pv: 3908,
             amt: 2000
         }, {
@@ -160,33 +196,8 @@ function Dashboard(): JSX.Element {
             amt: 2100
         },
         {
-            name: 'Page A',
-            uv: 4000,
-            pv: 2400,
-            amt: 2400
-        }, {
-            name: 'Page B',
-            uv: 3000,
-            pv: 1398,
-            amt: 2210
-        }, {
-            name: 'Page C',
-            uv: 2000,
-            pv: 9800,
-            amt: 2290
-        }, {
-            name: 'Page D',
-            uv: 2780,
-            pv: 3908,
-            amt: 2000
-        }, {
-            name: 'Page E',
-            uv: 1890,
-            pv: 4800,
-            amt: 2181
-        }, {
             name: 'Page F',
-            uv: 6000,
+            uv: 2390,
             pv: 3800,
             amt: 2500
         }, {
@@ -194,70 +205,10 @@ function Dashboard(): JSX.Element {
             uv: 3490,
             pv: 4300,
             amt: 2100
-        }
+        },
     ];
 
     commitData = data;
-    
-    const issue_dummy = [
-        {
-            id:1,
-            expense: "Issue 01",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: cartIcon,
-            iconBackgroundColor: "#32a7e2",
-        },
-        {
-            id:2,
-            expense: "Issue 02",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: transportIcon,
-            iconBackgroundColor: "#B548C6",
-        },
-        {
-            id:3,
-            expense: "Issue 03",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: houseIcon,
-            iconBackgroundColor: "#FF8700",
-        }
-    ]
-
-    const pullRequest_dummy = [
-        {
-            id:1,
-            expense: "PullRequest 01",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: cartIcon,
-            iconBackgroundColor: "#32a7e2",
-        },
-        {
-            id:2,
-            expense: "PullRequest 02",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: transportIcon,
-            iconBackgroundColor: "#B548C6",
-        },
-        {
-            id:3,
-            expense: "PullRequest 03",
-            time: "5:12 PM",
-            location: "Repo : syncer-bell",
-            price: 326.8,
-            icon: houseIcon,
-            iconBackgroundColor: "#FF8700",
-        }
-    ]
 
     const onMouseOver = (data : any, index : number) => setActiveIndex(index);
 
@@ -300,7 +251,10 @@ function Dashboard(): JSX.Element {
                             ---------------------------->*/}
                         <div className={styles.issueArea}>
                             <div className={styles.titleArea}>
-                                <p className={styles.areaTitle}>Issue</p>
+                                <div className={styles.titleWrapper}>
+                                    <FaBox className={styles.titleIcon}/>
+                                    <p className={styles.areaTitle}>Issue</p>
+                                </div>
                                 <Link to="/issue">
                                     <button>
                                         <img className={styles.showDetails} src={optionIcon} alt="options"/>
@@ -310,22 +264,23 @@ function Dashboard(): JSX.Element {
                             </div>
 
                             <ul>
-                                {issue_dummy.map((item) => (
-                                    <li className={styles.expenseItem} key={item.id}>
-                                        <div className={styles.expenseItemLeft}>
+                                {printIssue.slice(0,changeNumber).map((item) => (
+                                    <li className={styles.showingItem} key={item.date} onClick={()=>{
+                                        window.open(`${item.url}`, '_blank')
+                                    }}>
+                                        <div className={styles.showingItemLeft}>
                                             <div 
-                                                style={{backgroundColor: item.iconBackgroundColor}}
-                                                className={styles.expenseItemDiv}>
-                                                <img src={cartIcon} alt={item.expense}/>
+                                                className={styles.showingItemDiv}>
+                                                <p className={styles.showingItemIcon}>👉</p>
                                             </div>
-                                            <div className={styles.expenseItemDetails}>
-                                                <p className={styles.expenseItemTitle}>{item.expense}</p>
-                                                <p className={styles.expenseItemTime}>
-                                                    {item.time} . {item.location}
+                                            <div className={styles.showingItemDetails}>
+                                                <p className={styles.showingItemTitle}>{item.repoName}</p>
+                                                <p className={styles.showingItemTime}>
+                                                    {item.title}
                                                 </p>
                                             </div>
                                         </div>
-                                        <p className={styles.expenseItemPrice}>{item.price}</p>
+                                        <p className={styles.showingItemPrice}>{item.user}</p>
                                     </li>
                                 ))}
                             </ul>
@@ -336,7 +291,10 @@ function Dashboard(): JSX.Element {
                             ---------------------------->*/}
                         <div className={styles.prArea}>
                             <div className={styles.titleArea}>
-                                <p className={styles.areaTitle}>Pull Request</p>
+                            <div className={styles.titleWrapper}>
+                                    <FaBoxes className={styles.titleIcon}/>
+                                    <p className={styles.areaTitle}>Pull Request</p>
+                                </div>
                                 <Link to="/pullrequest">
                                     <button>
                                         <img className={styles.showDetails} src={optionIcon} alt="options"/>
@@ -345,23 +303,22 @@ function Dashboard(): JSX.Element {
                             </div>
 
                             <ul>
-                                {pullRequest_dummy.map((item) => (
-                                    <li className={styles.expenseItem} key={item.id}>
-                                        <div className={styles.expenseItemLeft}>
-                                            <div 
-                                                style={{backgroundColor: item.iconBackgroundColor}}
-                                                className={styles.expenseItemDiv}
-                                            >
-                                                <img src={cartIcon} alt={item.expense}/>
+                                {printPR.slice(0,changeNumber).map((item) => (
+                                    <li className={styles.showingItem} key={item.date} onClick={()=>{
+                                        window.open(`${item.url}`, '_blank')
+                                    }}>
+                                        <div className={styles.showingItemLeft}>
+                                            <div className={styles.showingItemDiv}>
+                                                <p className={styles.showingItemIcon}>👉</p>
                                             </div>
-                                            <div className={styles.expenseItemDetails}>
-                                                <p className={styles.expenseItemTitle}>{item.expense}</p>
-                                                <p className={styles.expenseItemTime}>
-                                                    {item.time} . {item.location}
+                                            <div className={styles.showingItemDetails}>
+                                                <p className={styles.showingItemTitle}>{item.repoName}</p>
+                                                <p className={styles.showingItemTime}>
+                                                    {item.title}
                                                 </p>
                                             </div>
                                         </div>
-                                        <p className={styles.expenseItemPrice}>{item.price}</p>
+                                        <p className={styles.showingItemPrice}>{item.user}</p>
                                     </li>
                                 ))}
                             </ul>

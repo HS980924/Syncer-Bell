@@ -7,7 +7,41 @@
     align-items: center;
 }
 
+.introWrap {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 12vh;
+}
+
+.logo {
+    position: relative;
+}
+
+.logoWriting{
+    position: relative;
+    margin-bottom: 5vh;
+}
+
 .beforeLoadData_msg{
     font-weight: 600;
+    font-size: 1.5rem;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.enterBtn{
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    font-size:2rem;
+    text-shadow: 2px 2px 3px lightsalmon;
+    color: orange;
+    width: 10%;
+    height: 7%;
+    border : 3px solid orange;
+    border-radius: 30px;
+    cursor: pointer;
 }

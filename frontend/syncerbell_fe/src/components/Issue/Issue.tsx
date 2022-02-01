@@ -1,15 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Issue.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaBox, FaSyncAlt } from 'react-icons/fa';
 import { issueData } from '../../view/Welcome';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-// export let printIssue=[{repoName:"", user:"", title:"", date:"", url:""}];
+export let refreshIssue=[{ repoName: "", user: "", title: "", date: "", url: "" }];
 
 const Issue = () => {
 
-    // printIssue = issueData.slice(0,10)
+    const [newIssueData, setNewIssueData] = useState(issueData);
+
+    const updateIssue = async()=>{
+        try{
+            const result = await axios.get('/issue');
+            setNewIssueData(JSON.parse(result.data));
+            refreshIssue = newIssueData;
+        }catch(e){
+            alert("Can't load Commit Update!");
+        }
+    }
 
     return (
         <>
@@ -29,7 +40,7 @@ const Issue = () => {
                                     <p className={styles.title}>Issue</p>
                                     <p className={styles.dates}>January 1th ~ 30th, 2022</p>
                                 </div>
-                                <FaSyncAlt className={styles.issueReloadIcon}/>
+                                <FaSyncAlt className={styles.issueReloadIcon} onClick={updateIssue}/>
                             </div>
                         </div>
 
@@ -38,7 +49,7 @@ const Issue = () => {
                             ---------------------------->*/}
                         <div className={styles.issueArea}>
                             <ul className={styles.listArea}>
-                                {issueData.map((item)=>(
+                                {newIssueData.map((item)=>(
                                     <li className={styles.issueList} key={item.title} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>

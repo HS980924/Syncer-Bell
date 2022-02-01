@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Pullrequest.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaSyncAlt, FaBoxes } from 'react-icons/fa';
 import {Link} from 'react-router-dom';
 import { pullsData } from '../../view/Welcome';
+import axios from 'axios';
 
-// export let printPr=[{repoName:"", user:"", title:"", date:"", url:""}];
+export let refreshPr=[{repoName:"", user:"", title:"", date:"", url:""}];
 
 const Pullrequest = () => {
     
-    // printPr = pullsData.slice(0,10)
+    const [newPullsData, setNewPullsData] = useState(pullsData);
+    
+    const updatePulls = async()=>{
+        try{
+            const result = await axios.get('/pullrequest');
+            console.log(result.data);
+            setNewPullsData(JSON.parse(result.data));
+            refreshPr = newPullsData;
+        }catch(e){
+            alert("Can't load Commit Update!");
+        }
+    }
 
     return (
         <>
@@ -29,7 +41,7 @@ const Pullrequest = () => {
                                     <p className={styles.title}>Pull Request</p>
                                     <p className={styles.dates}>January 1th ~ 30th, 2022</p>
                                 </div>
-                                <FaSyncAlt className={styles.prReloadIcon}/>
+                                <FaSyncAlt className={styles.prReloadIcon} onClick={updatePulls}/>
                             </div>
                         </div>
 
@@ -38,7 +50,7 @@ const Pullrequest = () => {
                             ---------------------------->*/}
                         <div className={styles.prArea}>
                             <ul className={styles.listArea}>
-                                {pullsData.map((item)=>(
+                                {newPullsData.map((item)=>(
                                     <li className={styles.prList} key={item.title} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>

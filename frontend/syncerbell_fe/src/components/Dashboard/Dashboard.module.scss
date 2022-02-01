@@ -51,7 +51,9 @@
     position: inherit;
     right: 1rem;
     font-weight: 600;
-    font-size: 45px;
+    font-size: 3rem;
+    color: orange;
+    text-shadow: 1px 1px 3px;
 }
 
 .chartArea{
@@ -93,29 +95,49 @@
     border-bottom: 0.5px solid #dedede;
 }
 
-.areaTitle {
-    font-size: 18px;
+.titleIcon{
+    margin-right: 2%;
+}
+
+.titleWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 80%;
+    font-size: 1.8rem;
     font-weight: 600;
+}
+
+.areaTitle{
+    width: 100%;
 }
 
 .showDetails {
     cursor:pointer;
 }
 
-.expenseItem {
+.showingItem {
     margin: 1rem;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor:pointer;
 }
 
-.expenseItemLeft {
+.showingItem:hover {
+    background-color: lightyellow;
+}
+.showingItemLeft {
     display: flex;
     align-items: center;
 }
 
-.expenseItemDiv {
+.showingItemIcon {
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.showingItemDiv {
     width: 48px;
     height: 48px;
     border-radius: 50%;
@@ -125,20 +147,20 @@
     align-items: center;
 }
 
-.expenseItemDetails {
+.showingItemDetails {
     margin-left: 1rem;
 }
 
-.expenseItemTitle {
+.showingItemTitle {
     font-weight: 500;
     margin-bottom: 0.5rem;
 }
 
-.expenseItemTime {
+.showingItemTime {
     opacity: 0.5;
 }
 
-.expenseItemPrice {
+.showingItemPrice {
     font-weight: 600;
 }
 
