@@ -6,6 +6,10 @@ const githubServicePull = require('../services/getpulls.js');
 const githubServiceUser = require('../services/getuser.js');
 const githubServiceMail = require('../services/mail.js');
 
+router.get('/',(req,res)=>{
+    res.send("Server start");
+})
+
 router.get('/home', async (req,res) => {
     const leftSide = githubServiceUser.UserInfo(req.session.passport.user.profile._json)
     
