@@ -4,6 +4,7 @@ const githubServiceCommit = require('../services/getcommit.js');
 const githubServiceIssue = require('../services/getissue.js');
 const githubServicePull = require('../services/getpulls.js');
 const githubServiceUser = require('../services/getuser.js');
+const githubServiceMail = require('../services/mail.js');
 
 router.get('/home', async (req,res) => {
     const leftSide = githubServiceUser.UserInfo(req.session.passport.user.profile._json)
@@ -52,6 +53,14 @@ router.get('/alldata', async(req,res) => {
 router.get('/email',(req,res) => {
     const Token = req.session.passport.user.token;
     const userId = req.session.passport.user.profile.username;
+
+})
+
+router.get('/test',async(req,res) => {
+    const Token = req.session.passport.user.token;
+    const userId = req.session.passport.user.profile.username;
+    var link = `https://api.github.com/repos/HS980924/HS980924/events`
+    const result = await githubServiceMail.repoCheckData(link,Token,userId);
 
 })
 

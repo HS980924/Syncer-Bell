@@ -1,6 +1,4 @@
 const axios = require('axios');
-const { parse } = require('dotenv');
-const e = require('express');
 
 /////////////////////////////////////////////////개인 프로필 데이터 가져오기////////////////////////////////////////////
 // 유저 개인 정보 가져오는 함수
@@ -93,7 +91,7 @@ const orgRepoName = async(token,userId) =>{
 
 const AllData = function (com, iss, pull) {
     const allData = {
-        "twoWeek" : twoWeekCommitCnt(com),
+        "twoWeek" : threeWeekCommitCnt(com),
         "commit" : getRefineData(com),
         "issue" : getRefineData(iss),
         "pulls" : getRefineData(pull),
@@ -123,7 +121,7 @@ const cntInfo = function (commitData, issueData, pullData) {
     return staticData
 }
 
-const twoWeekCommitCnt = function (commits) {
+const threeWeekCommitCnt = function (commits) {
 
     const commitCnt = {};
     const twoWeekAgo =  new Date();
@@ -156,5 +154,5 @@ module.exports = {
     getRefineData,
     AllData,
     orgRepoName,
-    twoWeekCommitCnt
+    threeWeekCommitCnt
 }

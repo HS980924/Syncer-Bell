@@ -1,7 +1,31 @@
-const nodemailer = require('nodemailer');
+//const nodemailer = require('nodemailer');
+const axios = require('axios');
+const githubServiceUser = require('../services/getuser.js');
 
-const checkData = async () => {
-    
+const checkData = async (token,userId) => {
+    const repos = await githubServiceUser.orgRepoName(token,userId);
+
+    const eventData = (await Promise.all(
+        repos.map(repo => {
+            const link = `https://api.github.com/repos/${repo}/events`
+            return repoCheckData(link,repo,token,userId)
+        })
+    )).filter(ele => ele).flat();
+
+}
+
+const repoCheckData = async (link,token,userId) =>{
+    const JsonData = await axios.get(link,{
+        headers: {
+            Authorization: `token ${token}`
+        },
+    });
+    const event = []
+
+    //JsonData.data[0].id
+
+    console.log(JsonData.data[0].id)
+    return 's'
 }
 
 const sendMail = async (req,res,user,data) =>{
@@ -23,7 +47,7 @@ const sendMail = async (req,res,user,data) =>{
     
     let mailOptions = {
         from: process.env.G_Email,
-        to: userEmail,
+        to: user.email,
         subject: 'Test Email<choi hyung soon>',
         html: `
             <h1> Test Email </h1>
@@ -51,4 +75,4 @@ const sendMail = async (req,res,user,data) =>{
     }
 }
 
-module.exports = {sendMail}
+module.exports = {sendMail, repoCheckData}
