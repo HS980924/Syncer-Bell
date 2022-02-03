@@ -28,7 +28,6 @@ const sendMail = async (req,res,user,data) =>{
         html: `
             <h1> Test Email </h1>
             <p> hi hyung soon </p>
-            <p> 아직 오늘이 가지 않았습니다! 커밋을 보내 잔디밭을 키워보세요! </p>
         `
     }
 
