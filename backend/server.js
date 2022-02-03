@@ -5,7 +5,6 @@ require('dotenv').config();
 
 const userRouter = require('./src/routes/user');
 const authRouter = require('./src/routes/auth');
-const loginRouter = require('./src/routes/login');
 
 const SECESSION_SECRET = process.env.SECESSION_SECRET
 const app = express();
@@ -20,7 +19,6 @@ require('./src/configs/passport.js')();
 
 app.use('/auth', authRouter);
 app.use('/', userRouter);
-app.use('/', loginRouter);
 
 app.listen(5000,()=>{
     console.log("Server started at http://localhost:5000");
