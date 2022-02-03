@@ -1,13 +1,13 @@
 import * as React from 'react';
-import './App.css';
-import Welcoming from './view/Welcome';
-// import RouterModule from './Router';
+import styles from './App.module.scss';
+import Welcome from './view/Welcome';
 
 function App() {
+
   return (
-    <>
-      <Welcoming/>
-    </>
+    <div className={styles.container}>
+        <Welcome/>
+    </div>
   );
 }
 

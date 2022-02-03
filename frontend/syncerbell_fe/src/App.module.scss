@@ -5,3 +5,14 @@ html {
   box-sizing: border-box;
   overflow-x: hidden;
 }
+
+.container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("./assets/png/welcoming.png");
+  background-size: cover;
+}

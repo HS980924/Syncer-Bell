@@ -1,12 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Commit.module.scss';
 import {FaArrowLeft, FaDelicious, FaSyncAlt} from 'react-icons/fa';
 import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
 import { commitData } from '../../view/Welcome';
+import axios from 'axios';
 
+export let refreshCommit = [
+    {
+        repoName: "",
+        user: "",
+        message: "",
+        date: "",
+        url: ""
+    }
+];
 
 const Commit = () => {
+    const [newCommitData, setNewCommitData] = useState(commitData);
+    
+    const updateCommit = async()=>{
+        try{
+            const result = await axios.get('/commit');
+            setNewCommitData(JSON.parse(result.data));
+            refreshCommit = newCommitData;
+            console.log(refreshCommit);
+        }catch(e){
+            alert("Can't load Commit Update!");
+        }
+    }
 
     return (
         <>
@@ -26,7 +48,7 @@ const Commit = () => {
                                     <p className={styles.title}>Commit</p>
                                     <p className={styles.dates}>January 1th ~ 30th, 2022</p>
                                 </div>
-                                <FaSyncAlt className={styles.commitReloadIcon}/>
+                                <FaSyncAlt className={styles.commitReloadIcon} onClick={updateCommit}/>
                             </div>
                         </div>
 
@@ -35,7 +57,7 @@ const Commit = () => {
                             ---------------------------->*/}
                         <div className={styles.commitArea}>
                             <ul className={styles.listArea}>
-                                {commitData.map((item)=>(
+                                {newCommitData.map((item)=>(
                                     <li className={styles.commitList} key={item.message} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
