@@ -49,5 +49,11 @@ router.get('/alldata', async(req,res) => {
     res.json(JSON.stringify(result))
 })
 
+router.get('/email',(req,res) => {
+    const Token = req.session.passport.user.token;
+    const userId = req.session.passport.user.profile.username;
+
+})
+
 
 module.exports = router;

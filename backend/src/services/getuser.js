@@ -133,7 +133,7 @@ const twoWeekCommitCnt = function (commits) {
         const pre = new Date(twoWeekAgo);
         pre.setDate(pre.getDate() + days + 1);
 
-        var day = pre.getFullYear() + '-' + pre.getMonth()+1 + '-' + pre.getDate();
+        var day = pre.getFullYear() + "-" + ("00" + (pre.getMonth() + 1)).slice(-2) + "-" + ("00" + pre.getDate()).slice(-2)
 
         commitCnt[day] = 0;
     })
