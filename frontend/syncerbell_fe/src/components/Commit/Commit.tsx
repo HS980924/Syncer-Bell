@@ -1,126 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Commit.module.scss';
 import {FaArrowLeft, FaDelicious, FaSyncAlt} from 'react-icons/fa';
 import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
-import {useEffect, useState} from 'react';
-import axios from "axios";
+import { commitData } from '../../view/Welcome';
+import axios from 'axios';
 
-let commitData=[{repoName:"", user:"", message:"", date:"", url:""}];
-export let printCommit=[{repoName:"", user:"", message:"", date:"", url:""}];
+export let refreshCommit = [
+    {
+        repoName: "",
+        user: "",
+        message: "",
+        date: "",
+        url: ""
+    }
+];
 
 const Commit = () => {
-    const [commit, setCommit] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [errors, setError] = useState<any | null>(null);
-
-    const fetchCommit = async()=>{
+    const [newCommitData, setNewCommitData] = useState(commitData);
+    
+    const updateCommit = async()=>{
         try{
-            setError(null);
-            setCommit(null);
-            setLoading(true);
-            const res = await axios.get('/commit');
-            setCommit(res.data);
-            console.log(res.data);
-        } catch(error){
-            setError(error);
+            const result = await axios.get('/commit');
+            setNewCommitData(JSON.parse(result.data));
+            refreshCommit = newCommitData;
+            console.log(refreshCommit);
+        }catch(e){
+            alert("Can't load Commit Update!");
         }
-        setLoading(false);
     }
-
-    useEffect(()=>{
-        fetchCommit();
-        console.log("loading?")
-    }, []);
-
-    if(loading) return <h3 className={styles.msg}>Loading....</h3>;
-    if(errors) return <h3 className={styles.msg}>Error!!</h3>;
-    if(!commit) return null;
-
-    commitData = JSON.parse(commit);
-    printCommit = commitData.slice(0,10)
-    // const dummyCommitData = [
-    //     {
-    //         id:1,
-    //         title: "Issue 01",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:2,
-    //         title: "Issue 02",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:3,
-    //         title: "Issue 03",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:4,
-    //         title: "Issue 04",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:5,
-    //         title: "Issue 05",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:6,
-    //         title: "Issue 06",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:7,
-    //         title: "Issue 07",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:8,
-    //         title: "Issue 08",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:9,
-    //         title: "Issue 09",
-    //         commitTime: "5:12 PM",
-    //         repo: "Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     },
-    //     {
-    //         id:10,
-    //         title: "Issue 10",
-    //         commitTime:"5:32 PM",
-    //         repo:"Repo : syncer-bell",
-    //         asignee: "JH9892",
-    //         bio:"lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
-    //     }
-    // ]
 
     return (
         <>
@@ -140,7 +48,7 @@ const Commit = () => {
                                     <p className={styles.title}>Commit</p>
                                     <p className={styles.dates}>January 1th ~ 30th, 2022</p>
                                 </div>
-                                <FaSyncAlt className={styles.commitReloadIcon}/>
+                                <FaSyncAlt className={styles.commitReloadIcon} onClick={updateCommit}/>
                             </div>
                         </div>
 
@@ -149,7 +57,7 @@ const Commit = () => {
                             ---------------------------->*/}
                         <div className={styles.commitArea}>
                             <ul className={styles.listArea}>
-                                {printCommit.map((item)=>(
+                                {newCommitData.map((item)=>(
                                     <li className={styles.commitList} key={item.message} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
@@ -168,29 +76,6 @@ const Commit = () => {
                                 ))}
                             </ul>
                         </div>
-                        {/* <!----------------------------------------------
-                                    Commit Area : demo data
-                            -------------------------------------------> */}
-                        {/* <div className={styles.commitArea}>
-                            <ul className={styles.listArea}>
-                                {dummyCommitData.map((items)=>(
-                                    <li className={styles.commitList} key={items.id}>
-                                        <div className={styles.commitListItem}>
-                                                <div className={styles.itemHeader}>
-                                                    <p className={styles.commitTitle}>{items.title}</p>
-                                                    <p className={styles.commitTime}>{items.commitTime}</p>
-                                                    <div className={styles.secondInfo}>
-                                                        <p className={styles.commitRepo}>{items.repo}</p>
-                                                        <p className={styles.commitAsignee}>{items.asignee}</p>
-                                                    </div>
-
-                                                </div>
-                                        </div>
-                                        <p className={styles.commitBio}>{items.bio}</p>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div> */}
                     </section>
                     <RightSide/>
                 </div>

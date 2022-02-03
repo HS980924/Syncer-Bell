@@ -1,43 +1,26 @@
-import React from 'react'
-import {useState, useEffect} from 'react';
+import React, { useState } from 'react'
 import styles from './Issue.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaBox, FaSyncAlt } from 'react-icons/fa';
+import { issueData } from '../../view/Welcome';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-let issueData=[{repoName:"", user:"", title:"", date:"", url:""}];
-export let printIssue=[{repoName:"", user:"", title:"", date:"", url:""}];
+export let refreshIssue=[{ repoName: "", user: "", title: "", date: "", url: "" }];
 
 const Issue = () => {
-    const [issue, setIssue] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [errors, setError] = useState<any | null>(null);
 
-    const fetchIssue = async()=>{
+    const [newIssueData, setNewIssueData] = useState(issueData);
+
+    const updateIssue = async()=>{
         try{
-            setError(null);
-            setIssue(null);
-            setLoading(true);
-            const res = await axios.get('/issue');
-            setIssue(res.data);
-            console.log(res.data);
-        } catch(error){
-            setError(error);
+            const result = await axios.get('/issue');
+            setNewIssueData(JSON.parse(result.data));
+            refreshIssue = newIssueData;
+        }catch(e){
+            alert("Can't load Commit Update!");
         }
-        setLoading(false);
     }
-
-    useEffect(()=>{
-        fetchIssue();
-    }, []);
-
-    if(loading) return <h3 className={styles.msg}>Loading....</h3>;
-    if(errors) return <h3 className={styles.msg}>Error!!</h3>;
-    if(!issue) return null;
-
-    issueData = JSON.parse(issue);
-    printIssue = issueData.slice(0,10)
 
     return (
         <>
@@ -57,16 +40,16 @@ const Issue = () => {
                                     <p className={styles.title}>Issue</p>
                                     <p className={styles.dates}>January 1th ~ 30th, 2022</p>
                                 </div>
-                                <FaSyncAlt className={styles.issueReloadIcon}/>
+                                <FaSyncAlt className={styles.issueReloadIcon} onClick={updateIssue}/>
                             </div>
                         </div>
 
                         {/*<!-------------------------- 
-                                    Commit Area 
+                                    Issue Area 
                             ---------------------------->*/}
                         <div className={styles.issueArea}>
                             <ul className={styles.listArea}>
-                                {printIssue.map((item)=>(
+                                {newIssueData.map((item)=>(
                                     <li className={styles.issueList} key={item.title} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
