@@ -19,9 +19,8 @@ const UserInfo = (userdata) => {
     }
     return leftSide
 }
-/////////////////////////////////////////////////개인 프로필 데이터 가져오기////////////////////////////////////////////
 
-////////////////////////////////////////////////commit 내용 및 개수 파악////////////////////////////////////////////////
+
 // 유저 레포 이름 가져오기
 const getFullName = async (token) => {
     try{
@@ -51,12 +50,52 @@ const getFullName = async (token) => {
     }
 }
 
+// 유저가 속한 조직에서 참여한 레포 확인하는 함수
+const orgRepoCheck = async (link,repo,Token,userId) => {
+    try{
+        var anon = true;
+        const Data = await axios.get(link,{
+            headers: {
+                Authorization: `token ${Token}`
+            },
+            params:{
+                anon
+            }
+        });
+        const contributors = Data.data.map(ele => ele.login);
+        if (contributors.includes(userId)){
+            return repo
+        }
+        else{
+            return null
+        }
+    } catch(err){
+        return null
+    }
+}
+
+//유저가 속한 레포에서 영향을 준 레포만 선별하여 리턴하는 함수
+const orgRepoName = async(token,userId) =>{
+    const repos = await getFullName(token)
+
+    const orgData = (await Promise.all(
+        repos.map(repo => {
+            const link = `https://api.github.com/repos/${repo}/contributors`
+            return orgRepoCheck(link,repo,token,userId)
+        })
+    )).filter(ele => ele).flat();
+
+    return orgData
+
+}
+
 const AllData = function (com, iss, pull) {
     const allData = {
+        "twoWeek" : threeWeekCommitCnt(com),
         "commit" : getRefineData(com),
         "issue" : getRefineData(iss),
         "pulls" : getRefineData(pull),
-        "cnt" : cntInfo(com,iss,pull)
+        "cnt" : cntInfo(com,iss,pull),
     }
     return allData
 }
@@ -71,32 +110,49 @@ const getRefineData = function (data) {
 }
 
 const cntInfo = function (commitData, issueData, pullData) {
+    let today = new Date();
+    let year = today.getFullYear();
+
     const staticData = {
         "commits" : commitData.length,
         "issues" : issueData.length,
-        "pulls" : pullData.length
+        "pulls" : pullData.filter(ele => ele.date.includes(year)).length
     }
     return staticData
 }
 
+const threeWeekCommitCnt = function (commits) {
 
+    const commitCnt = {};
+    const twoWeekAgo =  new Date();
+    twoWeekAgo.setDate(twoWeekAgo.getDate() - 21);
+    
+    new Array(21).fill(0).forEach((_, days) =>{
+        const pre = new Date(twoWeekAgo);
+        pre.setDate(pre.getDate() + days + 1);
 
-// 유저가 속한 조직에서 참여한 레포 확인하는 함수
-// const orgRepoCheck = async (fullname) => {
-//     try{
-//         const link = `https://api.github.com/repos/${fullname}/contributors`
-//         const Data = await axios.get(link);
-//         const contributors = Data.data.map(ele => ele.login);
-//         contributors.push(fullname);
-//         return contributors
-//     } catch(err){
-//         return null
-//     }
-// }
+        var day = pre.getFullYear() + "-" + ("00" + (pre.getMonth() + 1)).slice(-2) + "-" + ("00" + pre.getDate()).slice(-2)
+
+        commitCnt[day] = 0;
+    })
+
+    commits.forEach(com => {
+        const Data = new Date(com.date);
+        const dayData = Data.getFullYear() + '-' + Data.getMonth()+1 + '-' + Data.getDate(); 
+        
+        if (commitCnt.hasOwnProperty(dayData)){
+            commitCnt[dayData]++;
+        }
+
+    })  
+
+    return commitCnt
+}
 
 module.exports = {
     UserInfo,
-    getFullName,
     getRefineData,
-    AllData
+    AllData,
+    orgRepoName,
+    threeWeekCommitCnt
 }

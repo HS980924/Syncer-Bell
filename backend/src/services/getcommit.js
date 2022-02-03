@@ -1,40 +1,56 @@
 const axios = require('axios');
 const githubServiceUser = require('../services/getuser.js');
 
-// commit 정보 가져오는 함수 
+// commit 정보 가져오는 함수
 const getCommitList = async (url,repo,token,userId) => {
     try{
+        var len;
+        var page = 1
         var commitList = []
-        const JsonData = await axios.get(url,{
-            headers: {
-                Authorization: `token ${token}`
-            }
-        });
-        JsonData.data.forEach((com) =>{
-            try{
-                if (com.author.login === userId){
-                    var commitData = new Object();
-                    commitData.repoName = repo;
-                    commitData.user = com.author.login;
-                    commitData.message = com.commit.message;
-                    commitData.date = com.commit.author.date;
-                    commitData.url = com.html_url;
-                    commitList.push(commitData);
+        var since = new Date().getFullYear();
+        since = since + '-01-01T00:00:00';
+        do{
+            len = 0
+            const JsonData = await axios.get(url,{
+                headers: {
+                    Authorization: `token ${token}`
+                },
+                params :{
+                    since,
+                    per_page: 100,
+                    page
                 }
-            } catch(err){
-                return null
-            }
-        })
-        return commitList
+            });
+            const coms = (await Promise.all( 
+                JsonData.data.map((com) =>{
+                    try{
+                        len++;
+                        if (com.author.login === userId){
+                            var commitData = new Object();
+                            commitData.repoName = repo;
+                            commitData.user = userId;
+                            commitData.message = com.commit.message;
+                            commitData.date = com.commit.author.date;
+                            commitData.url = com.html_url;
+                            return commitData;
+                        }
+                    } catch(err){
+                        return null
+                    }
+                })
+            )).filter(ele => ele);
+            commitList.push(coms)
+            page++;
+        }while(len > 99);
+        return commitList.flat()
     }catch(err){
         return null
     }
 }
 
-
 const getUserCommit = async (userId,token) => {
     try{
-        const repos = await githubServiceUser.getFullName(token)
+        const repos = await githubServiceUser.orgRepoName(token,userId)
         
         const commitdata = (await Promise.all(
             repos.map(repo => {

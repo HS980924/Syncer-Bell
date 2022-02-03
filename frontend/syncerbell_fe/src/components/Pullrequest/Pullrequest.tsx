@@ -1,43 +1,27 @@
-import React from 'react'
-import {useState, useEffect} from 'react';
+import React, { useState } from 'react'
 import styles from './Pullrequest.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaSyncAlt, FaBoxes } from 'react-icons/fa';
 import {Link} from 'react-router-dom';
+import { pullsData } from '../../view/Welcome';
 import axios from 'axios';
 
-let prData=[{repoName:"", user:"", title:"", date:"", url:""}];
-export let printPr=[{repoName:"", user:"", title:"", date:"", url:""}];
+export let refreshPr=[{repoName:"", user:"", title:"", date:"", url:""}];
 
 const Pullrequest = () => {
-    const [pr, setPr] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [errors, setError] = useState<any | null>(null);
-
-    const fetchPullRequest = async()=>{
+    
+    const [newPullsData, setNewPullsData] = useState(pullsData);
+    
+    const updatePulls = async()=>{
         try{
-            setError(null);
-            setPr(null);
-            setLoading(true);
-            const res = await axios.get('/pullrequest');
-            setPr(res.data);
-            console.log(res.data);
-        } catch(error){
-            setError(error);
+            const result = await axios.get('/pullrequest');
+            console.log(result.data);
+            setNewPullsData(JSON.parse(result.data));
+            refreshPr = newPullsData;
+        }catch(e){
+            alert("Can't load Commit Update!");
         }
-        setLoading(false);
     }
-
-    useEffect(()=>{
-        fetchPullRequest();
-    }, []);
-
-    if(loading) return <h3 className={styles.msg}>Loading....</h3>;
-    if(errors) return <h3 className={styles.msg}>Error!!</h3>;
-    if(!pr) return null;
-
-    prData = JSON.parse(pr);
-    printPr = prData.slice(0,10)
 
     return (
         <>
@@ -57,7 +41,7 @@ const Pullrequest = () => {
                                     <p className={styles.title}>Pull Request</p>
                                     <p className={styles.dates}>January 1th ~ 30th, 2022</p>
                                 </div>
-                                <FaSyncAlt className={styles.prReloadIcon}/>
+                                <FaSyncAlt className={styles.prReloadIcon} onClick={updatePulls}/>
                             </div>
                         </div>
 
@@ -66,7 +50,7 @@ const Pullrequest = () => {
                             ---------------------------->*/}
                         <div className={styles.prArea}>
                             <ul className={styles.listArea}>
-                                {printPr.map((item)=>(
+                                {newPullsData.map((item)=>(
                                     <li className={styles.prList} key={item.title} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
