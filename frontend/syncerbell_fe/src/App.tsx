@@ -1,12 +1,12 @@
 import * as React from 'react';
 import styles from './App.module.scss';
-import Welcome from './view/Welcome';
+import Router from './Router';
 
 function App() {
 
   return (
     <div className={styles.container}>
-        <Welcome/>
+        <Router/>
     </div>
   );
 }
