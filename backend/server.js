@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const userRouter = require('./src/routes/user');
@@ -9,6 +10,7 @@ const authRouter = require('./src/routes/auth');
 const SECESSION_SECRET = process.env.SECESSION_SECRET
 const app = express();
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
