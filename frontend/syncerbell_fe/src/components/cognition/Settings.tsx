@@ -4,6 +4,7 @@ import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaCog } from 'react-icons/fa';
 import { countNumber } from '../../view/Welcome';
+import Sidebar from '../Sidebar/Sidebar';
 
 export let userColor = {mainColor:"", hoverColor:""};
 export let changeNumber = 5;
@@ -68,10 +69,11 @@ const Settings = () => {
 
     return (
         <>
+            <Sidebar/>
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
-                        <Link to="/">
+                        <Link to="/home">
                             <FaArrowLeft className={styles.backArrowBtn}/>
                         </Link>
                         {/*<!-------------------------- 

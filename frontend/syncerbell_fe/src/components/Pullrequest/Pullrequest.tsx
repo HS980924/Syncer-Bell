@@ -5,6 +5,7 @@ import { FaArrowLeft, FaSyncAlt, FaBoxes } from 'react-icons/fa';
 import {Link} from 'react-router-dom';
 import { pullsData } from '../../view/Welcome';
 import axios from 'axios';
+import Sidebar from '../Sidebar/Sidebar';
 
 export let refreshPr=[{repoName:"", user:"", title:"", date:"", url:""}];
 
@@ -25,10 +26,11 @@ const Pullrequest = () => {
 
     return (
         <>
+            <Sidebar/>
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
-                        <Link to="/">
+                        <Link to="/home">
                             <FaArrowLeft className={styles.backArrowBtn}/>
                         </Link>
                         {/*<!-------------------------- 

@@ -5,6 +5,7 @@ import { FaArrowLeft, FaBox, FaSyncAlt } from 'react-icons/fa';
 import { issueData } from '../../view/Welcome';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import Sidebar from '../Sidebar/Sidebar';
 
 export let refreshIssue=[{ repoName: "", user: "", title: "", date: "", url: "" }];
 
@@ -24,10 +25,11 @@ const Issue = () => {
 
     return (
         <>
+            <Sidebar/>
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
-                        <Link to="/">
+                        <Link to="/home">
                             <FaArrowLeft className={styles.backArrowBtn}/>
                         </Link>
                         {/*<!-------------------------- 

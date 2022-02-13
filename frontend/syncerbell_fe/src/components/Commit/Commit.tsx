@@ -5,6 +5,7 @@ import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
 import { commitData } from '../../view/Welcome';
 import axios from 'axios';
+import Sidebar from '../Sidebar/Sidebar';
 
 export let refreshCommit = [
     {
@@ -32,10 +33,11 @@ const Commit = () => {
 
     return (
         <>
+            <Sidebar/>
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
-                        <Link to="/">
+                        <Link to="/home">
                             <FaArrowLeft className={styles.backArrowBtn}/>
                         </Link>
                         {/*<!-------------------------- 
