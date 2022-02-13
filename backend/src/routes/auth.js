@@ -8,7 +8,7 @@ router.get('/github', passport.authenticate('github', { scope: [ 'repo','user:em
 router.get('/github/callback', passport.authenticate('github', { failureRedirect: '/' }), //successRedirect: '/home',
     function(req, res) {
         req.session.save(() => {
-            res.redirect('/home');
+            res.redirect('http://localhost:3000/home');
         })
     }
 );
