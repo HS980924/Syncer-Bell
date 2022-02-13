@@ -6,6 +6,11 @@ const githubServicePull = require('../services/getpulls.js');
 const githubServiceUser = require('../services/getuser.js');
 const githubServiceMail = require('../services/mail.js');
 
+
+router.get('/',(req,res)=>{
+    res.send("Server start");
+})
+
 router.get('/home', async (req,res) => {
     const leftSide = githubServiceUser.UserInfo(req.session.passport.user.profile._json)
     
@@ -45,8 +50,7 @@ router.get('/alldata', async(req,res) => {
     const myCommit = await githubServiceCommit.getUserCommit(userId,Token)
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token)
     const mypulls = await githubServicePull.getUserPull(userId,Token)
-    const result = githubServiceUser.AllData(myCommit, myIssue, mypulls)
-
+    const result = githubServiceUser.AllData(myCommit, myIssue, mypulls, userId)
     res.json(JSON.stringify(result))
 })
 
