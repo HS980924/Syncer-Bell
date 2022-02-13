@@ -26,7 +26,7 @@ function Sidebar() {
                             <li className={styles.sidebarNavItem}>
                                 <Link 
                                     className={styles.sidebarNavLink}
-                                    to={`/`}>Home</Link>
+                                    to={`/home`}>Home</Link>
                             </li>
                             <li className={styles.sidebarNavItem}>
                                 <Link 

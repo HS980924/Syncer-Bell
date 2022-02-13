@@ -4,10 +4,10 @@ import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import optionIcon from '../../assets/png/menuIcon.png';
 import RightSide from '../RightSide/RightSide';
-import { barColor, barColor_hover } from '../cognition/Settings';
 import { printIssue, printPR } from '../../view/Welcome';
 import { changeNumber } from '../cognition/Settings';
 import { FaBox, FaBoxes  } from 'react-icons/fa';
+import Sidebar from '../Sidebar/Sidebar';
 
 export let commitData: { name: string; uv: number; pv: number; amt: number; }[];
 
@@ -214,6 +214,7 @@ function Dashboard(): JSX.Element {
 
     return ( 
         <> 
+            <Sidebar/>
             <main className={styles.dashBoard}>
                 <div className={styles.dashBoardMain}>
                     <section className={styles.dashBoardCenterArea}>
