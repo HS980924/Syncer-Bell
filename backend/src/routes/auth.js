@@ -5,18 +5,22 @@ const router = express.Router();
 
 router.get('/github', passport.authenticate('github', { scope: [ 'repo','user:email', 'admin:org'], session: false }));
 
-router.get('/github/callback', passport.authenticate('github', { successRedirect: '/home', failureRedirect: '/login' }),
-    // function(req, res) {
-    //     req.session.save(() => {
-    //         res.redirect('/home');
-    //     })
-    // }
+router.get('/github/callback', passport.authenticate('github', { failureRedirect: '/' }), //successRedirect: '/home',
+    function(req, res) {
+        req.session.save(() => {
+            res.redirect('/home');
+        })
+    }
 );
 
 router.get('/logout', function(req, res){
-    //res.clearCookie()
-    req.logout();
-    res.redirect('/login');
+    req.logOut();
+    // req.session.destroy(function(){
+    //     req.session;
+    //     //res.clearCookie('connect.sid',{path:'/home'});
+    //     //res.redirect('/');
+    // });
+    res.redirect('/');
 });
 
 module.exports = router;
