@@ -3,7 +3,7 @@ import styles from './Commit.module.scss';
 import {FaArrowLeft, FaDelicious, FaSyncAlt} from 'react-icons/fa';
 import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
-import { commitData } from '../../view/Welcome';
+import { commitData } from '../../view/Loading';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 

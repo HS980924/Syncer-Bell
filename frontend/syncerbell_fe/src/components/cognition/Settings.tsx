@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Settings.module.scss';
-import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaCog } from 'react-icons/fa';
-import { countNumber } from '../../view/Welcome';
+import {GithubPicker} from 'react-color';
+
+import styles from './Settings.module.scss';
+import RightSide from '../RightSide/RightSide';
+import { countNumber } from '../../view/Loading';
 import Sidebar from '../Sidebar/Sidebar';
 
 export let userColor = {mainColor:"", hoverColor:""};
@@ -45,10 +47,6 @@ const Settings = () => {
             window.localStorage.setItem("count", JSON.stringify(userObj));
             setShowCount(showCount-1)
         }
-    }
-
-    function changeBarColor(){
-
     }
 
     function toggleCommitFunction(){
@@ -110,11 +108,14 @@ const Settings = () => {
                                 <div className={styles.logoutForm}>
                                     <h3 className={styles.functionTitle}>👉 Account</h3>
                                     <div className={styles.buttonWrapper}>
-                                        <button className={styles.logoutBtn}>▶ Logout</button>
+                                        <button className={styles.logoutBtn} onClick={()=>{
+                                            window.open("http://localhost:5000/auth/logout", "_self");
+                                        }}>Logout</button>
                                     </div>
                                 </div>
                                 <div className={styles.barColor}>
                                     <h3 className={styles.functionTitle}>👉 Select Bar Color</h3>
+                                    <GithubPicker className={styles.colorPicker}/>
                                 </div>
                                 <div className={styles.showDetails}>
                                     <h3 className={styles.functionTitle}>👉 Show Item Count</h3>

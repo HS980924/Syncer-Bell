@@ -3,7 +3,7 @@ import styles from './Pullrequest.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaSyncAlt, FaBoxes } from 'react-icons/fa';
 import {Link} from 'react-router-dom';
-import { pullsData } from '../../view/Welcome';
+import { pullsData } from '../../view/Loading';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 

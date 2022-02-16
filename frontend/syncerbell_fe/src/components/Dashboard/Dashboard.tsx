@@ -1,18 +1,18 @@
 import styles from './Dashboard.module.scss';
+import { FaBox, FaBoxes  } from 'react-icons/fa';
 import {Bar, BarChart, Cell, ResponsiveContainer} from 'recharts';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
+
 import optionIcon from '../../assets/png/menuIcon.png';
 import RightSide from '../RightSide/RightSide';
-import { printIssue, printPR } from '../../view/Welcome';
 import { changeNumber } from '../cognition/Settings';
-import { FaBox, FaBoxes  } from 'react-icons/fa';
 import Sidebar from '../Sidebar/Sidebar';
+import { printIssue, printPR, commitData, pullsData, issueData, dData } from '../../view/Loading';
 
-export let commitData: { name: string; uv: number; pv: number; amt: number; }[];
+export let commitChart: { name: string; uv: number; pv: number; amt: number; }[];
 
-function Dashboard(): JSX.Element {
-
+function Dashboard() {
     const [activeIndex, setActiveIndex] = useState(0);
     const data = [
         {
@@ -208,10 +208,14 @@ function Dashboard(): JSX.Element {
         },
     ];
 
-    commitData = data;
+    commitChart = data;
 
     const onMouseOver = (data : any, index : number) => setActiveIndex(index);
-
+    console.log(commitData);
+    console.log(issueData);
+    console.log(pullsData);
+    console.log(dData);
+    
     return ( 
         <> 
             <Sidebar/>

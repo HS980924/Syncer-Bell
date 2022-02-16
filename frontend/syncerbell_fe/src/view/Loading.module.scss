@@ -1,0 +1,18 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,.4);
+    z-index: 10;
+}
+
+.title{
+    font-size: 3rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 200;
+    color: white;
+    text-shadow: 2px 2px 2px lightyellow;
+}

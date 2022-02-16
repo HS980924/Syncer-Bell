@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styles from './Issue.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaBox, FaSyncAlt } from 'react-icons/fa';
-import { issueData } from '../../view/Welcome';
+import { issueData } from '../../view/Loading';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';

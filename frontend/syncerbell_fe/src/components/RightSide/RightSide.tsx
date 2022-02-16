@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Rightside.module.scss';
 import dummy from '../../assets/png/dummy_img.jpg';
-import { statics } from '../../view/Welcome';
+import { statics } from '../../view/Loading';
 
 const RightSide = () => {
     const user_statics = [

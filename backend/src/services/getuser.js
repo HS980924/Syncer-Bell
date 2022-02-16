@@ -89,14 +89,13 @@ const orgRepoName = async(token,userId) =>{
 
 }
 
-const AllData = function (com, iss, pull, userID) {
+const AllData = function (com, iss, pull) {
     const allData = {
         "twoWeek" : threeWeekCommitCnt(com),
         "commit" : getRefineData(com),
         "issue" : getRefineData(iss),
         "pulls" : getRefineData(pull),
         "cnt" : cntInfo(com,iss,pull),
-        "check" : userID,
     }
     return allData
 }
