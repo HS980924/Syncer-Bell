@@ -1,4 +1,5 @@
 const express = require('express');
+const User = require('../models/User.js');
 const router = express.Router();
 const githubServiceCommit = require('../services/getcommit.js');
 const githubServiceIssue = require('../services/getissue.js');
@@ -12,14 +13,23 @@ router.get('/',(req,res)=>{
 })
 
 router.get('/home', async (req,res) => {
-    const leftSide = githubServiceUser.UserInfo(req.session.passport.user.profile._json)
-    
+    const userJson = req.session.passport.user.profile._json;
+    const userdb = req.session.passport.user.user
+    const leftSide = githubServiceUser.UserInfo(userJson)
+    const UpdateRepos = await githubServiceUser.orgRepoName(userdb.accessToken,userdb.githubId);
+
+    if(userdb.email !== userJson.email){
+        let githubId = userdb.githubId
+        await User.updateOne({githubId},{email:userJson.email}).exec();
+    }
+
+    console.log(UpdateRepos);
     res.json(leftSide);
 });
 
 router.get('/commit', async(req,res) => {
-    const Token = req.session.passport.user.token;
-    const userId = req.session.passport.user.profile.username;
+    const Token = req.session.passport.user.user.accessToken;
+    const userId = req.session.passport.user.user.githubId;
     const myCommit = await githubServiceCommit.getUserCommit(userId,Token)
     const Commits = githubServiceUser.getRefineData(myCommit)
 
@@ -27,8 +37,8 @@ router.get('/commit', async(req,res) => {
 })
 
 router.get('/issue',async(req,res) => {
-    const Token = req.session.passport.user.token;
-    const userId = req.session.passport.user.profile.username;
+    const Token = req.session.passport.user.user.accessToken;
+    const userId = req.session.passport.user.user.githubId;
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token) 
     const Issues = githubServiceUser.getRefineData(myIssue)
 
@@ -36,8 +46,8 @@ router.get('/issue',async(req,res) => {
 })
 
 router.get('/pullrequest', async(req,res) => {
-    const Token = req.session.passport.user.token;
-    const userId = req.session.passport.user.profile.username;
+    const Token = req.session.passport.user.user.accessToken;
+    const userId = req.session.passport.user.user.githubId;
     const mypulls = await githubServicePull.getUserPull(userId,Token)
     const Pulls = githubServiceUser.getRefineData(mypulls)
 
@@ -45,28 +55,22 @@ router.get('/pullrequest', async(req,res) => {
 })
 
 router.get('/alldata', async(req,res) => {
-    const Token = req.session.passport.user.token;
-    const userId = req.session.passport.user.profile.username;
+    const Token = req.session.passport.user.user.accessToken;
+    const userId = req.session.passport.user.user.githubId;
     const myCommit = await githubServiceCommit.getUserCommit(userId,Token)
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token)
     const mypulls = await githubServicePull.getUserPull(userId,Token)
-    const result = githubServiceUser.AllData(myCommit, myIssue, mypulls, userId)
-    res.json(JSON.stringify(result))
+    const result = githubServiceUser.AllData(myCommit, myIssue, mypulls)
+    console.log(result);
+    res.json(result)
 })
 
-router.get('/email',(req,res) => {
-    const Token = req.session.passport.user.token;
-    const userId = req.session.passport.user.profile.username;
+router.get('/email',async (req,res) => {
+    const userId = req.session.passport.user.user.githubId
+    await githubServiceMail.checkEventData(userId);
+
+    res.send('success email');
 
 })
-
-router.get('/test',async(req,res) => {
-    const Token = req.session.passport.user.token;
-    const userId = req.session.passport.user.profile.username;
-    var link = `https://api.github.com/repos/HS980924/HS980924/events`
-    const result = await githubServiceMail.repoCheckData(link,Token,userId);
-
-})
-
 
 module.exports = router;

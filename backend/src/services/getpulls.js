@@ -1,5 +1,6 @@
 const axios = require('axios');
 const githubServiceUser = require('../services/getuser.js');
+const User = require('../models/User.js')
 
 // 유저 레포의 pullrequest 타이틀 및 정보 가져오기(pulls에서 가져오기)
 const getPullList = async (url,repo,token,userId) => {
@@ -54,7 +55,9 @@ const getPullList = async (url,repo,token,userId) => {
 // 유저 이슈 정보 가져오기
 const getUserPull = async (userId,token) => {
     try{
-        const repos = await githubServiceUser.orgRepoName(token,userId);
+        const user = await User.findOne({userId}).exec();
+        const repos = user.repos;
+        //const repos = await githubServiceUser.orgRepoName(token,userId);
         
         const pulldata = (await Promise.all(
             repos.map(repo => {

@@ -1,4 +1,5 @@
 const axios = require('axios');
+const User = require('../models/User.js')
 
 /////////////////////////////////////////////////개인 프로필 데이터 가져오기////////////////////////////////////////////
 // 유저 개인 정보 가져오는 함수
@@ -17,6 +18,7 @@ const UserInfo = (userdata) => {
         "following" : userdata.following,
         'repo' : userdata.repos_url
     }
+
     return leftSide
 }
 
@@ -85,18 +87,79 @@ const orgRepoName = async(token,userId) =>{
         })
     )).filter(ele => ele).flat();
 
+    // const user = await User.findOne({userId}).exec();
+
+    // if(user.repos !== orgData){
+    //     await User.updateOne({userId},{repos:orgData}).exec();
+    // }
+
     return orgData
+}
+
+const updateUserRepos = async(userId) => {
+    const user = await User.findOne({userId}).exec();
+    if (!user){
+        return err
+    }
+    else{
+        const newRepos = await orgRepoName(user.accessToken, user.githubId);
+        if(user.repos !== newRepos){
+            await User.updateOne({userId},{repos:newRepos}).exec();
+        }
+    }
+}
+
+const CheckUserEvent = async(userId) => {
+    const user = await User.findOne({userId}).exec();
+    if (!user){
+        return null
+    }
+    else{
+        const repos = user.repos;
+
+        const Event = (await Promise.all(
+            repos.map(repo => {
+                const link = `https://api.github.com/repos/${repo}/events`
+                return getRepoEvents(link,user.accessToken,userId);
+            })
+        )).filter(ele => ele).flat();
+
+        if(user.events !== Event){
+            await User.updateOne({userId},{events:Event}).exec();
+        }
+
+        return Event
+    }
 
 }
 
-const AllData = function (com, iss, pull, userID) {
+const getRepoEvents = async(link,Token,userId) => {
+    try{
+        var anon = true;
+        const Data = await axios.get(link,{
+            headers: {
+                Authorization: `token ${Token}`
+            },
+            params:{
+                anon
+            }
+        });
+        const EventId = Data.data[0].id
+    
+        return EventId;
+
+    } catch(err){
+        return '0'
+    }
+}
+
+const AllData = function (com, iss, pull) {
     const allData = {
-        "twoWeek" : threeWeekCommitCnt(com),
+        "threeWeek" : threeWeekCommitCnt(com),
         "commit" : getRefineData(com),
         "issue" : getRefineData(iss),
         "pulls" : getRefineData(pull),
-        "cnt" : cntInfo(com,iss,pull),
-        "check" : userID,
+        "cnt" : cntInfo(com,iss,pull)
     }
     return allData
 }
@@ -155,5 +218,7 @@ module.exports = {
     getRefineData,
     AllData,
     orgRepoName,
-    threeWeekCommitCnt
+    threeWeekCommitCnt,
+    CheckUserEvent,
+    updateUserRepos
 }

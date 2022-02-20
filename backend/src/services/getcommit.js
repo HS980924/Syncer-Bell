@@ -1,5 +1,7 @@
 const axios = require('axios');
 const githubServiceUser = require('../services/getuser.js');
+const User = require('../models/User.js')
+
 
 // commit 정보 가져오는 함수
 const getCommitList = async (url,repo,token,userId) => {
@@ -50,7 +52,9 @@ const getCommitList = async (url,repo,token,userId) => {
 
 const getUserCommit = async (userId,token) => {
     try{
-        const repos = await githubServiceUser.orgRepoName(token,userId)
+        const user = await User.findOne({userId}).exec();
+        const repos = user.repos;
+        //const repos = await githubServiceUser.orgRepoName(token,userId)
         
         const commitdata = (await Promise.all(
             repos.map(repo => {

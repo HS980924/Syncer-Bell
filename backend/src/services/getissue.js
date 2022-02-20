@@ -1,5 +1,6 @@
 const axios = require('axios');
 const githubServiceUser = require('../services/getuser.js');
+const User = require('../models/User.js')
 
 // 유저 issue의 comment정보 목록 가져오기
 // const getIssueComment = async (url) => {
@@ -74,7 +75,9 @@ const getIssueList = async (url,repo,token,userId) => {
 // 유저 이슈 정보 가져오기
 const getUserIssue = async (userId,token) => {
     try{
-        const repos = await githubServiceUser.orgRepoName(token,userId);
+        const user = await User.findOne({userId}).exec();
+        const repos = user.repos;
+        //const repos = await githubServiceUser.orgRepoName(token,userId);
 
         const issuedata = (await Promise.all(
             repos.map(repo => {

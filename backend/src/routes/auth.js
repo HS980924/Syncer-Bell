@@ -8,19 +8,14 @@ router.get('/github', passport.authenticate('github', { scope: [ 'repo','user:em
 router.get('/github/callback', passport.authenticate('github', { failureRedirect: '/' }), //successRedirect: '/home',
     function(req, res) {
         req.session.save(() => {
-            res.redirect('http://localhost:3000/home');
+            res.redirect('http://localhost:3000/loading');
         })
     }
 );
 
 router.get('/logout', function(req, res){
     req.logOut();
-    // req.session.destroy(function(){
-    //     req.session;
-    //     //res.clearCookie('connect.sid',{path:'/home'});
-    //     //res.redirect('/');
-    // });
-    res.redirect('/');
+    res.redirect('http://localhost:3000');
 });
 
 module.exports = router;
