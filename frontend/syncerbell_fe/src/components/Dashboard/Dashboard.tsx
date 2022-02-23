@@ -8,12 +8,10 @@ import optionIcon from '../../assets/png/menuIcon.png';
 import RightSide from '../RightSide/RightSide';
 import { changeNumber } from '../cognition/Settings';
 import Sidebar from '../Sidebar/Sidebar';
-import { printIssue, printPR, commitData, pullsData, issueData, dData } from '../../view/Loading';
-
-export let commitChart: { name: string; uv: number; pv: number; amt: number; }[];
 
 function Dashboard() {
     const [activeIndex, setActiveIndex] = useState(0);
+    let weekly = transforming(window.localStorage.getItem("weeklyData"));
     const data = [
         {
             name: 'Page A',
@@ -208,14 +206,19 @@ function Dashboard() {
         },
     ];
 
-    commitChart = data;
 
     const onMouseOver = (data : any, index : number) => setActiveIndex(index);
-    console.log(commitData);
-    console.log(issueData);
-    console.log(pullsData);
-    console.log(dData);
     
+    function transforming(data:any){
+        let res = JSON.parse(JSON.stringify(data));
+        return JSON.parse(res);
+    }
+
+    let dash_printIssue = transforming(window.localStorage.getItem("printIssue"));
+    let dash_printPR = transforming(window.localStorage.getItem("printPR"));
+    let chartColor = window.localStorage.getItem("chartColor");
+    let chartColor_hover = window.localStorage.getItem("chartColor_hover");
+
     return ( 
         <> 
             <Sidebar/>
@@ -241,8 +244,8 @@ function Dashboard() {
                                         <Cell
                                             cursor="pointer"
                                             fill={index === activeIndex
-                                            ? "rgb(0,255,69)"
-                                            : "rgba(0,255,69,.2)"}
+                                            ? `${chartColor}`
+                                            : `${chartColor_hover}`}
                                             key={index}
                                         />
                                     ))}
@@ -269,7 +272,7 @@ function Dashboard() {
                             </div>
 
                             <ul>
-                                {printIssue.slice(0,changeNumber).map((item) => (
+                                {dash_printIssue.slice(0,changeNumber).map((item:any) => (
                                     <li className={styles.showingItem} key={item.date} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
@@ -308,7 +311,7 @@ function Dashboard() {
                             </div>
 
                             <ul>
-                                {printPR.slice(0,changeNumber).map((item) => (
+                                {dash_printPR.slice(0,changeNumber).map((item:any) => (
                                     <li className={styles.showingItem} key={item.date} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
@@ -329,7 +332,7 @@ function Dashboard() {
                             </ul>
                         </div>
                     </section>
-                    <RightSide/>
+                <RightSide/>
                 </div>
             </main> 
         </>

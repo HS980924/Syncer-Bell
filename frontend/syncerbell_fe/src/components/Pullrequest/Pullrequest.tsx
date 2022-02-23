@@ -3,24 +3,32 @@ import styles from './Pullrequest.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaSyncAlt, FaBoxes } from 'react-icons/fa';
 import {Link} from 'react-router-dom';
-import { pullsData } from '../../view/Loading';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 
-export let refreshPr=[{repoName:"", user:"", title:"", date:"", url:""}];
-
 const Pullrequest = () => {
     
-    const [newPullsData, setNewPullsData] = useState(pullsData);
+    function transforming(data:any){
+        let res = JSON.parse(JSON.stringify(data));
+        return JSON.parse(res);
+    }
+
+    let base_pulls = transforming(window.localStorage.getItem("pullsData"));
+
+    const [newPullsData, setNewPullsData] = useState(base_pulls);
     
     const updatePulls = async()=>{
         try{
             const result = await axios.get('/pullrequest');
-            console.log(result.data);
-            setNewPullsData(JSON.parse(result.data));
-            refreshPr = newPullsData;
+            let new_pulls = JSON.parse(result.data);
+            if(new_pulls !== base_pulls){
+                window.localStorage.setItem("pullsData", JSON.stringify(new_pulls));
+            }
+            else{
+                alert("Can't load Pulls Update!");
+            }
         }catch(e){
-            alert("Can't load Commit Update!");
+            alert("Error!!");
         }
     }
 
@@ -52,8 +60,8 @@ const Pullrequest = () => {
                             ---------------------------->*/}
                         <div className={styles.prArea}>
                             <ul className={styles.listArea}>
-                                {newPullsData.map((item)=>(
-                                    <li className={styles.prList} key={item.title} onClick={()=>{
+                                {newPullsData.map((item:any)=>(
+                                    <li className={styles.prList} key={item.url.slice(15,)} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
                                         <div className={styles.prListItem}>
