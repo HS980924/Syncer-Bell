@@ -16,14 +16,14 @@ export let barColor_hover="#97ffb3";
 const Settings = () => {
     // let countNumber = parseInt(window.localStorage.getItem("countNumber"));
     const [showCount, setShowCount] = useState(5);
-    const [toggleCommit, setToggleCommit] = useState(false);
-    const [toggleIssue, setToggleIssue] = useState(false);
-    const [togglePulls, setTogglePulls] = useState(false);
+    const [toggleCommit, setToggleCommit] = useState(true);
+    const [toggleIssue, setToggleIssue] = useState(true);
+    const [togglePulls, setTogglePulls] = useState(true);
 
-    const send =(name:boolean)=>{
+    const send=(name:string, state:any)=>{
         const client = axios.create();   // axios 기능생성
         // const name = 'send data test';   
-        client.post('/setting' , {name} );   //axios 기능을 통한 post 사용및 name 값 전달.
+        client.post('/setting' , {"name":name, "state":state} );   //axios 기능을 통한 post 사용및 name 값 전달.
     }
     
     function addCount(){
@@ -56,17 +56,17 @@ const Settings = () => {
 
     function toggleCommitFunction(){
         setToggleCommit(prevStatus => prevStatus ? false : true);
-        send(toggleCommit);
+        send("commit",toggleCommit);
     }
 
     function toggleIssueFunction(){
         setToggleIssue(prevStatus => prevStatus ? false : true);
-        send(toggleIssue);
+        send("issue",toggleIssue);
     }
 
     function togglePullsFunction(){
         setTogglePulls(prevStatus => prevStatus ? false : true);
-        send(togglePulls);
+        send("pulls",togglePulls);
     }
 
     useEffect(()=>{
@@ -143,8 +143,8 @@ const Settings = () => {
                                                 className={styles.itemTitle}
                                                 style={
                                                     (toggleCommit === true)?
-                                                        {color:"green"}:
-                                                        {color:"red"}
+                                                        {color:"red"}:
+                                                        {color:"green"}
                                                     }
                                             >Commit</p>
                                             <input className={styles.itemChecking} type="checkbox" onClick={toggleCommitFunction}/>
@@ -154,8 +154,8 @@ const Settings = () => {
                                                 className={styles.itemTitle}
                                                 style={
                                                     (toggleIssue === true)?
-                                                        {color:"green"}:
-                                                        {color:"red"}
+                                                        {color:"red"}:
+                                                        {color:"green"}
                                                     }
                                             >Issue</p>
                                             <input className={styles.itemChecking} type="checkbox" onClick={toggleIssueFunction}/>
@@ -165,8 +165,8 @@ const Settings = () => {
                                                 className={styles.itemTitle}
                                                 style={
                                                     (togglePulls === true)?
-                                                        {color:"green"}:
-                                                        {color:"red"}
+                                                        {color:"red"}:
+                                                        {color:"green"}
                                                     }
                                             >Pull Request</p>
                                             <input className={styles.itemChecking} type="checkbox" onClick={togglePullsFunction}/>
