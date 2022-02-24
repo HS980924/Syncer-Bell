@@ -3,15 +3,8 @@ import ptj_logo from '../../assets/png/logo.png';
 import {Link} from 'react-router-dom';
 import UserData, {userGit} from "../leftside_data/leftside_data";
 
-// const sidebarNavLinks = ["home","commit","issue","pullrequest","settings"];
-
 function Sidebar() {
-    // const location = useLocation();
-
-    // function isAuth(){
-    //     return null;
-    // }
-
+    console.log(typeof(UserData));
     return (
         <> 
             <aside className={styles.leftBar}>

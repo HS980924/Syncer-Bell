@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Settings.module.scss';
-import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
 import { FaArrowLeft, FaCog } from 'react-icons/fa';
-import { countNumber } from '../../view/Welcome';
+import {GithubPicker} from 'react-color';
+
+import styles from './Settings.module.scss';
+import RightSide from '../RightSide/RightSide';
 import Sidebar from '../Sidebar/Sidebar';
 
 export let userColor = {mainColor:"", hoverColor:""};
@@ -12,7 +13,8 @@ export let barColor="#00ff45";
 export let barColor_hover="#97ffb3";
 
 const Settings = () => {
-    const [showCount, setShowCount] = useState(countNumber);
+    // let countNumber = parseInt(window.localStorage.getItem("countNumber"));
+    const [showCount, setShowCount] = useState(5);
     const [toggleCommit, setToggleCommit] = useState(false);
     const [toggleIssue, setToggleIssue] = useState(false);
     const [togglePulls, setTogglePulls] = useState(false);
@@ -20,35 +22,29 @@ const Settings = () => {
     function addCount(){
         changeNumber = showCount+1;
         if(changeNumber >= 6){
-            const userObj = { count: 5 };
-            window.localStorage.setItem("count", JSON.stringify(userObj));
+            window.localStorage.setItem("countNumber", "5");
             setShowCount(5);
             changeNumber = 5;
         }
         else {
-            const userObj = { count: showCount+1 };
-            window.localStorage.setItem("count", JSON.stringify(userObj));
-            setShowCount(showCount+1);
+            const nextNumber = showCount+1;
+            window.localStorage.setItem("countNumber", nextNumber.toString());
+            setShowCount(nextNumber);
         }
     }
 
     function minusCount(){
         changeNumber = showCount-1;
         if(changeNumber <= 1){
-            const userObj = { count: 1 };
-            window.localStorage.setItem("count", JSON.stringify(userObj));
+            window.localStorage.setItem("countNumber", "1");
             setShowCount(1);
             changeNumber = 1;
         }
         else {
-            const userObj = { count: showCount-1 };
-            window.localStorage.setItem("count", JSON.stringify(userObj));
-            setShowCount(showCount-1)
+            const nextNumber = showCount-1;
+            window.localStorage.setItem("countNumber", nextNumber.toString());
+            setShowCount(nextNumber)
         }
-    }
-
-    function changeBarColor(){
-
     }
 
     function toggleCommitFunction(){
@@ -110,11 +106,14 @@ const Settings = () => {
                                 <div className={styles.logoutForm}>
                                     <h3 className={styles.functionTitle}>👉 Account</h3>
                                     <div className={styles.buttonWrapper}>
-                                        <button className={styles.logoutBtn}>▶ Logout</button>
+                                        <button className={styles.logoutBtn} onClick={()=>{
+                                            window.open("http://localhost:5000/auth/logout", "_self");
+                                        }}>Logout</button>
                                     </div>
                                 </div>
                                 <div className={styles.barColor}>
                                     <h3 className={styles.functionTitle}>👉 Select Bar Color</h3>
+                                    <GithubPicker className={styles.colorPicker}/>
                                 </div>
                                 <div className={styles.showDetails}>
                                     <h3 className={styles.functionTitle}>👉 Show Item Count</h3>

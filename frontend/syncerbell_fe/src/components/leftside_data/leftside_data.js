@@ -19,6 +19,7 @@ function Leftside_data() {
             setLoading(true);
             const res = await axios.get('/home');
             setUsers(res.data);
+            window.localStorage.setItem("userProfile", JSON.stringify(res.data));
         } catch(e) {
             setError(e);
         }

@@ -61,8 +61,13 @@ router.get('/alldata', async(req,res) => {
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token)
     const mypulls = await githubServicePull.getUserPull(userId,Token)
     const result = githubServiceUser.AllData(myCommit, myIssue, mypulls)
+<<<<<<< HEAD
     console.log(result);
     res.json(result)
+=======
+    res.json(JSON.stringify(result))
+    // res.json(result)
+>>>>>>> 81fb4c6c1724d355046c2efaf7ba8e654dbef4f1
 })
 
 router.get('/email',async (req,res) => {

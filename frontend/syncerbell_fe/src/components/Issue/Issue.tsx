@@ -2,24 +2,33 @@ import React, { useState } from 'react'
 import styles from './Issue.module.scss';
 import RightSide from '../RightSide/RightSide';
 import { FaArrowLeft, FaBox, FaSyncAlt } from 'react-icons/fa';
-import { issueData } from '../../view/Welcome';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 
-export let refreshIssue=[{ repoName: "", user: "", title: "", date: "", url: "" }];
-
 const Issue = () => {
 
-    const [newIssueData, setNewIssueData] = useState(issueData);
+    function transforming(data:any){
+        let res = JSON.parse(JSON.stringify(data));
+        return JSON.parse(res);
+    }
+
+    let base_issue = transforming(window.localStorage.getItem("issueData"));
+    const [newIssueData, setNewIssueData] = useState(base_issue);
 
     const updateIssue = async()=>{
         try{
             const result = await axios.get('/issue');
-            setNewIssueData(JSON.parse(result.data));
-            refreshIssue = newIssueData;
+            let new_issue = JSON.parse(result.data);
+            if(new_issue !== base_issue){
+                window.localStorage.setItem("issueData", JSON.stringify(new_issue));
+            }
+            else{
+                alert("Can't load issue Update!");
+            }
+            
         }catch(e){
-            alert("Can't load Commit Update!");
+            alert("Error!!");
         }
     }
 
@@ -51,8 +60,8 @@ const Issue = () => {
                             ---------------------------->*/}
                         <div className={styles.issueArea}>
                             <ul className={styles.listArea}>
-                                {newIssueData.map((item)=>(
-                                    <li className={styles.issueList} key={item.title} onClick={()=>{
+                                {newIssueData.map((item:any)=>(
+                                    <li className={styles.issueList} key={item.url.slice(15,)} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
                                         <div className={styles.issueListItem}>

@@ -133,6 +133,7 @@ const CheckUserEvent = async(userId) => {
 
 }
 
+<<<<<<< HEAD
 const getRepoEvents = async(link,Token,userId) => {
     try{
         var anon = true;
@@ -153,13 +154,19 @@ const getRepoEvents = async(link,Token,userId) => {
     }
 }
 
+=======
+>>>>>>> 81fb4c6c1724d355046c2efaf7ba8e654dbef4f1
 const AllData = function (com, iss, pull) {
     const allData = {
         "threeWeek" : threeWeekCommitCnt(com),
         "commit" : getRefineData(com),
         "issue" : getRefineData(iss),
         "pulls" : getRefineData(pull),
+<<<<<<< HEAD
         "cnt" : cntInfo(com,iss,pull)
+=======
+        "cnt" : cntInfo(com,iss,pull),
+>>>>>>> 81fb4c6c1724d355046c2efaf7ba8e654dbef4f1
     }
     return allData
 }

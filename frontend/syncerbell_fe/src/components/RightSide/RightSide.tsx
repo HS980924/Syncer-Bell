@@ -1,9 +1,16 @@
 import React from 'react'
 import styles from './Rightside.module.scss';
 import dummy from '../../assets/png/dummy_img.jpg';
-import { statics } from '../../view/Welcome';
 
 const RightSide = () => {
+
+    function transforming(data:any){
+        let res = JSON.parse(JSON.stringify(data));
+        return JSON.parse(res);
+    }
+
+    let statics = transforming(window.localStorage.getItem("static"));
+    
     const user_statics = [
         {
             id:1,
@@ -20,6 +27,7 @@ const RightSide = () => {
         },
     ]
 
+    
     function checkPercentage(entity:number){
         if(entity>100){
             return false;

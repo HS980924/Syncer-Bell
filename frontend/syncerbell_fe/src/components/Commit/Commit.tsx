@@ -3,31 +3,31 @@ import styles from './Commit.module.scss';
 import {FaArrowLeft, FaDelicious, FaSyncAlt} from 'react-icons/fa';
 import RightSide from '../RightSide/RightSide';
 import { Link } from 'react-router-dom';
-import { commitData } from '../../view/Welcome';
 import axios from 'axios';
 import Sidebar from '../Sidebar/Sidebar';
 
-export let refreshCommit = [
-    {
-        repoName: "",
-        user: "",
-        message: "",
-        date: "",
-        url: ""
-    }
-];
-
 const Commit = () => {
-    const [newCommitData, setNewCommitData] = useState(commitData);
+    function transforming(data:any){
+        let res = JSON.parse(JSON.stringify(data));
+        return JSON.parse(res);
+    }
+
+    let base_commit = transforming(window.localStorage.getItem("commitData"));
+    const [newCommitData, setNewCommitData] = useState(base_commit);
     
     const updateCommit = async()=>{
         try{
             const result = await axios.get('/commit');
-            setNewCommitData(JSON.parse(result.data));
-            refreshCommit = newCommitData;
-            console.log(refreshCommit);
+            let new_commit = JSON.parse(result.data);
+            if (new_commit !== base_commit){
+                window.localStorage.setItem("commitData", JSON.stringify(new_commit));
+                // console.log("Update is noting!");
+            }
+            else{
+                alert("Can't load Commit Update!");
+            }
         }catch(e){
-            alert("Can't load Commit Update!");
+            alert("Error!!");
         }
     }
 
@@ -59,8 +59,8 @@ const Commit = () => {
                             ---------------------------->*/}
                         <div className={styles.commitArea}>
                             <ul className={styles.listArea}>
-                                {newCommitData.map((item)=>(
-                                    <li className={styles.commitList} key={item.message} onClick={()=>{
+                                {newCommitData.map((item:any)=>(
+                                    <li className={styles.commitList} key={item.url.slice(15,)} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
                                         <div className={styles.commitListItem}>

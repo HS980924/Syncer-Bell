@@ -1,19 +1,17 @@
 import styles from './Dashboard.module.scss';
+import { FaBox, FaBoxes  } from 'react-icons/fa';
 import {Bar, BarChart, Cell, ResponsiveContainer} from 'recharts';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
+
 import optionIcon from '../../assets/png/menuIcon.png';
 import RightSide from '../RightSide/RightSide';
-import { printIssue, printPR } from '../../view/Welcome';
 import { changeNumber } from '../cognition/Settings';
-import { FaBox, FaBoxes  } from 'react-icons/fa';
 import Sidebar from '../Sidebar/Sidebar';
 
-export let commitData: { name: string; uv: number; pv: number; amt: number; }[];
-
-function Dashboard(): JSX.Element {
-
+function Dashboard() {
     const [activeIndex, setActiveIndex] = useState(0);
+    let weekly = transforming(window.localStorage.getItem("weeklyData"));
     const data = [
         {
             name: 'Page A',
@@ -208,9 +206,18 @@ function Dashboard(): JSX.Element {
         },
     ];
 
-    commitData = data;
 
     const onMouseOver = (data : any, index : number) => setActiveIndex(index);
+    
+    function transforming(data:any){
+        let res = JSON.parse(JSON.stringify(data));
+        return JSON.parse(res);
+    }
+
+    let dash_printIssue = transforming(window.localStorage.getItem("printIssue"));
+    let dash_printPR = transforming(window.localStorage.getItem("printPR"));
+    let chartColor = window.localStorage.getItem("chartColor");
+    let chartColor_hover = window.localStorage.getItem("chartColor_hover");
 
     return ( 
         <> 
@@ -237,8 +244,8 @@ function Dashboard(): JSX.Element {
                                         <Cell
                                             cursor="pointer"
                                             fill={index === activeIndex
-                                            ? "rgb(0,255,69)"
-                                            : "rgba(0,255,69,.2)"}
+                                            ? `${chartColor}`
+                                            : `${chartColor_hover}`}
                                             key={index}
                                         />
                                     ))}
@@ -265,7 +272,7 @@ function Dashboard(): JSX.Element {
                             </div>
 
                             <ul>
-                                {printIssue.slice(0,changeNumber).map((item) => (
+                                {dash_printIssue.slice(0,changeNumber).map((item:any) => (
                                     <li className={styles.showingItem} key={item.date} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
@@ -304,7 +311,7 @@ function Dashboard(): JSX.Element {
                             </div>
 
                             <ul>
-                                {printPR.slice(0,changeNumber).map((item) => (
+                                {dash_printPR.slice(0,changeNumber).map((item:any) => (
                                     <li className={styles.showingItem} key={item.date} onClick={()=>{
                                         window.open(`${item.url}`, '_blank')
                                     }}>
@@ -325,7 +332,7 @@ function Dashboard(): JSX.Element {
                             </ul>
                         </div>
                     </section>
-                    <RightSide/>
+                <RightSide/>
                 </div>
             </main> 
         </>
