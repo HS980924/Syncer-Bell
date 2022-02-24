@@ -6,6 +6,7 @@ import {GithubPicker} from 'react-color';
 import styles from './Settings.module.scss';
 import RightSide from '../RightSide/RightSide';
 import Sidebar from '../Sidebar/Sidebar';
+import axios from 'axios';
 
 export let userColor = {mainColor:"", hoverColor:""};
 export let changeNumber = 5;
@@ -18,6 +19,12 @@ const Settings = () => {
     const [toggleCommit, setToggleCommit] = useState(false);
     const [toggleIssue, setToggleIssue] = useState(false);
     const [togglePulls, setTogglePulls] = useState(false);
+
+    const send =(name:boolean)=>{
+        const client = axios.create();   // axios 기능생성
+        // const name = 'send data test';   
+        client.post('/setting' , {name} );   //axios 기능을 통한 post 사용및 name 값 전달.
+    }
     
     function addCount(){
         changeNumber = showCount+1;
@@ -49,14 +56,17 @@ const Settings = () => {
 
     function toggleCommitFunction(){
         setToggleCommit(prevStatus => prevStatus ? false : true);
+        send(toggleCommit);
     }
 
     function toggleIssueFunction(){
         setToggleIssue(prevStatus => prevStatus ? false : true);
+        send(toggleIssue);
     }
 
     function togglePullsFunction(){
         setTogglePulls(prevStatus => prevStatus ? false : true);
+        send(togglePulls);
     }
 
     useEffect(()=>{

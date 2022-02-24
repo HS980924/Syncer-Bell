@@ -11,7 +11,9 @@ import Sidebar from '../Sidebar/Sidebar';
 
 function Dashboard() {
     const [activeIndex, setActiveIndex] = useState(0);
-    let weekly = transforming(window.localStorage.getItem("weeklyData"));
+    // let weekly = transforming(window.localStorage.getItem("weeklyData"));
+    
+
     const data = [
         {
             name: 'Page A',
