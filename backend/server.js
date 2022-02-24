@@ -47,6 +47,7 @@ require('./src/configs/passport.js')();
 app.use('/auth', authRouter);
 app.use('/', userRouter);
 
+// localStorage.setItem("test", "01");
 app.listen(5000,(err)=>{
     if(err){
         return console.log(err);
