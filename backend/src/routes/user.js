@@ -72,7 +72,7 @@ router.get('/email',async (req,res) => {
 
 })
 
-router.get('/setting',async(req,res) => {
+router.post('/setting',async(req,res) => {
     const test = req.body.name;
     console.log(test);
 

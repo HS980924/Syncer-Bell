@@ -19,9 +19,9 @@ const githubLogin = async (accessToken, refreshToken, profile, done) =>{
                 events: [],
                 showcnt: 5,
                 Color: null,
-                checkCommit: true,
-                checkIssue: true,
-                checkPr: true
+                checkCommit: false,
+                checkIssue: false,
+                checkPr: false
             });
         }
         else if (user.accessToken !== accessToken){
