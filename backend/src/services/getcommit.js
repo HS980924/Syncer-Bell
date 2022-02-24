@@ -10,7 +10,7 @@ const getCommitList = async (url,repo,token,userId) => {
         var page = 1
         var commitList = []
         var since = new Date().getFullYear();
-        since = since + '-01-01T00:00:00';
+        since = since + '-01-01T00:00:00Z';
         do{
             len = 0
             const JsonData = await axios.get(url,{
@@ -27,6 +27,7 @@ const getCommitList = async (url,repo,token,userId) => {
                 JsonData.data.map((com) =>{
                     try{
                         len++;
+                        console.log(com.author.login);
                         if (com.author.login === userId){
                             var commitData = new Object();
                             commitData.repoName = repo;
@@ -69,6 +70,7 @@ const getUserCommit = async (userId,token) => {
             return day2 - day1;
         });
 
+        console.log(commitdata);
         return commitdata
     } catch(err){
         return err

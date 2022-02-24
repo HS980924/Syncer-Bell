@@ -2,8 +2,11 @@ const express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
+const bodyparser = require('body-parser');
 const mongoose = require('mongoose');
 const schedule = require('node-schedule');
+
 require('dotenv').config();
 
 const userRouter = require('./src/routes/user');
@@ -27,6 +30,10 @@ const autoScheduler = schedule.scheduleJob('* * * * *', async() => {
 })
 
 const app = express();
+
+app.use(bodyparser.urlencoded({extended: false}));
+app.use(cors());
+app.listenerCount(bodyparser.json());
 
 app.use(cookieParser());
 app.use(express.json());
