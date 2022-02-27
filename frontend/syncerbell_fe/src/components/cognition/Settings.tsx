@@ -15,7 +15,9 @@ export let barColor="#00ff45";
 export let barColor_hover="#97ffb3";
 
 const Settings = () => {
-    
+
+    let setting_Cnt = JSON.stringify(window.localStorage.getItem("countNumber"));
+    console.log(setting_Cnt)
     function createDefault(target:string){
         const defaultValue = window.localStorage.getItem(target);
         if(defaultValue !== null){//target값이 localStorage에 있으면
@@ -26,7 +28,7 @@ const Settings = () => {
         }
     }
 
-    const [showCount, setShowCount] = useState(5);
+    const [showCount, setShowCount] = useState(parseInt(setting_Cnt));
     const [toggleCommit, setToggleCommit] = useState(createDefault("is_commit_mailing"));
     const [toggleIssue, setToggleIssue] = useState(createDefault("is_issue_mailing"));
     const [togglePulls, setTogglePulls] = useState(createDefault("is_pulls_mailing"));
@@ -175,7 +177,7 @@ const Settings = () => {
                                     <h3 className={styles.functionTitle}>👉 Show Item Count</h3>
                                     <div className={styles.controlForm}>
                                         <div className={styles.buttonArea}>
-                                            <p>{showCount} : </p>
+                                            <p>{setting_Cnt} : </p>
                                             <button className={styles.toggleButton} onClick={addCount}>+</button>
                                             <button className={styles.toggleButton} onClick={minusCount}>-</button>
                                         </div>
