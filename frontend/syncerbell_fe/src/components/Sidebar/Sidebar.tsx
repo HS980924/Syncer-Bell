@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 import UserData, {userGit} from "../leftside_data/leftside_data";
 
 function Sidebar() {
-    console.log(typeof(UserData));
+
     return (
         <> 
             <aside className={styles.leftBar}>

@@ -10,7 +10,8 @@ const Loading = () => {
     const fetchData = async() => {
         try{
             const res = await axios.get('/alldata');
-            /* Originally, below data should be saved the DB. After version 1.0.0, If we refactoring this project. we must intergrated data to DB */
+            /* Originally, below data should be saved the DB. After version 1.0.0, 
+            If we refactoring this project. we must intergrated data to DB */
             window.localStorage.setItem("userData", res.data);
             window.localStorage.setItem("weeklyData", JSON.stringify(JSON.parse(res.data)["twoWeek"]));
             window.localStorage.setItem("commitData", JSON.stringify(JSON.parse(res.data)["commit"]));
@@ -20,8 +21,8 @@ const Loading = () => {
             window.localStorage.setItem("printIssue", JSON.stringify(JSON.parse(res.data)["issue"].slice(0, 5)));
             window.localStorage.setItem("printPR", JSON.stringify(JSON.parse(res.data)["pulls"].slice(0, 5)));
             window.localStorage.setItem("countNumber", "5");
-            window.localStorage.setItem("chartColor", "rgb(0,255,69)");
-            window.localStorage.setItem("chartColor_hover", "rgba(0,255,69,.2)");
+            // window.localStorage.setItem("chartColor", "rgb(0,255,69)");
+            // window.localStorage.setItem("chartColor_hover", "rgba(0,255,69,.2)");
             setLoading(true);
         }catch(e){
             setError(e);
@@ -39,7 +40,6 @@ const Loading = () => {
 
     if(isLoading){
         movePage();
-        console.log(isLoading);
     }
 
     return (    

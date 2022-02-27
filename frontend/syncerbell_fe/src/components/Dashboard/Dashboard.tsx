@@ -216,10 +216,20 @@ function Dashboard() {
         return JSON.parse(res);
     }
 
+    function createDefault_chart(target:string,default_V:string){
+        const defaultValue = window.localStorage.getItem(target);
+        if(defaultValue !== null){//target값이 localStorage에 있으면
+            return defaultValue;
+        }
+        else{
+            return default_V;
+        }
+    }
+
     let dash_printIssue = transforming(window.localStorage.getItem("printIssue"));
     let dash_printPR = transforming(window.localStorage.getItem("printPR"));
-    let chartColor = window.localStorage.getItem("chartColor");
-    let chartColor_hover = window.localStorage.getItem("chartColor_hover");
+    let chartColor = createDefault_chart("chartColor", "rgb(0,255,69)");
+    let chartColor_hover = createDefault_chart("chartColor_hover", "rgba(0,255,69,.2)");
 
     return ( 
         <> 

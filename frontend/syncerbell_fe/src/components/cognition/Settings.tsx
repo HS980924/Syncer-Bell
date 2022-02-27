@@ -15,14 +15,24 @@ export let barColor_hover="#97ffb3";
 
 const Settings = () => {
     // let countNumber = parseInt(window.localStorage.getItem("countNumber"));
+
+    function createDefault(target:string){
+        const defaultValue = window.localStorage.getItem(target);
+        if(defaultValue !== null){//target값이 localStorage에 있으면
+            return defaultValue;
+        }
+        else{
+            return false;
+        }
+    }
+
     const [showCount, setShowCount] = useState(5);
-    const [toggleCommit, setToggleCommit] = useState(true);
-    const [toggleIssue, setToggleIssue] = useState(true);
-    const [togglePulls, setTogglePulls] = useState(true);
+    const [toggleCommit, setToggleCommit] = useState(createDefault("is_commit_mailing"));
+    const [toggleIssue, setToggleIssue] = useState(createDefault("is_issue_mailing"));
+    const [togglePulls, setTogglePulls] = useState(createDefault("is_pulls_mailing"));
 
     const send=(name:string, state:any)=>{
         const client = axios.create();   // axios 기능생성
-        // const name = 'send data test';   
         client.post('/setting' , {"name":name, "state":state} );   //axios 기능을 통한 post 사용및 name 값 전달.
     }
     
@@ -56,17 +66,33 @@ const Settings = () => {
 
     function toggleCommitFunction(){
         setToggleCommit(prevStatus => prevStatus ? false : true);
+        window.localStorage.setItem("is_commit_mailing", toggleCommit.toString());
         send("commit",toggleCommit);
     }
 
     function toggleIssueFunction(){
         setToggleIssue(prevStatus => prevStatus ? false : true);
+        window.localStorage.setItem("is_issue_mailing", toggleIssue.toString());
         send("issue",toggleIssue);
     }
 
     function togglePullsFunction(){
         setTogglePulls(prevStatus => prevStatus ? false : true);
+        window.localStorage.setItem("is_pulls_mailing", togglePulls.toString());
         send("pulls",togglePulls);
+    }
+
+    let [bgColor, setBgColor] = useState(null);
+    let [hover_bgColor, setHoverColor] = useState(null);
+
+    const handleChangeComplete = (color:any) => {
+        setBgColor(color.hex)
+        window.localStorage.setItem("chartColor", color.hex);
+    }
+
+    const handleHoverChangeComplete = (color:any) => {
+        setHoverColor(color.hex)
+        window.localStorage.setItem("chartColor_hover", color.hex);
     }
 
     useEffect(()=>{
@@ -122,8 +148,14 @@ const Settings = () => {
                                     </div>
                                 </div>
                                 <div className={styles.barColor}>
-                                    <h3 className={styles.functionTitle}>👉 Select Bar Color</h3>
-                                    <GithubPicker className={styles.colorPicker}/>
+                                    <div className={styles.chartColorWrapper}>
+                                        <h3 className={styles.functionTitle}>👉 Select Chart Color</h3>
+                                        <GithubPicker className={styles.colorPicker} onChangeComplete={handleChangeComplete}/>
+                                    </div>
+                                    <div className={styles.hoverChartColorWrapper}>
+                                        <h3 className={styles.functionTitle}>👉 Select Chart Hover Color</h3>
+                                        <GithubPicker className={styles.colorPicker} onChangeComplete={handleHoverChangeComplete}/>
+                                    </div>
                                 </div>
                                 <div className={styles.showDetails}>
                                     <h3 className={styles.functionTitle}>👉 Show Item Count</h3>
@@ -147,7 +179,7 @@ const Settings = () => {
                                                         {color:"green"}
                                                     }
                                             >Commit</p>
-                                            <input className={styles.itemChecking} type="checkbox" onClick={toggleCommitFunction}/>
+                                            <input className={styles.itemChecking} type="checkbox" checked={!Boolean(toggleCommit)} onClick={toggleCommitFunction}/>
                                         </div>
                                         <div className={styles.checkboxWrapper}>
                                             <p 
@@ -158,7 +190,7 @@ const Settings = () => {
                                                         {color:"green"}
                                                     }
                                             >Issue</p>
-                                            <input className={styles.itemChecking} type="checkbox" onClick={toggleIssueFunction}/>
+                                            <input className={styles.itemChecking} type="checkbox" checked={!Boolean(toggleIssue)} onClick={toggleIssueFunction}/>
                                         </div>
                                         <div className={styles.checkboxWrapper}>
                                             <p 
@@ -169,7 +201,7 @@ const Settings = () => {
                                                         {color:"green"}
                                                     }
                                             >Pull Request</p>
-                                            <input className={styles.itemChecking} type="checkbox" onClick={togglePullsFunction}/>
+                                            <input className={styles.itemChecking} type="checkbox" checked={!Boolean(togglePulls)} onClick={togglePullsFunction}/>
                                         </div>
                                     </div>
                                 </div>

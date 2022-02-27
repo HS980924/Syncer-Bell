@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../Sidebar/Sidebar.module.scss';
 import {FaChild, FaCode} from 'react-icons/fa';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from "axios";
 
 export let userGit;
@@ -9,14 +9,14 @@ export let userData;
 
 function Leftside_data() {
     const [users, setUsers] = useState(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(null);
     const [errors, setError] = useState(null);
 
+    // let USER = JSON.parse(JSON.parse(JSON.stringify(window.localStorage.getItem("userProfile"))));
+    // setUsers(USER);
     const fetchUsers = async()=>{
         try{
-            setError(null);
             setUsers(null);
-            setLoading(true);
             const res = await axios.get('/home');
             setUsers(res.data);
             window.localStorage.setItem("userProfile", JSON.stringify(res.data));
@@ -38,7 +38,7 @@ function Leftside_data() {
     const url = users.blog;
     userGit = users.url;
     userData = users;
-    
+
     return(
         <>
             <div className={styles.profileDetails}>
@@ -70,7 +70,7 @@ function Leftside_data() {
                                 onClick={()=> {
                                     window.open(url, '_blank')
                                 }}>
-                                    {users.blog}
+                                    {userGit}
                             </p>
                         </li>
                     </ul>
