@@ -17,6 +17,7 @@ const getCommitList = async (url,repo,token,userId) => {
                     Authorization: `token ${token}`
                 },
                 params :{
+                    author: userId,
                     since,
                     per_page: 100,
                     page,
@@ -27,21 +28,15 @@ const getCommitList = async (url,repo,token,userId) => {
                 return null;
             }
             else{
-                console.log(repo);
                 const coms = (await Promise.all( 
                     JsonData.data.map((com) =>{
-                        if (com.author.login === userId){
-                            var commitData = new Object();
-                            commitData.repoName = repo;
-                            commitData.user = userId;
-                            commitData.message = com.commit.message;
-                            commitData.date = com.commit.author.date;
-                            commitData.url = com.html_url;
-                            return commitData;
-                        }
-                        else{
-                            return null;
-                        }
+                        var commitData = new Object();
+                        commitData.repoName = repo;
+                        commitData.user = userId;
+                        commitData.message = com.commit.message;
+                        commitData.date = com.commit.author.date;
+                        commitData.url = com.html_url;
+                        return commitData;
                     })
                 )).filter(ele => ele);
                 commitList.push(coms)

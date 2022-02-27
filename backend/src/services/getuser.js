@@ -39,9 +39,9 @@ const getFullName = async (token) => {
                 },
                 params: {
                     visibility,
+                    since,
                     per_page,
                     page,
-                    since,
                 }
             });
             const repoName = res.data.map(ele => ele.full_name);
@@ -49,9 +49,9 @@ const getFullName = async (token) => {
             len = repoName.length;
             page++;
         }while(len > 99);
-        console.log(orgs.flat());
         return orgs.flat()
     } catch(err){
+        console.log(err);
         return err
     }
 }
@@ -65,14 +65,21 @@ const orgRepoCheck = async (link,repo,Token,userId) => {
                 Authorization: `token ${Token}`
             }
         });
-        const contributors = Data.data.map(ele => ele.login);
-        if (contributors.includes(userId)){
-            return repo
+        var len = Object.keys(Data.data).length;
+        if (len <= 0){
+            return null;
         }
         else{
-            return null
+            const contributors = Data.data.map(ele => ele.login);
+            if (contributors.includes(userId)){
+                return repo
+            }
+            else{
+                return null
+            }
         }
     } catch(err){
+        console.log(err);
         return null
     }
 }
@@ -88,7 +95,6 @@ const orgRepoName = async(token,userId) =>{
         })
     )).filter(ele => ele).flat();
 
-    console.log(orgData);
     return orgData
 }
 
@@ -129,7 +135,7 @@ const CheckUserEvent = async(userId) => {
 
 }
 
-const getRepoEvents = async(link,Token) => {
+const getRepoEvents = async (link,Token) => {
     try{
         var anon = true;
         const Data = await axios.get(link,{
@@ -140,12 +146,17 @@ const getRepoEvents = async(link,Token) => {
                 anon
             }
         });
-        const EventId = Data.data[0].id
-    
-        return EventId;
-
+        var len = Object.keys(Data.data).length;
+        if (len == 0){
+            return '0'
+        }
+        else{
+            const EventId = Data.data[0].id
+            return EventId;
+        }
     } catch(err){
-        return '0'
+        console.log(err);
+        return null;
     }
 }
 
@@ -213,16 +224,6 @@ const threeWeekCommitCnt = function (commits) {
     return result;
 }
 
-const getUserID = async () => {
-    const link = 'http://localhost:5000/home';
-    const Data = await axios.get(link);
-
-    const userId = Data.data.login;
-    
-    console.log(userId);
-    return userId
-}
-
 module.exports = {
     UserInfo,
     getRefineData,
@@ -231,5 +232,4 @@ module.exports = {
     threeWeekCommitCnt,
     CheckUserEvent,
     updateUserRepos,
-    getUserID
 }

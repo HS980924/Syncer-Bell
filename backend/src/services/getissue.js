@@ -37,6 +37,7 @@ const getIssueList = async (url,repo,token,userId) => {
                 },
                 params :{
                     state : 'all',
+                    creator: userId,
                     since,
                     per_page: 100,
                     page
@@ -50,7 +51,7 @@ const getIssueList = async (url,repo,token,userId) => {
                 const issues = (await Promise.all( 
                     JsonData.data.map((iss) =>{
                         var Iu_check = iss.node_id
-                        if (iss.user.login === userId && Iu_check.includes('I_')){
+                        if (Iu_check.includes('I_')){
                             var issueData = new Object();
                             issueData.repoName = repo;
                             issueData.title = iss.title;
