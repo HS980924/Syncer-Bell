@@ -139,8 +139,14 @@ const Settings = () => {
                                     </div>
                                     <div className={styles.bottomLine}></div>
                                     <p className={styles.projectBio}>
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas eaque quo officia accusamus est cumque deleniti, rerum voluptatum fuga minus. Dolore praesentium atque ipsa officia asperiores reprehenderit repudiandae quam repellendus!
-                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas eaque quo officia accusamus est cumque deleniti, rerum voluptatum fuga minus. Dolore praesentium atque ipsa officia asperiores reprehenderit repudiandae quam repellendus!
+                                    Project "SyncerBell"은 Team Devlll에서 시행한 첫 번째 학습용 프로젝트입니다.<br/>
+                                    처음 시도해보는 FE와 BE사이의 협업, Git과 Slack을 통한 커뮤니케이션, <br/>
+                                    Notion을 통한 개발문서화, Agile 개발방식을 활용한 프로젝트 관리까지 많은 시도를 하였고<br/>
+                                    그 결과가 여러분이 보고 있는 SyncerBell DashBoard입니다.<br/>
+                                    <br/>
+                                    학습을 위한 프로젝트였기에 결과물의 완성도보다는 정해진 기간동안 기능구현에 비중을 두었습니다.
+                                    본 프로젝트가 밑거름이 되어 앞으로의 개발에 도움이 될 것입니다.
+                                    <br/>
                                     </p>
                                 </div>
                             </div>

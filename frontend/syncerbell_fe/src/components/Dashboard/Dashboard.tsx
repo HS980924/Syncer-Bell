@@ -12,7 +12,6 @@ import Sidebar from '../Sidebar/Sidebar';
 function Dashboard() {
     const [activeIndex, setActiveIndex] = useState(0);
     let weekly = transforming(window.localStorage.getItem("weeklyData"));
-    
 
     const data = [
         {
@@ -208,71 +207,15 @@ function Dashboard() {
         },
     ];
 
-    const dummy = [
-        {
-            name: "2022-02-07",
-            pv: 1000
-        },{
-            date: "2022-02-08",
-            pv: 1000
-        },{
-            date: "2022-02-09",
-            pv: 1000
-        },{
-            date: "2022-02-10",
-            pv: 1000
-        },{
-            date: "2022-02-11",
-            pv: 1000
-        },{
-            date: "2022-02-12",
-            pv: 1000
-        },{
-            date: "2022-02-13",
-            pv: 1000
-        },{
-            date: "2022-02-14",
-            number: 1000
-        },{
-            date: "2022-02-15",
-            number: 1000
-        },{
-            date: "2022-02-16",
-            number: 1000
-        },{
-            date: "2022-02-17",
-            number: 1000
-        },{
-            date: "2022-02-18",
-            number: 1000
-        },{
-            date: "2022-02-19",
-            number: 4000
-        },{
-            date: "2022-02-20",
-            number: 1000
-        },{
-            date: "2022-02-21",
-            number: 1000
-        },{
-            date: "2022-02-22",
-            number: 1000
-        },{
-            date: "2022-02-23",
-            number: 1000
-        },{
-            date: "2022-02-24",
-            number: 0
-        },{
-            date: "2022-02-25",
-            number: 1000
-        },{
-            date: "2022-02-26",
-            number: 1000
-        },{
-            date: "2022-02-27",
-            number: 1000
-    }];
+    let weeklyData = weekly;
+
+    weeklyData.forEach((element:any)=>{
+        element.name = element.date;
+        element.pv = element.number;
+        element.uv=0;
+        delete element.date;
+        delete element.number;
+    });
 
     const onMouseOver = (data : any, index : number) => setActiveIndex(index);
     
@@ -312,9 +255,9 @@ function Dashboard() {
                             </div>
                             
                             <ResponsiveContainer className={styles.chartArea} width="70%" height="70%">
-                                <BarChart data={data}>
+                                <BarChart data={weeklyData}>
                                     <Bar 
-                                        dataKey="uv" 
+                                        dataKey="pv" 
                                         fill="#00000033" 
                                         onMouseOver={onMouseOver}>
                                         {data.map((entry, index) => (
