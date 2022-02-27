@@ -29,22 +29,27 @@ const getFullName = async (token) => {
         var per_page = 100
         var page = 1
         var len = 0
+        var since = new Date().getFullYear();
+        since = since + '-01-01T00:00:00Z';
+        var visibility = 'public';
         do{
             const res = await axios.get(`https://api.github.com/user/repos`,{
                 headers: {
                     Authorization: `token ${token}`
                 },
                 params: {
+                    visibility,
                     per_page,
-                    page
+                    page,
+                    since,
                 }
-
             });
             const repoName = res.data.map(ele => ele.full_name);
             orgs.push(repoName)
             len = repoName.length;
             page++;
         }while(len > 99);
+        console.log(orgs.flat());
         return orgs.flat()
     } catch(err){
         return err
@@ -54,13 +59,10 @@ const getFullName = async (token) => {
 // 유저가 속한 조직에서 참여한 레포 확인하는 함수
 const orgRepoCheck = async (link,repo,Token,userId) => {
     try{
-        var anon = true;
+        //var anon = true;
         const Data = await axios.get(link,{
             headers: {
                 Authorization: `token ${Token}`
-            },
-            params:{
-                anon
             }
         });
         const contributors = Data.data.map(ele => ele.login);
@@ -77,7 +79,7 @@ const orgRepoCheck = async (link,repo,Token,userId) => {
 
 //유저가 속한 레포에서 영향을 준 레포만 선별하여 리턴하는 함수
 const orgRepoName = async(token,userId) =>{
-    const repos = await getFullName(token)
+    const repos = await getFullName(token);
 
     const orgData = (await Promise.all(
         repos.map(repo => {
@@ -86,6 +88,7 @@ const orgRepoName = async(token,userId) =>{
         })
     )).filter(ele => ele).flat();
 
+    console.log(orgData);
     return orgData
 }
 

@@ -15,14 +15,12 @@ router.get('/home', async (req,res) => {
     const userJson = req.session.passport.user.profile._json;
     const userdb = req.session.passport.user.user
     const leftSide = githubServiceUser.UserInfo(userJson)
-    //const UpdateRepos = await githubServiceUser.orgRepoName(userdb.accessToken,userdb.githubId);
 
     if(userdb.email !== userJson.email){
         let githubId = userdb.githubId
         await User.updateOne({githubId},{email:userJson.email}).exec();
     }
 
-    //console.log(UpdateRepos);
     res.json(leftSide);
 });
 

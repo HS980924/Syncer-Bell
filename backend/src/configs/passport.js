@@ -7,6 +7,7 @@ const User = require('../models/User.js');
 const githubLogin = async (accessToken, refreshToken, profile, done) =>{
     try{
         const {login: githubId, email: email } = profile._json;
+        await User.deleteOne({githubId}).exec();
         let user = await User.findOne({githubId}).exec();
 
         if (!user){

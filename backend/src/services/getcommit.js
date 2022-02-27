@@ -33,7 +33,7 @@ const getCommitList = async (url,repo,token,userId) => {
                         if (com.author.login === userId){
                             var commitData = new Object();
                             commitData.repoName = repo;
-                            commitData.user = com.author.login;
+                            commitData.user = userId;
                             commitData.message = com.commit.message;
                             commitData.date = com.commit.author.date;
                             commitData.url = com.html_url;
