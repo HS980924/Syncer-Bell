@@ -11,7 +11,7 @@ import Sidebar from '../Sidebar/Sidebar';
 
 function Dashboard() {
     const [activeIndex, setActiveIndex] = useState(0);
-    // let weekly = transforming(window.localStorage.getItem("weeklyData"));
+    let weekly = transforming(window.localStorage.getItem("weeklyData"));
     
 
     const data = [
@@ -208,6 +208,71 @@ function Dashboard() {
         },
     ];
 
+    const dummy = [
+        {
+            name: "2022-02-07",
+            pv: 1000
+        },{
+            date: "2022-02-08",
+            pv: 1000
+        },{
+            date: "2022-02-09",
+            pv: 1000
+        },{
+            date: "2022-02-10",
+            pv: 1000
+        },{
+            date: "2022-02-11",
+            pv: 1000
+        },{
+            date: "2022-02-12",
+            pv: 1000
+        },{
+            date: "2022-02-13",
+            pv: 1000
+        },{
+            date: "2022-02-14",
+            number: 1000
+        },{
+            date: "2022-02-15",
+            number: 1000
+        },{
+            date: "2022-02-16",
+            number: 1000
+        },{
+            date: "2022-02-17",
+            number: 1000
+        },{
+            date: "2022-02-18",
+            number: 1000
+        },{
+            date: "2022-02-19",
+            number: 4000
+        },{
+            date: "2022-02-20",
+            number: 1000
+        },{
+            date: "2022-02-21",
+            number: 1000
+        },{
+            date: "2022-02-22",
+            number: 1000
+        },{
+            date: "2022-02-23",
+            number: 1000
+        },{
+            date: "2022-02-24",
+            number: 0
+        },{
+            date: "2022-02-25",
+            number: 1000
+        },{
+            date: "2022-02-26",
+            number: 1000
+        },{
+            date: "2022-02-27",
+            number: 1000
+    }];
 
     const onMouseOver = (data : any, index : number) => setActiveIndex(index);
     
@@ -250,7 +315,7 @@ function Dashboard() {
                                 <BarChart data={data}>
                                     <Bar 
                                         dataKey="uv" 
-                                        fill="rgba(21,122,255,.2)" 
+                                        fill="#00000033" 
                                         onMouseOver={onMouseOver}>
                                         {data.map((entry, index) => (
                                         <Cell

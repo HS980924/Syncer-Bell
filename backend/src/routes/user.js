@@ -68,6 +68,10 @@ router.post('/setting',async(req,res) => {
     const githubId = req.body.user;
     const check = req.body.name;
     const data = req.body.state;
+    
+    console.log(check);
+    console.log(data);
+    console.log(githubId);
 
     if (check === 'commit'){
         await User.updateOne({githubId},{checkCommit:data}).exec();
