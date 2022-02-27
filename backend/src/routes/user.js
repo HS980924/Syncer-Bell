@@ -65,19 +65,21 @@ router.get('/alldata', async(req,res) => {
 })
 
 router.post('/setting',async(req,res) => {
-    //const githubId = req.body.user;
-    //const githubId = await githubServiceUser.getUserID();
+    const githubId = req.body.user;
     const check = req.body.name;
     const data = req.body.state;
 
     if (check === 'commit'){
         await User.updateOne({githubId},{checkCommit:data}).exec();
+        console.log(githubId + 'user Commit emailing alarm update')
     }
     else if(check === 'issue'){
         await User.updateOne({githubId},{checkIssue:data}).exec();
+        console.log(githubId + 'user issue emailing alarm update')
     }
     else{
         await User.updateOne({githubId},{checkPr:data}).exec();
+        console.log(githubId + 'user pullrequest emailing alarm update')
     }
 
     res.send('success User data Update');
