@@ -17,8 +17,6 @@ const githubLogin = async (accessToken, refreshToken, profile, done) =>{
                 accessToken,
                 repos: repo,
                 events: [],
-                showcnt: 5,
-                Color: null,
                 checkCommit: false,
                 checkIssue: false,
                 checkPr: false

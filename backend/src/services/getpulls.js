@@ -5,11 +5,10 @@ const User = require('../models/User.js')
 // 유저 레포의 pullrequest 타이틀 및 정보 가져오기(pulls에서 가져오기)
 const getPullList = async (url,repo,token,userId) => {
     try{
-        var len;
+        var len = 0;
         var page = 1;
         var pullList = []
         do{
-            len = 0
             const JsonData = await axios.get(url,{
                 headers: {
                     Authorization: `token ${token}`
@@ -20,10 +19,13 @@ const getPullList = async (url,repo,token,userId) => {
                     page
                 }
             });
-            const pulls = (await Promise.all( 
-                JsonData.data.map((pull) =>{
-                    len++;
-                    try{
+            len = Object.keys(JsonData.data).length;
+            if(len == 0){
+                return null;
+            }
+            else{
+                const pulls = (await Promise.all( 
+                    JsonData.data.map((pull) =>{
                         if (pull.user.login === userId){
                             var pullData = new Object();
                             pullData.repoName = repo;
@@ -37,14 +39,15 @@ const getPullList = async (url,repo,token,userId) => {
                             pullData.url = pull.html_url;
                             return pullData
                         }
-                    } catch(err){
-                        return null
-                    }
-                })
-            )).filter(ele => ele);
-            pullList.push(pulls);
-            page++;
-        }while(len > 99);
+                        else{
+                            return null;
+                        }
+                    })
+                )).filter(ele => ele);
+                pullList.push(pulls);
+                page++;
+            }
+        }while(len >= 100);
 
         return pullList.flat()
     }catch(err){
@@ -57,7 +60,6 @@ const getUserPull = async (userId,token) => {
     try{
         const user = await User.findOne({userId}).exec();
         const repos = user.repos;
-        //const repos = await githubServiceUser.orgRepoName(token,userId);
         
         const pulldata = (await Promise.all(
             repos.map(repo => {
@@ -74,6 +76,7 @@ const getUserPull = async (userId,token) => {
 
         return pulldata
     } catch(err){
+        console.log(err);
         return err
     }
 }
