@@ -8,8 +8,6 @@ const userSchema = new Schema({
     accessToken: String,
     repos: [String],
     events: [String],
-    showcnt: Number,
-    Color: String,
     checkCommit: Boolean,
     checkIssue: Boolean,
     checkPr: Boolean

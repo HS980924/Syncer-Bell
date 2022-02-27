@@ -25,13 +25,12 @@ const User = require('../models/User.js')
 // 유저 레포의 issue 타이틀 및 정보 가져오기
 const getIssueList = async (url,repo,token,userId) => {
     try{
-        var len;
+        var len = 0;
         var page = 1;
         var issueList = []
         var since = new Date().getFullYear();
-        since = since + '-01-01T00:00:00';
+        since = since + '-01-01T00:00:00Z';
         do{
-            len = 0
             const JsonData = await axios.get(url,{
                 headers: {
                     Authorization: `token ${token}`
@@ -43,9 +42,13 @@ const getIssueList = async (url,repo,token,userId) => {
                     page
                 }
             });
-            const issues = (await Promise.all( 
-                JsonData.data.map((iss) =>{
-                    try{
+            len = Object.keys(JsonData.data).length;
+            if (len == 0){
+                return null;
+            }
+            else{
+                const issues = (await Promise.all( 
+                    JsonData.data.map((iss) =>{
                         var Iu_check = iss.node_id
                         if (iss.user.login === userId && Iu_check.includes('I_')){
                             var issueData = new Object();
@@ -57,14 +60,15 @@ const getIssueList = async (url,repo,token,userId) => {
                             issueData.body = iss.body;
                             return issueData
                         }
-                    } catch(err){
-                        return null
-                    }
-                })
-            )).filter(ele => ele);
-            issueList.push(issues);
-            page++;
-        }while(len > 99);
+                        else{
+                            return null;
+                        }
+                    })
+                )).filter(ele => ele);
+                issueList.push(issues);
+                page++;
+            }
+        }while(len >= 100);
 
         return issueList.flat()
     }catch(err){
@@ -77,7 +81,6 @@ const getUserIssue = async (userId,token) => {
     try{
         const user = await User.findOne({userId}).exec();
         const repos = user.repos;
-        //const repos = await githubServiceUser.orgRepoName(token,userId);
 
         const issuedata = (await Promise.all(
             repos.map(repo => {
@@ -94,6 +97,7 @@ const getUserIssue = async (userId,token) => {
         
         return issuedata
     } catch(err){
+        console.log(err);
         return err
     }
 }

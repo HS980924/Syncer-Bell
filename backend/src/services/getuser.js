@@ -22,7 +22,6 @@ const UserInfo = (userdata) => {
     return leftSide
 }
 
-
 // 유저 레포 이름 가져오기
 const getFullName = async (token) => {
     try{
@@ -87,12 +86,6 @@ const orgRepoName = async(token,userId) =>{
         })
     )).filter(ele => ele).flat();
 
-    // const user = await User.findOne({userId}).exec();
-
-    // if(user.repos !== orgData){
-    //     await User.updateOne({userId},{repos:orgData}).exec();
-    // }
-
     return orgData
 }
 
@@ -120,7 +113,7 @@ const CheckUserEvent = async(userId) => {
         const Event = (await Promise.all(
             repos.map(repo => {
                 const link = `https://api.github.com/repos/${repo}/events`
-                return getRepoEvents(link,user.accessToken,userId);
+                return getRepoEvents(link,user.accessToken);
             })
         )).filter(ele => ele).flat();
 
@@ -133,7 +126,7 @@ const CheckUserEvent = async(userId) => {
 
 }
 
-const getRepoEvents = async(link,Token,userId) => {
+const getRepoEvents = async(link,Token) => {
     try{
         var anon = true;
         const Data = await axios.get(link,{
@@ -169,7 +162,6 @@ const getRefineData = function (data) {
         const result = data.slice(0,10);
         return result
     }
-
     return data
 }
 
@@ -188,11 +180,11 @@ const cntInfo = function (commitData, issueData, pullData) {
 const threeWeekCommitCnt = function (commits) {
 
     const commitCnt = {};
-    const twoWeekAgo =  new Date();
-    twoWeekAgo.setDate(twoWeekAgo.getDate() - 21);
+    const threeWeekAgo =  new Date();
+    threeWeekAgo.setDate(threeWeekAgo.getDate() - 21);
     
     new Array(21).fill(0).forEach((_, days) =>{
-        const pre = new Date(twoWeekAgo);
+        const pre = new Date(threeWeekAgo);
         pre.setDate(pre.getDate() + days + 1);
 
         var day = pre.getFullYear() + "-" + ("00" + (pre.getMonth() + 1)).slice(-2) + "-" + ("00" + pre.getDate()).slice(-2)
@@ -202,14 +194,30 @@ const threeWeekCommitCnt = function (commits) {
 
     commits.forEach(com => {
         const Data = new Date(com.date);
-        const dayData = Data.getFullYear() + '-' + Data.getMonth()+1 + '-' + Data.getDate(); 
-        
+        const dayData = Data.getFullYear() + "-" + ("00" + (Data.getMonth() + 1)).slice(-2) + "-" + ("00" + Data.getDate()).slice(-2)
+
         if (commitCnt.hasOwnProperty(dayData)){
             commitCnt[dayData]++;
         }
     })
 
-    return commitCnt
+    const result = []
+
+    for (const key in commitCnt){
+        result.push({date: key, number: commitCnt[key]});
+    }
+
+    return result;
+}
+
+const getUserID = async () => {
+    const link = 'http://localhost:5000/home';
+    const Data = await axios.get(link);
+
+    const userId = Data.data.login;
+    
+    console.log(userId);
+    return userId
 }
 
 module.exports = {
@@ -219,5 +227,6 @@ module.exports = {
     orgRepoName,
     threeWeekCommitCnt,
     CheckUserEvent,
-    updateUserRepos
+    updateUserRepos,
+    getUserID
 }

@@ -5,7 +5,6 @@ const githubServiceCommit = require('../services/getcommit.js');
 const githubServiceIssue = require('../services/getissue.js');
 const githubServicePull = require('../services/getpulls.js');
 const githubServiceUser = require('../services/getuser.js');
-const githubServiceMail = require('../services/mail.js');
 
 
 router.get('/',(req,res)=>{
@@ -16,14 +15,14 @@ router.get('/home', async (req,res) => {
     const userJson = req.session.passport.user.profile._json;
     const userdb = req.session.passport.user.user
     const leftSide = githubServiceUser.UserInfo(userJson)
-    const UpdateRepos = await githubServiceUser.orgRepoName(userdb.accessToken,userdb.githubId);
+    //const UpdateRepos = await githubServiceUser.orgRepoName(userdb.accessToken,userdb.githubId);
 
     if(userdb.email !== userJson.email){
         let githubId = userdb.githubId
         await User.updateOne({githubId},{email:userJson.email}).exec();
     }
 
-    console.log(UpdateRepos);
+    //console.log(UpdateRepos);
     res.json(leftSide);
 });
 
@@ -39,7 +38,7 @@ router.get('/commit', async(req,res) => {
 router.get('/issue',async(req,res) => {
     const Token = req.session.passport.user.user.accessToken;
     const userId = req.session.passport.user.user.githubId;
-    const myIssue = await githubServiceIssue.getUserIssue(userId,Token) 
+    const myIssue = await githubServiceIssue.getUserIssue(userId,Token)
     const Issues = githubServiceUser.getRefineData(myIssue)
 
     res.json(JSON.stringify(Issues))
@@ -61,22 +60,27 @@ router.get('/alldata', async(req,res) => {
     const myIssue = await githubServiceIssue.getUserIssue(userId,Token)
     const mypulls = await githubServicePull.getUserPull(userId,Token)
     const result = githubServiceUser.AllData(myCommit, myIssue, mypulls)
+
     res.json(JSON.stringify(result))
 })
 
-router.get('/email',async (req,res) => {
-    const userId = req.session.passport.user.user.githubId
-    await githubServiceMail.checkEventData(userId);
-
-    res.send('success email');
-
-})
-
 router.post('/setting',async(req,res) => {
-    const test = req.body.name;
-    console.log(test);
+    //const githubId = req.body.user;
+    //const githubId = await githubServiceUser.getUserID();
+    const check = req.body.name;
+    const data = req.body.state;
 
-    res.send(test);
+    if (check === 'commit'){
+        await User.updateOne({githubId},{checkCommit:data}).exec();
+    }
+    else if(check === 'issue'){
+        await User.updateOne({githubId},{checkIssue:data}).exec();
+    }
+    else{
+        await User.updateOne({githubId},{checkPr:data}).exec();
+    }
+
+    res.send('success User data Update');
 })
 
 module.exports = router;
