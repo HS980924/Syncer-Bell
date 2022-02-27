@@ -6,6 +6,7 @@ import {GithubPicker} from 'react-color';
 import styles from './Settings.module.scss';
 import RightSide from '../RightSide/RightSide';
 import Sidebar from '../Sidebar/Sidebar';
+import { userNAME } from '../leftside_data/leftside_data';
 import axios from 'axios';
 
 export let userColor = {mainColor:"", hoverColor:""};
@@ -14,8 +15,7 @@ export let barColor="#00ff45";
 export let barColor_hover="#97ffb3";
 
 const Settings = () => {
-    // let countNumber = parseInt(window.localStorage.getItem("countNumber"));
-
+    
     function createDefault(target:string){
         const defaultValue = window.localStorage.getItem(target);
         if(defaultValue !== null){//target값이 localStorage에 있으면
@@ -31,11 +31,16 @@ const Settings = () => {
     const [toggleIssue, setToggleIssue] = useState(createDefault("is_issue_mailing"));
     const [togglePulls, setTogglePulls] = useState(createDefault("is_pulls_mailing"));
 
-    const send=(name:string, state:any)=>{
+    const send=(name:string, state:boolean)=>{
         const client = axios.create();   // axios 기능생성
         client.post('/setting' , {"name":name, "state":state} );   //axios 기능을 통한 post 사용및 name 값 전달.
     }
     
+    const sendID=(name:string, state:string)=>{
+        const client = axios.create();   // axios 기능생성
+        client.post('/setting' , {"name":name, "state":state} );   //axios 기능을 통한 post 사용및 name 값 전달.
+    }
+
     function addCount(){
         changeNumber = showCount+1;
         if(changeNumber >= 6){
@@ -67,19 +72,22 @@ const Settings = () => {
     function toggleCommitFunction(){
         setToggleCommit(prevStatus => prevStatus ? false : true);
         window.localStorage.setItem("is_commit_mailing", toggleCommit.toString());
-        send("commit",toggleCommit);
+        send("commit",Boolean(toggleCommit));
+        sendID("user",userNAME);
     }
 
     function toggleIssueFunction(){
         setToggleIssue(prevStatus => prevStatus ? false : true);
         window.localStorage.setItem("is_issue_mailing", toggleIssue.toString());
-        send("issue",toggleIssue);
+        send("issue",Boolean(toggleIssue));
+        sendID("user",userNAME);
     }
 
     function togglePullsFunction(){
         setTogglePulls(prevStatus => prevStatus ? false : true);
         window.localStorage.setItem("is_pulls_mailing", togglePulls.toString());
-        send("pulls",togglePulls);
+        send("pulls",Boolean(togglePulls));
+        sendID("user",userNAME);
     }
 
     let [bgColor, setBgColor] = useState(null);

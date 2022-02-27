@@ -6,6 +6,7 @@ import axios from "axios";
 
 export let userGit;
 export let userData;
+export let userNAME;
 
 function Leftside_data() {
     const [users, setUsers] = useState(null);
@@ -16,10 +17,13 @@ function Leftside_data() {
     // setUsers(USER);
     const fetchUsers = async()=>{
         try{
+            setLoading(null);
+            setError(null);
             setUsers(null);
             const res = await axios.get('/home');
             setUsers(res.data);
-            window.localStorage.setItem("userProfile", JSON.stringify(res.data));
+            window.localStorage.setItem("userProfile", JSON.parse(res.data));
+            // window.localStorage.setItem("user", JSON.stringify(JSON.parse(res.data)["login"]));
         } catch(e) {
             setError(e);
         }
@@ -30,14 +34,12 @@ function Leftside_data() {
         fetchUsers();
     }, []);
 
-    
-    if (loading) return <h3 className={styles.msg}>Loading.....</h3>;
-    if (errors) return <h3 className={styles.msg}>Error!!</h3>;
     if (!users) return null;
     
     const url = users.blog;
     userGit = users.url;
     userData = users;
+    userNAME = users.login;
 
     return(
         <>
