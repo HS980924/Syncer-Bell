@@ -255,7 +255,7 @@ function Dashboard() {
                             </div>
                             
                             <ResponsiveContainer className={styles.chartArea} width="70%" height="70%">
-                                <BarChart data={weeklyData}>
+                                <BarChart data={data}>
                                     <Bar 
                                         dataKey="pv" 
                                         fill="#00000033" 

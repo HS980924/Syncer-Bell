@@ -32,15 +32,12 @@ const Settings = () => {
     const [toggleCommit, setToggleCommit] = useState(createDefault("is_commit_mailing"));
     const [toggleIssue, setToggleIssue] = useState(createDefault("is_issue_mailing"));
     const [togglePulls, setTogglePulls] = useState(createDefault("is_pulls_mailing"));
+    const [bgColor, setBgColor] = useState(null);
+    const [hover_bgColor, setHoverColor] = useState(null);
 
-    const send=(name:string, state:boolean)=>{
+    const send=(name:string, state:boolean, user:string)=>{
         const client = axios.create();   // axios 기능생성
-        client.post('/setting' , {"name":name, "state":state} );   //axios 기능을 통한 post 사용및 name 값 전달.
-    }
-    
-    const sendID=(name:string, state:string)=>{
-        const client = axios.create();   // axios 기능생성
-        client.post('/setting' , {"name":name, "state":state} );   //axios 기능을 통한 post 사용및 name 값 전달.
+        client.post('/setting' , {"name":name, "state":state, "user":user} );   //axios 기능을 통한 post 사용및 name 값 전달.
     }
 
     function addCount(){
@@ -74,26 +71,20 @@ const Settings = () => {
     function toggleCommitFunction(){
         setToggleCommit(prevStatus => prevStatus ? false : true);
         window.localStorage.setItem("is_commit_mailing", toggleCommit.toString());
-        send("commit",Boolean(toggleCommit));
-        sendID("user",userNAME);
+        send("commit",Boolean(toggleCommit), userNAME);
     }
 
     function toggleIssueFunction(){
         setToggleIssue(prevStatus => prevStatus ? false : true);
         window.localStorage.setItem("is_issue_mailing", toggleIssue.toString());
-        send("issue",Boolean(toggleIssue));
-        sendID("user",userNAME);
+        send("issue",Boolean(toggleIssue), userNAME);
     }
 
     function togglePullsFunction(){
         setTogglePulls(prevStatus => prevStatus ? false : true);
         window.localStorage.setItem("is_pulls_mailing", togglePulls.toString());
-        send("pulls",Boolean(togglePulls));
-        sendID("user",userNAME);
+        send("pulls",Boolean(togglePulls), userNAME);
     }
-
-    let [bgColor, setBgColor] = useState(null);
-    let [hover_bgColor, setHoverColor] = useState(null);
 
     const handleChangeComplete = (color:any) => {
         setBgColor(color.hex)
